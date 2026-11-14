@@ -4,7 +4,7 @@ Aplicação React + TypeScript para conversão de moedas, com especificação de
 
 ## Status atual
 
-`TASK-004` configura o pipeline de testes com Vitest, Testing Library, jsdom e MSW. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
+`TASK-005` configura os gates E2E com Playwright e Chromium. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
 
 O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A implementação visual fica para as tarefas de UI previstas no plano.
 
@@ -18,11 +18,17 @@ npm run typecheck
 npm run test
 npm run test:coverage
 npm run test:watch
+npm run test:e2e
+npm run test:e2e:ci
 npm run build
 npm run preview
 ```
 
 `test` executa o Vitest em modo CI; `test:watch` inicia o modo interativo e `test:coverage` gera cobertura V8 em `coverage/`. O setup usa jsdom, Testing Library e MSW para manter testes de UI e rede independentes de serviços reais.
+
+## E2E
+
+O Playwright executa o smoke test contra o servidor Vite local em duas referências: Chromium desktop `1440×900` e Chromium mobile `390×844`. `test:e2e` usa o reporter padrão; `test:e2e:ci` ativa o reporter de linha, proíbe `test.only`, usa um worker e permite até dois retries. Na primeira execução de uma máquina, instale o browser com `npx playwright install chromium`.
 
 ## Estilos
 
