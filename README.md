@@ -4,7 +4,7 @@ Aplicação React + TypeScript para conversão de moedas, com especificação de
 
 ## Status atual
 
-`TASK-006` prepara o app shell, providers e configuração pública. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
+`TASK-007` extrai os tokens HERMES dark e os estilos globais. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
 
 O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A implementação visual fica para as tarefas de UI previstas no plano.
 
@@ -35,6 +35,10 @@ O Playwright executa o smoke test contra o servidor Vite local em duas referênc
 `src/main.tsx` permanece como entrada pública e delega a montagem para `src/app/main.tsx`, que aplica `StrictMode` e `AppProviders`. O provider é intencionalmente neutro nesta fase; providers de features entram junto com suas respectivas tarefas. `src/App.tsx` mantém um re-export compatível para imports existentes, enquanto o componente está organizado em `src/app/App.tsx`.
 
 `VITE_FRANKFURTER_API_URL` é uma configuração pública de browser documentada em [.env.example](.env.example). Variáveis `VITE_*` não podem conter segredos; o fallback local aponta para `https://api.frankfurter.dev/v2` até a camada HTTP ser implementada.
+
+## Design foundation
+
+Os tokens verificados no Design Guide local estão em `src/app/styles/tokens.css`, com aliases semânticos dark-only, dimensões HERMES, tipografia Inter e mapeamento nominal para utilities Tailwind. `src/app/styles/globals.css` aplica reset, foco visível, seleção, tipografia base e contraste; `src/index.css` permanece como ponto de entrada compatível.
 
 ## Estilos
 

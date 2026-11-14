@@ -1,0 +1,111 @@
+/* HERMES tokens verified against styleRef/HERMES_Design_System_Standalone.html. */
+:root {
+  /* Primitive colors — dark mode only. */
+  --palette-canvas: #0D1412;
+  --palette-sidebar: #101A17;
+  --palette-surface: #16221E;
+  --palette-raised: #1B2924;
+  --palette-line: #263630;
+  --palette-control-line: #304039;
+  --palette-foreground: #F1F5F2;
+  --palette-muted: #A7B7AE;
+  --palette-subtle: #82968B;
+  --palette-brand: #235C4B;
+  --palette-positive: #8BDEA6;
+  --palette-negative: #E49B9D;
+
+  /* Semantic colors — dark mode only. */
+  --color-background-canvas: var(--palette-canvas);
+  --color-background-sidebar: var(--palette-sidebar);
+  --color-surface-default: var(--palette-surface);
+  --color-surface-raised: var(--palette-raised);
+  --color-border-default: var(--palette-line);
+  --color-border-control: var(--palette-control-line);
+  --color-text-primary: var(--palette-foreground);
+  --color-text-secondary: var(--palette-muted);
+  --color-text-subtle: var(--palette-subtle);
+  --color-action-primary: var(--palette-brand);
+  --color-status-positive: var(--palette-positive);
+  --color-status-negative: var(--palette-negative);
+
+  /* Dimensions. */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 999px;
+  --spacing-period-mobile: 10px;
+  --spacing-7: 28px;
+
+  /* Typography foundations. */
+  --font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-h1: 30px;
+  --leading-h1: 36px;
+  --font-h2: 24px;
+  --leading-h2: 32px;
+  --font-h3: 20px;
+  --leading-h3: 28px;
+  --font-h4: 18px;
+  --leading-h4: 28px;
+  --font-body-lg: 16px;
+  --leading-body-lg: 24px;
+  --font-body-md: 14px;
+  --leading-body-md: 20px;
+  --font-caption-sm: 12px;
+  --leading-caption-sm: 16px;
+
+  /* Approved visual references for interaction states. */
+  --reference-brand-hover: #226351;
+  --reference-selected: #2B4438;
+  --reference-positive-soft: #1C392A;
+
+  /* Compatibility aliases for the unmodified starter shell. */
+  --text: var(--color-text-secondary);
+  --text-h: var(--color-text-primary);
+  --bg: var(--color-background-canvas);
+  --border: var(--color-border-default);
+  --code-bg: var(--color-surface-raised);
+  --accent: var(--color-status-positive);
+  --accent-bg: var(--color-surface-raised);
+  --accent-border: var(--color-status-positive);
+  --social-bg: var(--color-surface-default);
+  --shadow: none;
+  --sans: var(--font-family);
+  --heading: var(--font-family);
+  --mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+@theme inline {
+  --color-hermes-canvas: var(--color-background-canvas);
+  --color-hermes-sidebar: var(--color-background-sidebar);
+  --color-hermes-surface: var(--color-surface-default);
+  --color-hermes-raised: var(--color-surface-raised);
+  --color-hermes-line: var(--color-border-default);
+  --color-hermes-control-line: var(--color-border-control);
+  --color-hermes-foreground: var(--color-text-primary);
+  --color-hermes-muted: var(--color-text-secondary);
+  --color-hermes-subtle: var(--color-text-subtle);
+  --color-hermes-brand: var(--color-action-primary);
+  --color-hermes-positive: var(--color-status-positive);
+  --color-hermes-negative: var(--color-status-negative);
+  --font-sans: var(--font-family);
+  --font-mono: var(--mono);
+  --radius-hermes-md: var(--radius-md);
+  --radius-hermes-lg: var(--radius-lg);
+  --radius-hermes-xl: var(--radius-xl);
+  --radius-hermes-2xl: var(--radius-2xl);
+  --radius-hermes-full: var(--radius-full);
+}
