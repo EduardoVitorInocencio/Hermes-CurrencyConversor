@@ -4,7 +4,7 @@ Aplicação React + TypeScript para conversão de moedas, com especificação de
 
 ## Status atual
 
-`TASK-003` configura o pipeline Tailwind CSS v4. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
+`TASK-004` configura o pipeline de testes com Vitest, Testing Library, jsdom e MSW. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
 
 O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A implementação visual fica para as tarefas de UI previstas no plano.
 
@@ -16,11 +16,13 @@ npm run dev
 npm run lint
 npm run typecheck
 npm run test
+npm run test:coverage
+npm run test:watch
 npm run build
 npm run preview
 ```
 
-`test` usa o runner nativo do Node como gate transitório, sem mascarar falhas e sem instalar uma suíte de testes nesta tarefa. A configuração de Vitest, React Testing Library, MSW e Playwright está planejada nas tarefas posteriores.
+`test` executa o Vitest em modo CI; `test:watch` inicia o modo interativo e `test:coverage` gera cobertura V8 em `coverage/`. O setup usa jsdom, Testing Library e MSW para manter testes de UI e rede independentes de serviços reais.
 
 ## Estilos
 

@@ -7,11 +7,12 @@
 - Phase: Phase 0 — Repository Setup
 - Type: Test
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-001
-- Branch: `task/TASK-004-test-stack` a partir de `chore/project-setup`
+- Branch: `dev`
 - PRD References: RNF-013, RNF-017
 - TECH References: TECH-001, TECH-016
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Dependências, configuração, setup global e um teste mínimo de fumaça. Não 
 
 ### 4. Implementation Steps
 
-- [ ] Adicionar Vitest, Testing Library e MSW compatíveis.
-- [ ] Configurar ambiente DOM e `src/test/setup.ts`.
-- [ ] Criar scripts `test` e `test:coverage`.
-- [ ] Criar teste de fumaça e handler de exemplo.
-- [ ] Executar testes, lint, typecheck e build.
+- [x] Adicionar Vitest, Testing Library e MSW compatíveis.
+- [x] Configurar ambiente DOM e `src/test/setup.ts`.
+- [x] Criar scripts `test` e `test:coverage`.
+- [x] Criar teste de fumaça e handler de exemplo.
+- [x] Executar testes, lint, typecheck e build.
 
 ### 5. Expected Files
 
@@ -49,21 +50,23 @@ Teste de fumaça aprovado, além de lint/typecheck/build.
 
 ### 8. Definition of Done
 
-- [ ] Stack de teste configurada.
-- [ ] Teste de fumaça aprovado.
-- [ ] Gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Stack de teste configurada.
+- [x] Teste de fumaça aprovado.
+- [x] Gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
-- Pull Request: não aberto.
-- Branch de destino: `chore/project-setup`.
-- Status do merge: pendente.
+- Branch utilizada: `dev`.
+- Commits realizados: commit local atual — `test(setup): configure Vitest and MSW`.
+- Pull Request: não aberto, conforme solicitado.
+- Branch de destino: `dev`.
+- Status do merge: não aplicável; integração via PR não será realizada.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Stack de testes configurada com Vitest `5.1.0`, Testing Library, jsdom `31.0.1`, MSW `3.0.5` e cobertura V8. O setup global configura cleanup do DOM e o servidor MSW; o teste de fumaça cobre o heading do starter e o teste de integração confirma uma resposta HTTP interceptada sem rede real.
+
+Validação em 14/11/2026: `npm run test` passou com 2 arquivos e 2 testes; `npm run test:coverage` passou com relatório V8; `npm run lint` passou sem warnings após ignorar `coverage/`; `npm run typecheck` e `npm run build` passaram. A instalação do npm reportou 7 vulnerabilidades moderadas; nenhuma correção forçada foi aplicada nesta tarefa.
