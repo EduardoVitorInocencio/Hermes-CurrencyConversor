@@ -7,11 +7,12 @@
 - Phase: Phase 0 — Repository Setup
 - Type: Setup
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-002, TASK-003
-- Branch: `task/TASK-006-app-shell-bootstrap` a partir de `chore/project-setup`
+- Branch: `dev`
 - PRD References: RNF-001, RNF-017
 - TECH References: TECH-001, TECH-004
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Criar providers/configuração mínima, mover entradas somente se seguro e defin
 
 ### 4. Implementation Steps
 
-- [ ] Definir `VITE_FRANKFURTER_API_URL` público de exemplo.
-- [ ] Organizar `App`/`main` sem quebrar o template.
-- [ ] Preparar ponto de montagem de estilos e providers.
-- [ ] Remover somente artefatos não usados após validação.
-- [ ] Rodar todos os gates.
+- [x] Definir `VITE_FRANKFURTER_API_URL` público de exemplo.
+- [x] Organizar `App`/`main` sem quebrar o template.
+- [x] Preparar ponto de montagem de estilos e providers.
+- [x] Remover somente artefatos não usados após validação.
+- [x] Rodar todos os gates.
 
 ### 5. Expected Files
 
@@ -49,21 +50,23 @@ Dev server, lint, typecheck, unit smoke, E2E smoke e build.
 
 ### 8. Definition of Done
 
-- [ ] Shell preparado.
-- [ ] Critérios atendidos.
-- [ ] Gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Shell preparado.
+- [x] Critérios atendidos.
+- [x] Gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
-- Pull Request: não aberto.
-- Branch de destino: `chore/project-setup`.
-- Status do merge: pendente.
+- Branch utilizada: `dev`.
+- Commits realizados: commit local atual — `chore(app): bootstrap application shell`.
+- Pull Request: não aberto, conforme solicitado.
+- Branch de destino: `dev`.
+- Status do merge: não aplicável; integração via PR não será realizada.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Bootstrap preparado sem alterar o layout visual: `src/app/App.tsx` concentra o starter, `src/app/main.tsx` monta `StrictMode` + `AppProviders`, `src/main.tsx` delega a entrada e `src/App.tsx` mantém compatibilidade por re-export. `src/app/config/env.ts` expõe somente a configuração pública do Frankfurter, documentada em `.env.example`; `.env` e `.env.*` são ignorados, exceto o exemplo.
+
+Validação em 14/11/2026: `npm run test` passou com 2 testes; `npm run test:e2e:ci` passou com 2 projetos; `npm run lint`, `npm run typecheck` e `npm run build` passaram. O E2E validou o servidor Vite e o app shell nos viewports desktop e mobile.
