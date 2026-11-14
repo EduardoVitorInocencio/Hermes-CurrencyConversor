@@ -4,7 +4,7 @@ Aplicação React + TypeScript para conversão de moedas, com especificação de
 
 ## Status atual
 
-`TASK-007` extrai os tokens HERMES dark e os estilos globais. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
+`TASK-009` configura iconografia Phosphor e o mapa explícito de bandeiras por moeda. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
 
 O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A implementação visual fica para as tarefas de UI previstas no plano.
 
@@ -40,6 +40,10 @@ O Playwright executa o smoke test contra o servidor Vite local em duas referênc
 
 Os tokens verificados no Design Guide local estão em `src/app/styles/tokens.css`, com aliases semânticos dark-only, dimensões HERMES, tipografia Inter, breakpoints de referência e mapeamento nominal para utilities Tailwind. `src/app/styles/globals.css` aplica reset, escala tipográfica, números tabulares, foco visível, seleção, contraste e overflow horizontal controlado; `src/index.css` permanece como ponto de entrada compatível.
 
+## Moedas, bandeiras e ícones
+
+`@phosphor-icons/react` é a fonte única para ícones de ação, com reexports em `src/shared/components/iconography.ts`. `country-flag-icons` é consumido por `CurrencyFlag`; o mapa explícito cobre `EUR → EU`, `USD → US`, `GBP → GB`, `BRL → BR` e `JPY → JP`. Códigos sem mapeamento exibem o código original e um marcador neutro, nunca uma bandeira presumida.
+
 ## Estilos
 
 Tailwind CSS v4 está integrado pelo plugin oficial do Vite e pela entrada `src/index.css`. A escala de tipografia usa Inter/fallback de sistema com os estilos H1–H4, Body Large/Medium e Caption Small do guia. Os breakpoints documentados são 375, 390, 430, 768, 1024, 1280 e 1440 px; são pontos de validação, não modos visuais adicionais.
@@ -61,7 +65,7 @@ Novos componentes não precisam usar caminhos relativos longos; a migração dos
 - TypeScript `6.0.3`.
 - ESLint `10.15.0` instalado (`package.json`: `^10.14.0`).
 - Entradas atuais: `src/main.tsx`, `src/App.tsx`, `src/App.css` e `src/index.css`.
-- Ainda ausentes no baseline: cliente HTTP, arquitetura por feature, Axios, Recharts, Phosphor e `country-flag-icons`. Tailwind CSS v4, tokens HERMES dark e breakpoints de referência já estão configurados.
+- Ainda ausentes no baseline: cliente HTTP, arquitetura por feature, Axios e Recharts. Tailwind CSS v4, tokens HERMES dark, breakpoints de referência, Phosphor e `country-flag-icons` já estão configurados.
 
 ## Escopo de referência
 
