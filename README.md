@@ -1,75 +1,49 @@
-# React + TypeScript + Vite
+# HERMES — Currency Exchange
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação React + TypeScript para conversão de moedas, com especificação de produto em `PRD_SPEC.md`, arquitetura técnica em `TECH_SPEC.md` e plano de execução em `TASKs_SPEC.md`.
 
-Currently, two official plugins are available:
+## Status atual
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+`TASK-001` registra o baseline do template e normaliza os gates mínimos do repositório. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
 
-## React Compiler
+O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A implementação visual fica para as tarefas de UI previstas no plano.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Scripts
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+`test` usa o runner nativo do Node como gate transitório, sem mascarar falhas e sem instalar uma suíte de testes nesta tarefa. A configuração de Vitest, React Testing Library, MSW e Playwright está planejada nas tarefas posteriores.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Imports
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+O projeto usa TypeScript estrito. Para importar módulos da aplicação, use o alias `@/*`, resolvido para `src/*` tanto pelo TypeScript quanto pelo Vite:
 
+```ts
+import App from '@/App'
 ```
+
+Novos componentes não precisam usar caminhos relativos longos; a migração dos componentes existentes fica para as tarefas de UI.
+
+## Baseline auditado
+
+- React `19.3.1` e React DOM `19.3.1`.
+- Vite `8.3.8` instalado (`package.json`: `^8.3.6`).
+- TypeScript `6.0.3`.
+- ESLint `10.15.0` instalado (`package.json`: `^10.14.0`).
+- Entradas atuais: `src/main.tsx`, `src/App.tsx`, `src/App.css` e `src/index.css`.
+- Ainda ausentes no baseline: aliases, cliente HTTP, arquitetura por feature, Tailwind CSS v4, Axios, Recharts, Phosphor, `country-flag-icons` e ferramentas dedicadas de teste.
+
+## Escopo de referência
+
+- Produto: [PRD_SPEC.md](PRD_SPEC.md)
+- Arquitetura: [TECH_SPEC.md](TECH_SPEC.md)
+- Plano geral: [TASKs_SPEC.md](TASKs_SPEC.md)
+- Tarefas: [tasks/task1.md](tasks/task1.md) até `tasks/task42.md`
