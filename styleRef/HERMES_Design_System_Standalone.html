@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="HERMES — referência de Design System baseada no Design Guide Figma, com design tokens, tipografia, componentes e exemplos interativos, em um único arquivo HTML.">
+  <title>HERMES — Design System · Standalone Reference</title>
+  <style id="hermes-styles">
+    /* ========================================================================
+       HERMES / DESIGN TOKENS — FONTE: FIGMA 00_DESIGN-GUIDE (26:1408)
+       Snapshot documentado: 14 NOV 2026, revisão 03.
+       As 12 cores primitivas + 12 semânticas e 16 dimensões abaixo são
+       valores verificados nas Figma Variables. Não use emerald padrão.
+       ======================================================================== */
+    :root {
+      /* Primitives / HERMES Primitive Colors — 12 */
+      --palette-canvas: #0D1412;
+      --palette-sidebar: #101A17;
+      --palette-surface: #16221E;
+      --palette-raised: #1B2924;
+      --palette-line: #263630;
+      --palette-control-line: #304039;
+      --palette-foreground: #F1F5F2;
+      --palette-muted: #A7B7AE;
+      --palette-subtle: #82968B;
+      --palette-brand: #235C4B;
+      --palette-positive: #8BDEA6;
+      --palette-negative: #E49B9D;
+
+      /* Semantics / HERMES Semantic Colors — 12, mode Dark only */
+      --color-background-canvas: var(--palette-canvas);
+      --color-background-sidebar: var(--palette-sidebar);
+      --color-surface-default: var(--palette-surface);
+      --color-surface-raised: var(--palette-raised);
+      --color-border-default: var(--palette-line);
+      --color-border-control: var(--palette-control-line);
+      --color-text-primary: var(--palette-foreground);
+      --color-text-secondary: var(--palette-muted);
+      --color-text-subtle: var(--palette-subtle);
+      --color-action-primary: var(--palette-brand);
+      --color-status-positive: var(--palette-positive);
+      --color-status-negative: var(--palette-negative);
+
+      /* Dimensions / HERMES Dimensions — 16 */
+      --spacing-1: 4px;
+      --spacing-2: 8px;
+      --spacing-3: 12px;
+      --spacing-4: 16px;
+      --spacing-6: 24px;
+      --spacing-8: 32px;
+      --spacing-10: 40px;
+      --spacing-12: 48px;
+      --spacing-16: 64px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --radius-xl: 12px;
+      --radius-2xl: 16px;
+      --radius-full: 999px;
+      --spacing-period-mobile: 10px;
+      --spacing-7: 28px;
+
+      /* Typographic foundations — 7 Figma Text Styles */
+      --font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --font-h1: 30px;
+      --leading-h1: 36px;
+      --font-h2: 24px;
+      --leading-h2: 32px;
+      --font-h3: 20px;
+      --leading-h3: 28px;
+      --font-h4: 18px;
+      --leading-h4: 28px;
+      --font-body-lg: 16px;
+      --leading-body-lg: 24px;
+      --font-body-md: 14px;
+      --leading-body-md: 20px;
+      --font-caption-sm: 12px;
+      --leading-caption-sm: 16px;
+
+      /* VISUAL REFERENCE ONLY: documented in Guide, not Figma Variables. */
+      --reference-brand-hover: #226351;
+      --reference-selected: #2B4438;
+      --reference-positive-soft: #1C392A;
+
+      /* Web documentation utilities — not additional Figma tokens. */
+      --sidebar-width: 252px;
+      --doc-max-width: 1220px;
+      --transition-fast: 160ms;
+    }
+
+    /* Foundation + accessibility */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+    body { margin: 0; min-width: 320px; background: var(--color-background-canvas); color: var(--color-text-primary); font: 400 var(--font-body-md)/var(--leading-body-md) var(--font-family); -webkit-font-smoothing: antialiased; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .45; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--color-status-positive); }
+    :focus-visible { outline: 2px solid var(--color-status-positive); outline-offset: 3px; }
+    ::selection { background: var(--reference-brand-hover); color: var(--color-text-primary); }
+    code, pre, .mono { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
+    .tabular { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+    .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .muted { color: var(--color-text-secondary); }
+    .subtle { color: var(--color-text-subtle); }
+    .positive { color: var(--color-status-positive); }
+    .negative { color: var(--color-status-negative); }
+    .eyebrow { font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: .14em; color: var(--color-status-positive); text-transform: uppercase; }
+    .section-title { margin: 6px 0 0; font-size: 25px; line-height: 34px; font-weight: 600; letter-spacing: -.025em; }
+    .section-desc { max-width: 830px; margin: 8px 0 0; color: var(--color-text-secondary); line-height: 1.65; }
+    .section { padding: 38px 0 44px; border-bottom: 1px solid var(--color-border-default); scroll-margin-top: 24px; }
+    .section:last-of-type { border-bottom: 0; }
+    .section-head { margin-bottom: 24px; }
+    .section-head .kicker { color: var(--color-text-subtle); font-size: 11px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; }
+    .section-tag { display: inline-flex; align-items: center; border: 1px solid var(--color-border-default); border-radius: var(--radius-full); padding: 4px 9px; font-size: 11px; color: var(--color-text-secondary); }
+    .ds-panel { padding: 24px; background: var(--color-surface-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); }
+    .ds-panel h3 { margin: 0 0 7px; font-size: 17px; font-weight: 600; }
+    .ds-panel > p { margin: 0 0 18px; color: var(--color-text-secondary); font-size: 13px; }
+    .inset-panel { background: var(--color-surface-raised); border: 1px solid var(--color-border-control); border-radius: var(--radius-lg); padding: 16px; }
+    .rule-note { font-size: 12px; line-height: 1.6; color: var(--color-text-secondary); margin-top: 14px; }
+    .notice { margin-top: 18px; padding: 13px 15px; border-radius: var(--radius-lg); border: 1px solid var(--color-border-control); background: var(--color-surface-raised); font-size: 12px; line-height: 1.65; color: var(--color-text-secondary); }
+    .notice strong { color: var(--color-text-primary); }
+    .notice.important { border-left: 3px solid var(--color-status-positive); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+    .stack { display: flex; flex-direction: column; gap: 12px; }
+    .inline-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .inline-between { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .spacer { flex: 1; }
+
+    /* App shell of documentation only */
+    .app-shell { display: grid; min-height: 100vh; grid-template-columns: var(--sidebar-width) minmax(0,1fr); }
+    .sidebar { position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto; padding: 28px 18px 22px; background: var(--color-background-sidebar); border-right: 1px solid var(--color-border-default); display: flex; flex-direction: column; gap: 18px; }
+    .brand { display: flex; align-items: center; gap: 13px; padding: 2px 8px 18px; border-bottom: 1px solid var(--color-border-default); }
+    .brand-mark { width: 39px; height: 39px; display: grid; place-items: center; border: 1px solid var(--color-border-control); border-radius: 11px; color: var(--color-status-positive); font-size: 20px; font-weight: 600; line-height: 1; background: var(--color-surface-default); }
+    .brand-name { font-size: 16px; letter-spacing: .14em; font-weight: 700; }
+    .brand-sub { color: var(--color-text-subtle); font-size: 10px; letter-spacing: .09em; margin-top: 2px; }
+    .side-heading { font-size: 10px; text-transform: uppercase; color: var(--color-text-subtle); letter-spacing: .14em; padding: 2px 12px; font-weight: 600; }
+    .side-nav { display: grid; gap: 3px; }
+    .side-nav a { display: flex; align-items: center; gap: 12px; min-height: 37px; padding: 8px 11px; color: var(--color-text-secondary); font-size: 12px; border: 1px solid transparent; border-radius: var(--radius-lg); transition: background var(--transition-fast),color var(--transition-fast); }
+    .side-nav a:hover { color: var(--color-text-primary); background: var(--color-surface-default); }
+    .side-nav a.active { color: var(--color-text-primary); background: var(--color-surface-raised); border-color: var(--color-border-default); }
+    .side-nav .n { width: 20px; color: var(--color-text-subtle); font: 11px/1 ui-monospace, monospace; }
+    .side-nav a.active .n { color: var(--color-status-positive); }
+    .side-bottom { margin-top: auto; border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); background: var(--color-surface-default); padding: 16px; }
+    .side-bottom .tiny { color: var(--color-text-subtle); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .side-bottom b { display: block; font-size: 13px; margin: 8px 0 5px; }
+    .side-bottom p { color: var(--color-text-secondary); margin: 0; font-size: 11px; line-height: 1.6; }
+    .doc-main { width: 100%; min-width: 0; padding: 0 clamp(24px,4.2vw,72px) 65px; }
+    .content { max-width: var(--doc-max-width); margin: 0 auto; }
+    .topbar { height: 72px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--color-border-default); gap: 12px; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--color-text-secondary); }
+    .breadcrumb strong { font-weight: 500; color: var(--color-text-primary); }
+    .top-actions { display: flex; gap: 8px; align-items: center; }
+    .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--color-status-positive); box-shadow: 0 0 0 3px var(--reference-positive-soft); }
+    .status-chip { display: inline-flex; align-items: center; gap: 9px; min-height: 32px; padding: 4px 10px; background: var(--color-surface-default); border: 1px solid var(--color-border-default); color: var(--color-text-secondary); font-size: 11px; border-radius: var(--radius-full); white-space: nowrap; }
+    .hero { padding: 38px 0 34px; }
+    .hero h1 { margin: 18px 0 12px; font-size: clamp(34px,4.3vw,54px); line-height: 1.1; letter-spacing: -.045em; font-weight: 600; }
+    .hero h2 { color: var(--color-text-secondary); font-weight: 400; font-size: 19px; line-height: 1.45; margin: 0 0 15px; }
+    .hero p { max-width: 780px; margin: 0; color: var(--color-text-secondary); line-height: 1.7; }
+    .hero-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .metrics { margin: 10px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+    .metric { padding: 18px; border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); background: var(--color-surface-default); }
+    .metric-val { color: var(--color-status-positive); font-size: 30px; font-weight: 600; line-height: 1.2; }
+    .metric-title { display: block; font-size: 13px; font-weight: 600; margin: 7px 0 3px; }
+    .metric-sub { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; }
+    .mobile-navigation { display: none; }
+
+    /* Controls & cards */
+    .btn { --btn-bg: transparent; --btn-color: var(--color-text-primary); --btn-border: var(--color-border-control); display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-align: center; min-height: 44px; border: 1px solid var(--btn-border); border-radius: var(--radius-lg); background: var(--btn-bg); color: var(--btn-color); font-weight: 600; font-size: 14px; padding: 10px 16px; transition: background var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast),transform var(--transition-fast); }
+    .btn:hover:not(:disabled) { background: var(--color-surface-raised); }
+    .btn:active:not(:disabled) { transform: translateY(1px); }
+    .btn-primary { --btn-bg: var(--color-action-primary); --btn-border: var(--color-action-primary); }
+    .btn-primary:hover:not(:disabled) { background: var(--reference-brand-hover); border-color: var(--reference-brand-hover); }
+    .btn-secondary { background: var(--color-surface-raised); border-color: var(--color-border-control); color: var(--color-text-secondary); }
+    .btn-secondary:hover:not(:disabled) { background: var(--reference-selected); color: var(--color-text-primary); }
+    .btn-quiet { min-height: 34px; font-size: 12px; font-weight: 500; padding: 6px 12px; background: var(--color-surface-default); border-color: var(--color-border-default); }
+    .btn-quiet:hover:not(:disabled) { background: var(--color-surface-raised); }
+    .input, .select { width: 100%; min-height: 44px; background: var(--color-surface-raised); color: var(--color-text-primary); border: 1px solid var(--color-border-control); border-radius: var(--radius-lg); padding: 10px 12px; outline-offset: 2px; }
+    .input::placeholder { color: var(--color-text-subtle); }
+    .input[aria-invalid="true"] { border-color: var(--color-status-negative); }
+    .field-label { display: block; color: var(--color-text-secondary); font-size: 11px; font-weight: 600; letter-spacing: .06em; margin-bottom: 9px; text-transform: uppercase; }
+    .field-help { font-size: 11px; color: var(--color-text-subtle); margin: 6px 0 0; line-height: 1.6; }
+    .field-error { color: var(--color-status-negative); }
+    .locale-select { background: var(--color-surface-default); color: var(--color-text-primary); border: 1px solid var(--color-border-control); min-height: 33px; border-radius: var(--radius-lg); padding: 5px 10px; font-size: 12px; }
+    .copy-mini { font: 11px ui-monospace, monospace; color: var(--color-text-subtle); border: 1px solid var(--color-border-default); background: var(--color-surface-raised); border-radius: var(--radius-md); padding: 5px 8px; }
+    .copy-mini:hover { color: var(--color-text-primary); }
+    .pill { display: inline-flex; align-items: center; min-height: 23px; padding: 3px 8px; border-radius: var(--radius-full); font-size: 10px; border: 1px solid var(--color-border-control); color: var(--color-text-secondary); background: var(--color-surface-raised); }
+    .pill.good { color: var(--color-status-positive); border-color: var(--reference-brand-hover); background: var(--reference-positive-soft); }
+    .pill.warn { color: var(--color-status-negative); }
+
+    /* Colors */
+    .palette { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+    .color-card { min-width: 0; padding: 12px; text-align: left; color: var(--color-text-primary); background: var(--color-surface-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); transition: border-color var(--transition-fast),transform var(--transition-fast); }
+    .color-card:hover { border-color: var(--color-status-positive); transform: translateY(-1px); }
+    .color-chip { display: block; width: 100%; height: 54px; margin-bottom: 12px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,.07); }
+    .color-name { font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .color-hex { color: var(--color-text-secondary); font: 12px/1.6 ui-monospace,monospace; }
+    .color-meta { margin-top: 6px; color: var(--color-text-subtle); font-size: 11px; line-height: 1.5; }
+    .token-search { display: flex; align-items: center; gap: 10px; max-width: 290px; margin-left: auto; }
+    .token-search input { min-height: 35px; padding: 7px 10px; background: var(--color-surface-default); }
+    .semantic-map { margin-top: 20px; overflow-x: auto; border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); }
+    .semantic-map table { width: 100%; min-width: 590px; border-collapse: collapse; text-align: left; }
+    .semantic-map th { background: var(--color-surface-raised); color: var(--color-text-secondary); font-size: 11px; font-weight: 600; }
+    .semantic-map td, .semantic-map th { border-bottom: 1px solid var(--color-border-default); padding: 10px 14px; }
+    .semantic-map tr:last-child td { border-bottom: 0; }
+    .semantic-map td { font-size: 12px; }
+    .semantic-map .token-var { color: var(--color-status-positive); font: 11px ui-monospace,monospace; }
+
+    /* Typography */
+    .type-list { overflow: hidden; border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); }
+    .type-row { display: grid; grid-template-columns: minmax(0,1.3fr) 110px 130px minmax(120px,.9fr); gap: 15px; align-items: center; padding: 18px; background: var(--color-surface-default); border-bottom: 1px solid var(--color-border-default); }
+    .type-row:last-child { border-bottom: 0; }
+    .type-label { font-size: 11px; color: var(--color-text-secondary); }
+    .type-example { margin: 7px 0 0; color: var(--color-text-primary); font-weight: 600; white-space: normal; overflow-wrap: anywhere; }
+    .type-cell { font-size: 12px; color: var(--color-text-secondary); }
+    .type-cell code { color: var(--color-status-positive); font-size: 11px; }
+    .weight-samples { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; margin-top: 16px; }
+    .weight-samples > div { padding: 16px; background: var(--color-surface-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); }
+    .weight-samples b { display: block; font-size: 19px; margin-bottom: 5px; }
+    .weight-samples small { color: var(--color-text-secondary); font-size: 11px; }
+
+    /* Spacing & radius */
+    .space-grid { display: grid; grid-template-columns: repeat(9,minmax(0,1fr)); gap: 9px; }
+    .space-token { background: var(--color-surface-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); padding: 10px 9px; min-width: 0; }
+    .space-bar-wrap { height: 60px; display: flex; align-items: end; }
+    .space-bar { display: block; background: var(--color-status-positive); border-radius: 3px 3px 0 0; max-width: 100%; height: 8px; }
+    .space-token strong { display: block; font-size: 13px; white-space: nowrap; }
+    .space-token small { display: block; margin-top: 5px; font-size: 10px; color: var(--color-text-subtle); }
+    .radius-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 12px; }
+    .radius-token { background: var(--color-surface-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); padding: 14px; }
+    .radius-preview { height: 72px; background: var(--color-surface-raised); border: 1px solid var(--color-border-control); margin-bottom: 12px; }
+    .radius-token strong { display: block; font-size: 12px; }
+    .radius-token small { display: block; margin-top: 5px; font-size: 11px; color: var(--color-text-secondary); }
+
+    /* Components */
+    .demo-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 15px; }
+    .demo-heading h3 { margin: 0; font-size: 15px; }
+    .demo-card { background: var(--color-surface-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); padding: 22px; }
+    .demo-card p { color: var(--color-text-secondary); font-size: 12px; line-height: 1.5; margin: 5px 0 18px; }
+    .demo-pair-card { position: relative; min-height: 149px; background: var(--color-surface-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); padding: 16px; }
+    .pair-name { font-size: 13px; font-weight: 600; }
+    .pair-sub { font-size: 11px; color: var(--color-text-secondary); margin: 4px 0 12px; }
+    .pair-rate { font-size: 23px; line-height: 31px; font-weight: 600; }
+    .pair-change { font-size: 12px; margin-top: 7px; }
+    .sparkline { position: absolute; bottom: 13px; right: 12px; width: 88px; height: 35px; opacity: .9; }
+    .money-box { display: flex; align-items: stretch; min-height: 69px; border: 1px solid var(--color-border-control); border-radius: var(--radius-lg); background: var(--color-surface-raised); overflow: hidden; }
+    .money-box:focus-within { outline: 2px solid var(--color-status-positive); outline-offset: 2px; }
+    .money-box input { min-width: 0; width: 100%; flex: 1; font-size: 23px; font-weight: 600; color: var(--color-text-primary); border: 0; padding: 14px 16px; background: transparent; outline: none; font-variant-numeric: tabular-nums; }
+    .money-box select { min-width: 88px; border: 0; border-left: 1px solid var(--color-border-control); color: var(--color-text-primary); background: transparent; padding: 8px 12px; font-weight: 600; outline: none; }
+    .converter-grid { display: grid; grid-template-columns: minmax(0,1fr) 50px minmax(0,1fr); gap: 14px; align-items: end; }
+    .swap-btn { width: 46px; height: 46px; padding: 0; border-radius: var(--radius-full); font-size: 22px; margin-bottom: 12px; }
+    .converter-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 15px; font-size: 12px; }
+    .periods { display: flex; flex-wrap: wrap; gap: 6px; }
+    .period-button { min-width: 43px; min-height: 34px; background: var(--color-surface-raised); color: var(--color-text-secondary); border: 1px solid var(--color-border-default); padding: 5px 9px; font-size: 12px; border-radius: var(--radius-md); }
+    .period-button:hover { border-color: var(--color-border-control); color: var(--color-text-primary); }
+    .period-button[aria-pressed="true"] { background: var(--color-action-primary); border-color: var(--color-action-primary); color: var(--color-text-primary); }
+    .chart-caption { color: var(--color-text-secondary); font-size: 11px; margin: 3px 0 0; }
+    .chart-wrapper { margin-top: 16px; border-top: 1px solid var(--color-border-default); padding-top: 14px; }
+    .chart-main-rate { font-size: 27px; line-height: 33px; font-weight: 600; }
+    .chart-svg { width: 100%; height: 210px; margin-top: 12px; overflow: visible; }
+    .chart-svg text { fill: var(--color-text-subtle); font: 11px var(--font-family); }
+    .chart-svg .gridline { stroke: var(--color-border-default); stroke-width: 1; }
+    .chart-svg .series { stroke: var(--color-status-positive); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .chart-svg .area { fill: url(#chartGradient); }
+    .visual-state { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+    .visual-state > div { background: var(--color-surface-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); padding: 15px; }
+    .visual-state .s-title { display: block; color: var(--color-text-secondary); font-size: 11px; margin-bottom: 14px; }
+    .visual-state .s-foot { color: var(--color-text-subtle); font-size: 10px; margin-top: 10px; }
+    .visual-state .force-hover { background: var(--reference-brand-hover); border-color: var(--reference-brand-hover); }
+    .visual-state .force-focus { outline: 2px solid var(--color-status-positive); outline-offset: 3px; }
+    .component-inventory { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+    .inventory-item { border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); background: var(--color-surface-default); padding: 16px; }
+    .inventory-item h4 { font-size: 14px; margin: 0 0 8px; }
+    .inventory-item .description { font-size: 11px; line-height: 1.6; color: var(--color-text-secondary); }
+    .inventory-item .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 11px 0 0; }
+    .inventory-item .tags span { color: var(--color-text-secondary); border: 1px solid var(--color-border-control); background: var(--color-surface-raised); padding: 3px 7px; border-radius: var(--radius-md); font: 10px ui-monospace, monospace; }
+    .sort-button { font-weight: 600; border: 0; background: none; color: inherit; padding: 2px 0; font-size: inherit; text-transform: inherit; }
+    .sort-button:hover { color: var(--color-status-positive); }
+    .report-table { min-width: 550px; width: 100%; border-collapse: collapse; text-align: left; font-variant-numeric: tabular-nums; }
+    .report-table th { padding: 11px 13px; font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--color-text-secondary); background: var(--color-surface-raised); }
+    .report-table td { font-size: 12px; padding: 12px 13px; border-bottom: 1px solid var(--color-border-default); }
+    .report-table th:last-child,.report-table td:last-child { text-align: right; }
+    .scroll-table { width: 100%; overflow-x: auto; border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); }
+    .filters { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; align-items: end; margin-bottom: 16px; }
+    .filters .field-label { margin-bottom: 7px; }
+    .report-actions { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 15px; }
+    .demo-toast { position: fixed; bottom: 22px; right: 22px; max-width: min(390px,calc(100vw - 34px)); z-index: 1000; color: var(--color-text-primary); background: var(--color-surface-raised); border: 1px solid var(--color-status-positive); border-radius: var(--radius-lg); padding: 13px 17px; box-shadow: 0 12px 36px rgba(0,0,0,.3); font-size: 13px; opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .2s, transform .2s; }
+    .demo-toast.visible { opacity: 1; transform: translateY(0); }
+
+    /* Language, status, implementation */
+    .lang-line { border: 1px solid var(--color-border-default); background: var(--color-surface-default); padding: 13px 15px; border-radius: var(--radius-lg); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; }
+    .lang-line.selected { background: var(--reference-selected); }
+    .number-samples { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+    .number-samples > div { border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); padding: 13px; background: var(--color-surface-default); }
+    .number-samples b { display: block; margin-top: 6px; font-size: 18px; font-variant-numeric: tabular-nums; }
+    .number-samples small { color: var(--color-text-secondary); font-size: 11px; }
+    .status-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .status-line { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--color-border-default); line-height: 1.6; font-size: 13px; }
+    .status-line:last-child { border: 0; }
+    .status-line .status-name { flex: 0 0 155px; color: var(--color-text-primary); font-weight: 600; }
+    .status-line .status-detail { color: var(--color-text-secondary); }
+    .code-area { background: #0A100D; color: var(--color-text-secondary); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); padding: 20px; overflow-x: auto; font-size: 12px; line-height: 1.75; max-height: 360px; white-space: pre; }
+    .code-area code { color: #B4D5BD; }
+    .footer { padding: 28px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 13px; color: var(--color-text-subtle); font-size: 11px; }
+    .footer a { color: var(--color-text-secondary); text-decoration: underline; text-underline-offset: 3px; }
+
+    @media (max-width: 1240px) {
+      .palette { grid-template-columns: repeat(3,minmax(0,1fr)); }
+      .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .space-grid { grid-template-columns: repeat(5,minmax(0,1fr)); }
+      .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 1050px) {
+      .app-shell { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-navigation { display: flex; overflow-x: auto; margin: 0 calc(-1 * clamp(24px,4.2vw,72px)); padding: 13px clamp(24px,4.2vw,72px); gap: 7px; background: var(--color-background-sidebar); border-bottom: 1px solid var(--color-border-default); position: sticky; top: 0; z-index: 20; }
+      .mobile-navigation a { white-space: nowrap; flex-shrink: 0; padding: 7px 11px; background: var(--color-surface-default); border-radius: var(--radius-md); border: 1px solid var(--color-border-default); font-size: 12px; }
+      .mobile-navigation a.active { background: var(--reference-selected); border-color: var(--color-status-positive); }
+    }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: minmax(0,1fr); }
+      .palette { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .type-row { grid-template-columns: minmax(0,1fr) 78px; }
+      .type-row .type-cell:last-child { grid-column: 1 / -1; }
+      .radius-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+      .weight-samples { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .filters { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .component-inventory { grid-template-columns: minmax(0,1fr); }
+      .visual-state { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .topbar { height: auto; padding: 16px 0; flex-wrap: wrap; }
+      .converter-grid { grid-template-columns: minmax(0,1fr); gap: 12px; }
+      .swap-btn { margin: 0 auto; transform: rotate(90deg); }
+      .swap-btn:active:not(:disabled) { transform: rotate(90deg) translateY(1px); }
+    }
+    @media (max-width: 480px) {
+      .doc-main { padding-left: 16px; padding-right: 16px; }
+      .mobile-navigation { margin: 0 -16px; padding: 12px 16px; }
+      .hero h1 { font-size: 37px; }
+      .metrics, .palette, .radius-grid, .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .space-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+      .filters { grid-template-columns: minmax(0,1fr); }
+      .number-samples { grid-template-columns: minmax(0,1fr); }
+      .section { padding: 30px 0; }
+      .ds-panel,.demo-card { padding: 17px; }
+      .top-actions { flex-wrap: wrap; }
+      .type-row { padding: 13px; }
+      .token-search { max-width: 100%; margin-left: 0; }
+      .section-head > .inline-between { flex-wrap: wrap; align-items: start; }
+    }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Navegação do Design System">
+    <div class="brand"><div class="brand-mark" aria-hidden="true">H</div><div><div class="brand-name">HERMES</div><div class="brand-sub">DESIGN SYSTEM · V2</div></div></div>
+    <div class="side-heading">FOUNDATIONS & COMPONENTS</div>
+    <nav class="side-nav" aria-label="Seções do guia">
+      <a href="#intro" class="active"><span class="n">00</span>Visão geral</a>
+      <a href="#colors"><span class="n">01</span>Cores e tokens</a>
+      <a href="#typography"><span class="n">02</span>Tipografia</a>
+      <a href="#spacing"><span class="n">03</span>Espaçamento</a>
+      <a href="#radius"><span class="n">04</span>Bordas e raio</a>
+      <a href="#components"><span class="n">05</span>Componentes</a>
+      <a href="#states"><span class="n">06</span>Estados e acessibilidade</a>
+      <a href="#responsive"><span class="n">07</span>Responsividade</a>
+      <a href="#language"><span class="n">08</span>Linguagem e dados</a>
+      <a href="#implementation"><span class="n">09</span>Inventário real</a>
+      <a href="#handoff"><span class="n">→</span>Handoff para Codex</a>
+    </nav>
+    <div class="side-bottom"><div class="tiny">DESIGN SOURCE</div><b>00_DESIGN-GUIDE</b><p>Figma node <span class="mono">26:1408</span>. Valores verificados na revisão 03 · 14/11/2026.</p><p style="margin-top:9px">Página HTML independente, sem bibliotecas, sem consulta à API e sem assets externos.</p></div>
+  </aside>
+  <main class="doc-main"><div class="content">
+    <nav class="mobile-navigation" aria-label="Navegação mobile">
+      <a href="#intro" class="active">Visão geral</a><a href="#colors">Cores</a><a href="#typography">Tipografia</a><a href="#spacing">Espaçamento</a><a href="#radius">Raios</a><a href="#components">Componentes</a><a href="#states">Estados</a><a href="#responsive">Responsivo</a><a href="#language">Idioma</a><a href="#implementation">Inventário</a><a href="#handoff">Código</a>
+    </nav>
+    <header class="topbar">
+      <div class="breadcrumb"><span>HERMES</span><span aria-hidden="true">/</span><strong>Design Guide</strong><span aria-hidden="true">/</span><span>High Fidelity V2</span></div>
+      <div class="top-actions"><span class="status-chip"><span class="status-dot" aria-hidden="true"></span> Documentação revisada</span><select id="localeSelect" class="locale-select" aria-label="Localidade para exemplos numéricos"><option value="pt-BR">PT · BR</option><option value="en-US">EN · US</option><option value="es-ES">ES · ES</option></select></div>
+    </header>
+
+    <section class="hero" id="intro" aria-labelledby="intro-title">
+      <div class="eyebrow">HERMES / DESIGN GUIDE / 2026</div>
+      <h1 id="intro-title">Quiet confidence.</h1>
+      <h2>A mesma linguagem. Uma escala consistente.</h2>
+      <p>Documentação fiel da identidade do HERMES Currency Exchange, convertida para HTML5 + CSS3 + JavaScript Vanilla. A paleta escura e os nomes de variáveis correspondem ao Figma; os exemplos abaixo são demonstrações locais e não dependem da API Frankfurter.</p>
+      <div class="hero-tools">
+        <button class="btn btn-primary" id="copyCss">Copiar CSS de tokens <span aria-hidden="true">↗</span></button>
+        <button class="btn btn-secondary" id="downloadTokens">Exportar tokens JSON</button>
+        <a class="btn btn-quiet" href="https://www.figma.com/design/lXz8qLzcQWvYolE2odWoYj/HERMES-%E2%80%94-Currency-Exchange-%7C-Premium-UX---UI?node-id=26-1408" target="_blank" rel="noreferrer">Ver fonte no Figma ↗</a>
+      </div>
+      <div class="metrics" aria-label="Inventário verificado"><div class="metric"><span class="metric-val tabular">40</span><span class="metric-title">Figma Variables</span><span class="metric-sub">12 cores primitivas · 12 semânticas · 16 dimensões</span></div><div class="metric"><span class="metric-val tabular">54</span><span class="metric-title">Text Styles</span><span class="metric-sub">7 foundations + 47 Applied (preservados)</span></div><div class="metric"><span class="metric-val tabular">6</span><span class="metric-title">Component Sets</span><span class="metric-sub">Famílias nativas documentadas no Figma</span></div><div class="metric"><span class="metric-val tabular">24</span><span class="metric-title">Variantes</span><span class="metric-sub">37 instâncias entre desktop e mobile V2</span></div></div>
+      <div class="notice important"><strong>Escopo da referência:</strong> o Figma possui apenas o modo <strong>Dark</strong> de cores semânticas. Esta página não inventa um tema Light. A letra “H” do cabeçalho é apenas um marcador tipográfico: substitua pelo símbolo oficial exportado do Figma durante a implementação.</div>
+    </section>
+
+    <section class="section" id="colors" aria-labelledby="color-title">
+      <div class="section-head"><span class="kicker">01 / Foundations</span><div class="inline-between"><h2 class="section-title" id="color-title">Cores que vêm do produto</h2><label class="token-search"><span class="sr-only">Buscar cor por nome ou hexadecimal</span><input class="input" id="searchColor" placeholder="Buscar cor ou token…" type="search"></label></div><p class="section-desc">Paleta HERMES personalizada, composta por 12 cores primitivas ligadas a 12 aliases semânticos. Clique em qualquer cor para copiar o hexadecimal.</p></div>
+      <div id="paletteGrid" class="palette" aria-label="Paleta oficial HERMES"></div>
+      <div class="notice"><strong>Diretriz:</strong> não substituir os verdes HERMES pelos tons <code>emerald/green</code> padrão do Tailwind. <code>brand #235C4B</code> é o token de ação oficial; <code>#226351</code> ainda aparece em controles mobile e está documentado como referência visual de hover, não como variável nativa.</div>
+      <h3 style="font-size:15px;margin:26px 0 11px">Mapeamento semântico → CSS Custom Property</h3>
+      <div class="semantic-map"><table><thead><tr><th>Papel no Figma</th><th>CSS para Codex</th><th>Valor</th></tr></thead><tbody id="semanticRows"></tbody></table></div>
+    </section>
+
+    <section class="section" id="typography" aria-labelledby="type-title">
+      <div class="section-head"><span class="kicker">02 / Foundations</span><h2 class="section-title" id="type-title">Tipografia / Inter</h2><p class="section-desc">Família Inter, pesos Regular 400 · Medium 500 · Semi Bold 600 · Bold 700. A escala abaixo representa os sete Text Styles oficiais de fundação; o Figma preserva outros 47 estilos aplicados às telas V2.</p></div>
+      <div class="type-list" id="typeList"></div>
+      <div class="weight-samples"><div><b style="font-weight:400">Ag 123</b><small>Regular · 400</small></div><div><b style="font-weight:500">Ag 123</b><small>Medium · 500</small></div><div><b style="font-weight:600">Ag 123</b><small>Semi Bold · 600</small></div><div><b style="font-weight:700">Ag 123</b><small>Bold · 700</small></div></div>
+      <div class="notice"><strong>Compatibilidade:</strong> para permanecer em um arquivo único, nenhuma fonte externa é carregada. O CSS utiliza Inter quando disponível no computador, com fallback de sistema. Em produção, o Codex deve adicionar Inter por meio do projeto (respeitando a licença da fonte).</div>
+      <details style="margin-top:17px"><summary style="cursor:pointer;color:var(--color-text-secondary)">Ver os 47 estilos Applied legados, extraídos do Figma</summary><div class="semantic-map"><table><thead><tr><th>Estilo existente</th><th>Peso</th><th>Font Size</th><th>Line Height</th></tr></thead><tbody id="legacyRows"></tbody></table></div></details>
+    </section>
+
+    <section class="section" id="spacing" aria-labelledby="space-title">
+      <div class="section-head"><span class="kicker">03 / Dimensions</span><h2 class="section-title" id="space-title">Espaçamento / base de 4 px</h2><p class="section-desc">Unidade de referência: 4 px (0,25 rem com raiz de 16 px). Use os mesmos valores em padding, gap e margens; preserve 10 e 28 px como exceções existentes no Figma.</p></div>
+      <div id="spacingGrid" class="space-grid"></div><div class="notice"><strong>Receitas de composição:</strong> controle <code>padding-inline:16px</code> + <code>padding-block:12px</code>; card <code>padding:24px</code>; entre cards <code>gap:16px</code>; entre seções <code>gap:32px</code>.</div>
+    </section>
+
+    <section class="section" id="radius" aria-labelledby="radius-title">
+      <div class="section-head"><span class="kicker">04 / Dimensions</span><h2 class="section-title" id="radius-title">Bordas, raios e elevação</h2><p class="section-desc">Raios oficiais: 6, 8, 12, 16 e 999 px. Bordas finas e sem sombras por padrão. As antigas medidas 7, 9, 13 e 15 px foram normalizadas nas principais áreas, com exceções restantes a revisar.</p></div>
+      <div id="radiusGrid" class="radius-grid"></div><div class="notice"><strong>Border:</strong> <code>1px solid var(--color-border-default)</code> em cards e painéis. Inputs usam <code>--color-border-control</code>. Não existe Effect Style de sombra no arquivo atual.</div>
+    </section>
+
+    <section class="section" id="components" aria-labelledby="component-title">
+      <div class="section-head"><span class="kicker">05 / UI & domain</span><h2 class="section-title" id="component-title">Componentes / anatomia e composição</h2><p class="section-desc">Exemplos com aparência baseada no guia. Botões, campos de cotação, swap, períodos e navegação representam as famílias do Design System; o JavaScript abaixo simula comportamento local, sem acesso a taxas reais.</p></div>
+      <div class="grid-2">
+        <div class="demo-card"><div class="demo-heading"><h3>Button / Action</h3><span class="pill">Primary · Secondary · Disabled</span></div><p>Altura recomendada de 44 px, texto 14/20 semibold, rounded-lg.</p><div class="inline-row"><button class="btn btn-primary" id="demoAction">Exportar CSV ↗</button><button class="btn btn-secondary" id="clearDemo">Limpar filtros</button><button class="btn btn-primary" disabled>Sem dados</button></div><div class="rule-note">Estados de foco e hover deste arquivo são demonstrativos; não afirmar que todos estão conectados no protótipo Figma.</div></div>
+        <div class="demo-card"><div class="demo-heading"><h3>Navigation / Item</h3><span class="pill">State=Selected | Default</span></div><p>Seleção destacada; a mudança abaixo simula a variante ativa.</p><div class="inline-row" role="tablist" aria-label="Seções demonstrativas" id="navDemo"><button class="btn btn-quiet" role="tab" aria-selected="true" data-tab="Conversor">Conversor</button><button class="btn btn-quiet" role="tab" aria-selected="false" data-tab="Histórico">Histórico</button><button class="btn btn-quiet" role="tab" aria-selected="false" data-tab="Relatórios">Relatórios</button></div><div class="notice" id="navDemoContent" role="tabpanel">Selecionado: Conversor. Use a mesma família de componentes no desktop e no mobile.</div></div>
+      </div>
+
+      <div class="demo-card" style="margin-top:16px"><div class="demo-heading"><h3>CurrencyAmount / Field + SwapCurrencies / Button</h3><span class="pill">Source · Target / Desktop · Mobile</span></div><p>Exemplo ilustrativo fixo EUR/USD, sem cotação em tempo real. Entrada com moeda persistente e retorno calculado a partir de uma taxa de demonstração.</p><div class="converter-grid"><div><label for="amountInput" class="field-label">Valor de origem</label><div class="money-box"><input id="amountInput" type="text" inputmode="decimal" autocomplete="off" value="10.000,00" aria-describedby="conversionNote"><select id="fromCurrency" aria-label="Moeda de origem"><option>EUR</option><option>USD</option></select></div></div><button id="swapCurrencies" class="btn btn-primary swap-btn" title="Inverter moedas" aria-label="Inverter EUR e USD">⇄</button><div><label for="resultAmount" class="field-label">Valor convertido</label><div class="money-box"><input id="resultAmount" type="text" value="10.800,00" readonly aria-label="Valor convertido"><select id="toCurrency" aria-label="Moeda de destino" disabled><option>USD</option><option>EUR</option></select></div></div></div><div class="converter-footer"><strong class="positive tabular" id="rateStatement">1 EUR = 1,0800 USD</strong><span class="muted" id="conversionNote">Taxa ilustrativa · 22/09/2026 · sem tarifas</span></div></div>
+
+      <div class="grid-4" style="margin-top:16px" id="marketCards"></div>
+      <div class="demo-card" style="margin-top:16px"><div class="demo-heading"><h3>PeriodSelector / Item + ExchangeRateChart</h3><span class="pill">8 períodos · Selected/Default</span></div><div class="inline-between" style="flex-wrap:wrap"><div><strong style="font-size:13px">Evolução da cotação</strong><p class="chart-caption">EUR / USD · Taxas de referência (dados demonstrativos)</p></div><div class="periods" id="periodButtons" aria-label="Período ilustrativo da análise"></div></div><div class="chart-wrapper"><div class="inline-between"><div><div class="chart-main-rate tabular" id="chartNumber">1,0800</div><div class="chart-caption">USD por EUR</div></div><span class="pill good">↗ +2,14% no período (exemplo)</span></div><svg class="chart-svg" id="rateChart" viewBox="0 0 850 220" role="img" aria-label="Gráfico ilustrativo da cotação, sem dados reais"><defs><linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8BDEA6" stop-opacity=".25"></stop><stop offset="100%" stop-color="#8BDEA6" stop-opacity="0"></stop></linearGradient></defs><g id="chartLayers"></g></svg></div></div>
+      <div class="demo-card" style="margin-top:16px"><div class="demo-heading"><h3>FilterField / Value + DataTable / Exemplo</h3><span class="pill">Default · Error | Desktop · Mobile</span></div><p>Os registros são demonstrações locais para verificar tipos, campos, ordenação e exportação. Filtros de exemplo não consultam a API.</p><div class="filters"><label><span class="field-label">De</span><input type="date" class="input" id="dateStart" value="2026-09-20"></label><label><span class="field-label">Até</span><input type="date" class="input" id="dateEnd" value="2026-09-22"></label><label><span class="field-label">Cotação mínima</span><input class="input tabular" id="minRate" inputmode="decimal" value="1,0600"></label><label><span class="field-label">Cotação máxima</span><input class="input tabular" id="maxRate" inputmode="decimal" value="1,1050"></label></div><div id="filterError" class="field-help field-error" role="alert" aria-live="polite"></div><div class="inline-between" style="margin:9px 0 12px"><span class="muted" style="font-size:12px" id="resultsCount">3 registros filtrados</span><span class="pill">CSV apenas dos registros filtrados</span></div><div class="scroll-table"><table class="report-table"><thead><tr><th scope="col" id="dateHeading" aria-sort="descending"><button type="button" class="sort-button" id="sortDate">Data ⇵</button></th><th scope="col">Origem</th><th scope="col">Destino</th><th scope="col" id="rateHeading" aria-sort="none"><button type="button" class="sort-button" id="sortRate">Cotação ⇵</button></th></tr></thead><tbody id="reportBody"></tbody></table></div><div class="report-actions"><span class="subtle" style="font-size:11px">Valores fictícios do protótipo · Não use para decisões financeiras</span><div class="inline-row"><button class="btn btn-secondary" id="resetFilters">Limpar filtros</button><button class="btn btn-primary" id="exportDemoCsv">Exportar CSV ↗</button></div></div></div>
+    </section>
+
+    <section class="section" id="states" aria-labelledby="state-title"><div class="section-head"><span class="kicker">06 / Feedback</span><h2 class="section-title" id="state-title">Estados e acessibilidade</h2><p class="section-desc">WCAG 2.2 AA como objetivo. Os quatro estados abaixo são demonstrações HTML/CSS. No arquivo Figma, Selected, Error e Disabled possuem variantes nativas; Hover, Focus e Loading ainda carecem de implementação completa.</p></div><div class="visual-state"><div><span class="s-title">Default</span><button class="btn btn-primary" id="stateDefault">Exportar CSV</button><div class="s-foot">bg-brand</div></div><div><span class="s-title">Hover / simulado</span><button class="btn btn-primary force-hover">Exportar CSV</button><div class="s-foot">#226351 · referência visual</div></div><div><span class="s-title">Focus visible / simulado</span><button class="btn btn-primary force-focus">Exportar CSV</button><div class="s-foot">ring-positive 2px</div></div><div><span class="s-title">Disabled</span><button class="btn btn-primary" disabled>Sem dados</button><div class="s-foot">disabled + feedback textual</div></div></div><div class="notice"><strong>Acessibilidade:</strong> contraste desejado ≥ 4,5:1 para texto comum e ≥ 3:1 para texto grande; rótulos visíveis, valores financeiros com <code>font-variant-numeric: tabular-nums</code>, áreas de toque preferenciais de 44 px e estados que não dependam exclusivamente da cor. A aprovação WCAG final requer testes no aplicativo React.</div></section>
+
+    <section class="section" id="responsive" aria-labelledby="responsive-title"><div class="section-head"><span class="kicker">07 / Responsive</span><h2 class="section-title" id="responsive-title">Layout / do mobile ao desktop</h2><p class="section-desc">A ordem semântica é mercado → conversor → evolução → histórico. O CSS desta referência adapta os exemplos, mas isso não comprova que todas as telas do protótipo Figma estejam responsivas.</p></div><div class="grid-2"><div class="ds-panel"><span class="eyebrow">MOBILE FIRST</span><h3 style="margin-top:12px">390 px · referência visual</h3><p><span class="mono">padding-inline: 16px</span> · grades de duas colunas nos cartões; conversor e filtros empilhados em telas pequenas; conteúdo essencial visível, sem scroll horizontal da página.</p><span class="pill good">Cabeçalho testado: 375 / 390 / 430 px</span></div><div class="ds-panel"><span class="eyebrow">DESKTOP · LG ≥ 1024</span><h3 style="margin-top:12px">1440 px · referência visual</h3><p>Sidebar atual: 248 px (256 px é uma referência de grid). Quatro cards no overview; maior densidade de dados mantendo a mesma paleta, componentes e hierarquia.</p><span class="pill warn">1280 px e tablet: validação pendente no Figma</span></div></div><div class="notice"><strong>Breakpoints de implementação sugeridos:</strong> Mobile 375–430 px, tablet 768 px, desktop ≥1024 px e desktop grande 1280–1440 px. São regras de CSS desta página, e não novos modos de variável nem telas automaticamente criadas no Figma.</div></section>
+
+    <section class="section" id="language" aria-labelledby="language-title"><div class="section-head"><span class="kicker">08 / Content</span><h2 class="section-title" id="language-title">Linguagem / confiança nos dados</h2><p class="section-desc">PT-BR, EN-US e ES-ES. Os códigos ISO 4217 e a precisão numérica são preservados na tradução. Altere o seletor no topo para comparar os formatos locais dos exemplos.</p></div><div class="grid-2"><div class="ds-panel"><h3>Idioma / Language</h3><div class="lang-line selected"><span>🇧🇷 Português (Brasil)</span><span class="positive" aria-hidden="true">✓</span></div><div class="lang-line"><span>🇺🇸 English</span></div><div class="lang-line"><span>🇪🇸 Español</span></div><p style="margin:10px 0 0">Os exemplos numéricos mudam com a seleção; o idioma integral da interface requer tradução no aplicativo React.</p></div><div class="ds-panel"><h3>Precisão antes da decoração</h3><div class="number-samples" id="numberSamples"></div><div class="rule-note">Valores monetários: 2 casas. Cotações: 4 casas. Mostrar o par EUR/USD, sinal ± em variações, valores numéricos alinhados à direita, fonte e data de referência.</div></div></div></section>
+
+    <section class="section" id="implementation" aria-labelledby="implementation-title"><div class="section-head"><span class="kicker">09 / Native Figma inventory</span><h2 class="section-title" id="implementation-title">Sistema implementado</h2><p class="section-desc">Inventário efetivamente verificado na página atual e na seção <code>08 / HERMES Components & Variants</code> do Figma. Os IDs servem como referência para o Codex consultar os componentes corretos.</p></div><div class="component-inventory" id="componentInventory"></div><div class="grid-2" style="margin-top:16px"><div class="ds-panel"><h3>Implementado</h3><div class="status-list"><span class="pill good">40 Variables</span><span class="pill good">54 Text Styles</span><span class="pill good">6 Component Sets</span><span class="pill good">24 Variants</span><span class="pill good">37 Instances</span></div><p class="rule-note">Cores vinculadas a telas V2 e Design Guide. Auto Layout aplicado parcialmente a estruturas e controles. A referência usa o modo Dark.</p></div><div class="ds-panel"><h3>Pendente no projeto Figma</h3><div class="status-list"><span class="pill warn">Responsividade 768/1280 px</span><span class="pill warn">Hover/Focus/Loading completos</span><span class="pill warn">Prototype flows</span><span class="pill warn">WCAG final</span><span class="pill warn">Redução de estilos Applied</span></div><p class="rule-note">Os exemplos interativos desta página não alteram o estado dessas pendências no Figma.</p></div></div></section>
+
+    <section class="section" id="handoff" aria-labelledby="handoff-title"><div class="section-head"><span class="kicker">Developer handoff</span><h2 class="section-title" id="handoff-title">Base de implementação para Codex</h2><p class="section-desc">Use o bloco <code>:root</code> do início deste arquivo como fonte dos tokens. O HTML possui CSS e JavaScript internos e funciona com uma conexão de rede desligada.</p></div><div class="inline-row" style="margin-bottom:13px"><button class="btn btn-primary" id="copyCssBottom">Copiar tokens CSS</button><button class="btn btn-secondary" id="downloadTokensBottom">Exportar JSON</button><button class="btn btn-quiet" id="copyPrompt">Copiar instruções para Codex</button></div><pre class="code-area" aria-label="Trecho de CSS do Design System"><code id="cssPreview"></code></pre><div class="notice important"><strong>Recomendação de integração:</strong> no React + JavaScript + Vite + CSS Modules, extraia o bloco CSS <code>:root</code> para <code>src/styles/tokens.css</code> e importe uma vez em <code>main.jsx</code>. Converta os exemplos em componentes JSX sem usar o JavaScript demonstrativo como lógica de produção. Substitua os valores de exemplo pela API Frankfurter e trate loading, erro, empty state e acesso por teclado.</div></section>
+
+    <footer class="footer"><span>HERMES — Currency Exchange · Design System V2 · Revisão 03 (14/11/2026)</span><span>Baseado em Figma <a href="https://www.figma.com/design/lXz8qLzcQWvYolE2odWoYj/HERMES-%E2%80%94-Currency-Exchange-%7C-Premium-UX---UI?node-id=26-1408" target="_blank" rel="noreferrer">00_DESIGN-GUIDE / 26:1408</a> · arquivo HTML único</span></footer>
+  </div></main>
+</div>
+<div id="toast" class="demo-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<script>
+/* ===========================================================================
+   HERMES / DOCUMENTATION JS — 100% Vanilla, offline, without API requests.
+   These examples are illustrative. Connect live services in React later.
+   =========================================================================== */
+(() => {
+  'use strict';
+  const $ = (selector, scope = document) => scope.querySelector(selector);
+  const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+  const FIGMA_FILE = 'lXz8qLzcQWvYolE2odWoYj';
+  const SWATCHES = [
+    {name:'canvas', hex:'#0D1412', semantic:'color/background/canvas', role:'Fundo principal'},
+    {name:'sidebar',hex:'#101A17',semantic:'color/background/sidebar',role:'Navegação lateral'},
+    {name:'surface',hex:'#16221E',semantic:'color/surface/default',role:'Cards e painéis'},
+    {name:'raised',hex:'#1B2924',semantic:'color/surface/raised',role:'Inputs e superfícies'},
+    {name:'line',hex:'#263630',semantic:'color/border/default',role:'Divisores e cards'},
+    {name:'control-line',hex:'#304039',semantic:'color/border/control',role:'Borda de inputs'},
+    {name:'foreground',hex:'#F1F5F2',semantic:'color/text/primary',role:'Texto principal'},
+    {name:'muted',hex:'#A7B7AE',semantic:'color/text/secondary',role:'Texto secundário'},
+    {name:'subtle',hex:'#82968B',semantic:'color/text/subtle',role:'Legendas auxiliares'},
+    {name:'brand',hex:'#235C4B',semantic:'color/action/primary',role:'Ação principal'},
+    {name:'positive',hex:'#8BDEA6',semantic:'color/status/positive',role:'Alta, gráfico e foco'},
+    {name:'negative',hex:'#E49B9D',semantic:'color/status/negative',role:'Queda e erro'}
+  ];
+  const SPACE = [[1,4],[2,8],[3,12],[4,16],[6,24],[8,32],[10,40],[12,48],[16,64]];
+  const RADIUS = [{key:'md',px:6,role:'Chips e períodos'},{key:'lg',px:8,role:'Botões e inputs'},{key:'xl',px:12,role:'Cards e menus'},{key:'2xl',px:16,role:'Painéis maiores'},{key:'full',px:999,role:'Pílulas e status'}];
+  const TYPE = [
+    {name:'Heading/H1',size:30,line:36,weight:600,ex:'Moedas e câmbio',role:'Título da página',tw:'text-3xl'},
+    {name:'Heading/H2',size:24,line:32,weight:600,ex:'10.800,00',role:'Valor em destaque',tw:'text-2xl'},
+    {name:'Heading/H3',size:20,line:28,weight:600,ex:'Converter moedas',role:'Título de seção',tw:'text-xl'},
+    {name:'Heading/H4',size:18,line:28,weight:600,ex:'EUR / USD',role:'Subtítulo',tw:'text-lg'},
+    {name:'Body/Large',size:16,line:24,weight:400,ex:'Dados confiáveis',role:'Corpo e formulários',tw:'text-base'},
+    {name:'Body/Medium',size:14,line:20,weight:400,ex:'Exportar CSV',role:'Botões e tabelas',tw:'text-sm'},
+    {name:'Caption/Small',size:12,line:16,weight:400,ex:'Cotação de referência',role:'Metadados',tw:'text-xs'}
+  ];
+  const LEGACY = {
+    'Semi Bold': [[29,43],[28,40],[27,39],[26,38],[25,37],[24,34],[23,34],[23,33],[22,30],[20,30],[19,28],[18,26],[17,21],[16,23],[15,21],[14,21],[14,20],[13,19],[13,20],[13,18],[12,18],[12,17],[11,16],[10,16],[10,15],[10,18],[9.6,14.4],[9,13]],
+    'Medium': [[13,19],[13,18],[12,18],[12,17],[11,17],[11,16],[10,15],[9.6,14.4],[9,13]],
+    'Regular': [[13,19],[12,18],[12,17],[11,18],[11,17],[11,16],[10,15],[10,16],[9,14],[9,13]]
+  };
+  const COMPONENTS = [
+    {id:'44:15',name:'PeriodSelector / Item',variants:4,props:['Size: Desktop | Mobile','State: Default | Selected','Label (TEXT)'],desc:'Controle de períodos 7D / 15D / 30D / 3M / 6M / 1A / 5A / 10A.'},
+    {id:'46:14',name:'FilterField / Value',variants:4,props:['Size: Desktop | Mobile','State: Default | Error','Value (TEXT)'],desc:'Campos de data, cotação mínima e máxima.'},
+    {id:'46:39',name:'Button / Action',variants:8,props:['Size: Desktop | Mobile','Appearance: Primary | Secondary','State: Default | Disabled','Label (TEXT)'],desc:'Ações exportar CSV e limpar filtros.'},
+    {id:'46:46',name:'Navigation / Item',variants:2,props:['State: Default | Selected','Label (TEXT)'],desc:'Itens reutilizáveis da navegação mobile.'},
+    {id:'49:22',name:'CurrencyAmount / Field',variants:4,props:['Size: Desktop | Mobile','Role: Source | Target','Amount (TEXT)','Currency (TEXT)'],desc:'Campo monetário e seleção de moeda com as duas responsabilidades.'},
+    {id:'49:29',name:'SwapCurrencies / Button',variants:2,props:['Size: Desktop | Mobile','Symbol (TEXT)'],desc:'Botão para inverter origem e destino.'}
+  ];
+  const DEMO_MARKET = [
+    {pair:'EUR / USD',subtitle:'Euro · Dólar americano',rate:1.0800,delta:+0.42},
+    {pair:'USD / BRL',subtitle:'Dólar americano · Real',rate:5.2814,delta:-0.18},
+    {pair:'GBP / USD',subtitle:'Libra · Dólar americano',rate:1.3421,delta:+0.27},
+    {pair:'EUR / BRL',subtitle:'Euro · Real',rate:5.7042,delta:+0.36}
+  ];
+  const DEMO_REPORT = [
+    {date:'2026-09-22',source:'EUR',target:'USD',rate:1.0800},
+    {date:'2026-09-21',source:'EUR',target:'USD',rate:1.0818},
+    {date:'2026-09-20',source:'EUR',target:'USD',rate:1.0796}
+  ];
+  const PERIODS = ['7D','15D','30D','3M','6M','1A','5A','10A'];
+  let locale = 'pt-BR', currentPeriod = '1A', currentRate = 1.08;
+  let sorting = {key:'date',direction:'desc'}, filteredRows = DEMO_REPORT.slice();
+  let toastTimer = null;
+  const fmt = (v,decimals=4) => new Intl.NumberFormat(locale,{minimumFractionDigits:decimals,maximumFractionDigits:decimals}).format(v);
+  const fmtPercent = (v) => (v>=0?'+':'−') + fmt(Math.abs(v),2)+'%';
+  const make = (tag,className,text) => { const n=document.createElement(tag); if(className)n.className=className;if(text!==undefined)n.textContent=text;return n; };
+  const toast = msg => { const t=$('#toast');t.textContent=msg;t.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('visible'),3300); };
+  async function copy(text,success='Copiado para a área de transferência') {
+    try { if(navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text); else { const t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.left='-9999px';document.body.append(t);t.select();const ok=document.execCommand('copy');t.remove();if(!ok)throw Error('copy blocked'); }toast(success); }
+    catch { toast('Cópia bloqueada pelo navegador. Selecione o conteúdo exibido e copie manualmente.'); }
+  }
+  function download(text,name,type) { const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.style.display='none';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500); }
+  function tokenCss() { const source=$('#hermes-styles').textContent;const match=source.match(/:root\s*\{([\s\S]*?)\n\s*\}/);return match ? ':root {'+match[1]+'\n}' : ''; }
+  const tokenJson = () => ({
+    meta:{product:'HERMES Currency Exchange',source:'Figma 00_DESIGN-GUIDE node 26:1408',fileKey:FIGMA_FILE,revision:'03 — 2026-11-14',mode:'Dark',disclaimer:'Component behavior and derived state colors in HTML are illustrative; not additional Figma Variables.'},
+    primitiveColors:Object.fromEntries(SWATCHES.map(x=>['palette/'+x.name,x.hex])),
+    semanticColors:Object.fromEntries(SWATCHES.map(x=>[x.semantic,'{palette/'+x.name+'}'])),
+    dimensions:{...Object.fromEntries(SPACE.map(([k,v])=>['spacing/'+k,v])), 'spacing/period-mobile':10,'spacing/7':28,...Object.fromEntries(RADIUS.map(x=>['radius/'+x.key,x.px]))},
+    typography:{fontFamily:'Inter',weights:{Regular:400,Medium:500,'Semi Bold':600,Bold:700},foundation:TYPE.map(x=>({figmaStyle:'Typography/HERMES/Foundation/'+x.name,fontSize:x.size,lineHeight:x.line,fontWeight:x.weight})),legacyAppliedCount:47},
+    components:COMPONENTS.map(({id,name,variants,props})=>({nodeId:id,name,variants,properties:props})),
+    visualReferenceNotNative:{brandHover:'#226351',selected:'#2B4438',positiveSoft:'#1C392A'},
+    status:{applied:['color variables','text styles','component sets','37 instances','partial auto layout'],pending:['tablet/1280px responsive','hover/focus/loading figma variants','prototype flows','WCAG implementation testing']}
+  });
+  const renderPalette = query => {
+    const root=$('#paletteGrid');root.replaceChildren();const q=(query||'').trim().toLowerCase();let count=0;
+    for(const c of SWATCHES){if(q&&!`${c.name} ${c.hex} ${c.semantic} ${c.role}`.toLowerCase().includes(q))continue;count++;
+      const b=make('button','color-card');b.type='button';b.title=`Copiar ${c.hex}`;b.setAttribute('aria-label',`Copiar cor ${c.name}: ${c.hex}`);
+      const sw=make('span','color-chip');sw.style.background=c.hex;b.append(sw);
+      const name=make('span','color-name');name.append(make('span','',c.name));name.append(make('span','subtle','↗'));b.append(name);
+      b.append(make('span','color-hex',c.hex));b.append(make('div','color-meta',c.role));b.addEventListener('click',()=>copy(c.hex,`${c.name}: ${c.hex} copiado`));root.append(b);
+    }if(!count)root.append(make('p','muted','Nenhuma cor encontrada.'));
+  };
+  const renderSemantic = () => {const tb=$('#semanticRows');tb.replaceChildren();for(const c of SWATCHES){const tr=document.createElement('tr');for(const [val,cls] of [[c.semantic,'mono'],['--'+c.semantic.replaceAll('/','-'),'token-var'],[c.hex,'tabular']]){const cell=make('td',cls,val);tr.append(cell);}tb.append(tr);}};
+  const renderType = () => {const list=$('#typeList');list.replaceChildren();for(const t of TYPE){const row=make('div','type-row');const sample=make('div');sample.append(make('span','type-label','Typography / '+t.name));const ex=make('div','type-example',t.ex);ex.style.fontSize=t.size+'px';ex.style.lineHeight=t.line+'px';ex.style.fontWeight=t.weight;sample.append(ex);row.append(sample);const css=make('div','type-cell');css.append(make('code','',t.tw));row.append(css);row.append(make('div','type-cell',`${t.size} / ${t.line} px`));row.append(make('div','type-cell',t.role));list.append(row);}const legacy=$('#legacyRows');legacy.replaceChildren();for(const [weight,arr] of Object.entries(LEGACY)){for(const [size,line] of arr){const tr=document.createElement('tr');const legacyName=`Typography/HERMES/Applied/${weight.replaceAll(' ','-')}/${size}px-LH${line}`;for(const val of [legacyName,weight,size+' px',line+' px'])tr.append(make('td','',val));legacy.append(tr);}} };
+  const renderSpacing = () => {const root=$('#spacingGrid');root.replaceChildren();for(const [key,px] of SPACE){const box=make('div','space-token');const wrap=make('div','space-bar-wrap');const bar=make('span','space-bar');bar.style.height=Math.max(px,8)+'px';bar.style.width='28px';wrap.append(bar);box.append(wrap);box.append(make('strong','',px+' px'));box.append(make('small','mono','spacing/'+key));root.append(box);}};
+  const renderRadius = () => {const root=$('#radiusGrid');root.replaceChildren();for(const r of RADIUS){const card=make('div','radius-token');const preview=make('div','radius-preview');preview.style.borderRadius=r.px+'px';card.append(preview);card.append(make('strong','mono','radius/'+r.key));card.append(make('small','',r.px+' px · '+r.role));root.append(card);}};
+  const renderInventory = () => {const root=$('#componentInventory');root.replaceChildren();for(const c of COMPONENTS){const item=make('article','inventory-item');const top=make('div','inline-between');top.append(make('h4','',c.name));top.append(make('span','pill',c.variants+' variantes'));item.append(top);item.append(make('div','description',c.desc));const tags=make('div','tags');for(const prop of c.props)tags.append(make('span','',prop));item.append(tags);const link=make('a','description','Figma Node '+c.id+' ↗');link.href=`https://www.figma.com/design/${FIGMA_FILE}/HERMES?node-id=${c.id.replace(':','-')}`;link.target='_blank';link.rel='noreferrer';link.style.display='inline-block';link.style.marginTop='12px';item.append(link);root.append(item);}};
+  const sparkline = (positive,idx) => {const values=Array.from({length:15},(_,i)=>Math.sin(i*1.8+idx)*2 + (positive?i*.5:-i*.24)+6);const min=Math.min(...values),max=Math.max(...values);const p=values.map((v,i)=>`${i*6.1},${31-(v-min)/(max-min||1)*25}`).join(' ');return `<svg class="sparkline" viewBox="0 0 90 35" aria-hidden="true"><polyline points="${p}" fill="none" stroke="${positive?'#8BDEA6':'#E49B9D'}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" /></svg>`; };
+  const renderMarket = () => {const root=$('#marketCards');root.replaceChildren();DEMO_MARKET.forEach((m,i)=>{const card=make('div','demo-pair-card');card.append(make('div','pair-name',m.pair));card.append(make('div','pair-sub',m.subtitle));card.append(make('div','pair-rate tabular',fmt(m.rate)));card.append(make('div','pair-change tabular '+(m.delta>=0?'positive':'negative'),fmtPercent(m.delta)));const figure=make('div');figure.innerHTML=sparkline(m.delta>=0,i);card.append(figure.firstChild);root.append(card);});};
+  const renderPeriods = () => {const root=$('#periodButtons');root.replaceChildren();PERIODS.forEach(p=>{const b=make('button','period-button',p);b.type='button';b.dataset.period=p;b.setAttribute('aria-pressed',String(p===currentPeriod));b.addEventListener('click',()=>{currentPeriod=p;renderPeriods();renderChart();});root.append(b);});};
+  const renderChart = () => {
+    const root=$('#chartLayers');root.replaceChildren();const count={ '7D':8,'15D':15,'30D':22,'3M':25,'6M':29,'1A':45,'5A':55,'10A':65}[currentPeriod];
+    const values=Array.from({length:count},(_,i)=>1.061+i/(count-1)*.024 + Math.sin(i*.57)*.003+Math.sin(i*1.9)*.0016);
+    const min=Math.min(...values)-.004,max=Math.max(...values)+.003;const left=54,right=824,top=12,bottom=180;const pos=(v,i)=>[left+(right-left)*i/(count-1),bottom-(v-min)/(max-min)*(bottom-top)];const path=values.map((v,i)=>{const [x,y]=pos(v,i);return (i===0?'M':'L')+x.toFixed(2)+' '+y.toFixed(2);}).join(' ');const last=pos(values[count-1],count-1);
+    const area=document.createElementNS('http://www.w3.org/2000/svg','path');area.setAttribute('class','area');area.setAttribute('d',path+` L ${last[0]} ${bottom} L ${left} ${bottom} Z`);root.append(area);
+    for(let i=0;i<4;i++){const y=top+(bottom-top)*i/3;const line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('class','gridline');for(const [k,v] of Object.entries({x1:left,x2:right,y1:y,y2:y}))line.setAttribute(k,String(v));root.append(line);const label=document.createElementNS('http://www.w3.org/2000/svg','text');label.setAttribute('x','0');label.setAttribute('y',String(y+4));label.textContent=fmt(max-(max-min)*i/3);root.append(label);}
+    const series=document.createElementNS('http://www.w3.org/2000/svg','path');series.setAttribute('class','series');series.setAttribute('d',path);root.append(series);
+    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('cx',last[0]);dot.setAttribute('cy',last[1]);dot.setAttribute('r','4');dot.setAttribute('fill','#8BDEA6');root.append(dot);
+    const words=['INÍCIO','PERÍODO','AGORA'];words.forEach((word,i)=>{const text=document.createElementNS('http://www.w3.org/2000/svg','text');text.setAttribute('x',String(left+(right-left)*i/2));text.setAttribute('y','215');text.setAttribute('text-anchor',i===0?'start':i===2?'end':'middle');text.textContent=word;root.append(text);});$('#chartNumber').textContent=fmt(currentRate);$('#rateChart').setAttribute('aria-label',`Gráfico ilustrativo EUR/USD no período ${currentPeriod} — sem cotações reais`);
+  };
+  function parseLocalNumber(value){if(typeof value !== 'string')return NaN;let t=value.replace(/\s/g,'').replace(/[^\d,.-]/g,'');if(locale==='en-US'){t=t.replace(/,/g,'');}else{t=t.replace(/\./g,'').replace(',','.');}return Number(t);}
+  function setConverter(){const from=$('#fromCurrency').value,to=from==='EUR'?'USD':'EUR';$('#toCurrency').innerHTML=`<option>${to}</option>`;const raw=parseLocalNumber($('#amountInput').value);const amount=Number.isFinite(raw)&&raw>=0?raw:NaN;$('#amountInput').setAttribute('aria-invalid',String(!Number.isFinite(amount)));const rate=from==='EUR'?1.08:1/1.08;currentRate=rate;$('#resultAmount').value=Number.isFinite(amount)?fmt(amount*rate,2):'—';$('#rateStatement').textContent=`1 ${from} = ${fmt(rate)} ${to}`;$('#chartNumber').textContent=fmt(rate);$('#swapCurrencies').setAttribute('aria-label',`Inverter ${from} e ${to}`);}
+  function swapCurrencies(){const input=$('#amountInput');const value=parseLocalNumber(input.value);const from=$('#fromCurrency');from.value=from.value==='EUR'?'USD':'EUR';if(Number.isFinite(value))input.value=fmt(value*(from.value==='USD'?1.08:1/1.08),2);setConverter();toast('Moedas invertidas (demonstração local)');}
+  const validateFilters=()=>{
+    const date1=$('#dateStart').value,date2=$('#dateEnd').value,loRaw=$('#minRate').value,hiRaw=$('#maxRate').value;
+    const lo=loRaw?parseLocalNumber(loRaw):-Infinity,hi=hiRaw?parseLocalNumber(hiRaw):Infinity;
+    let err='';if(date1&&date2&&date1>date2)err='Data inicial não pode ser posterior à final.';
+    else if((loRaw&&!Number.isFinite(lo))||(hiRaw&&!Number.isFinite(hi)))err='Informe cotações numéricas válidas.';
+    else if(lo>hi)err='A cotação mínima não pode exceder a máxima.';
+    $('#filterError').textContent=err;for(const id of ['dateStart','dateEnd','minRate','maxRate'])$('#'+id).setAttribute('aria-invalid',String(Boolean(err)));
+    if(err){filteredRows=[];renderTable();return false;}
+    filteredRows=DEMO_REPORT.filter(r=>(!date1||r.date>=date1)&&(!date2||r.date<=date2)&&r.rate>=lo&&r.rate<=hi);renderTable();return true;
+  };
+  function renderTable(){const sorted=filteredRows.slice().sort((a,b)=>{const sign=sorting.direction==='asc'?1:-1;return sign*(a[sorting.key]>b[sorting.key]?1:a[sorting.key]<b[sorting.key]?-1:0);});const tb=$('#reportBody');tb.replaceChildren();if(!sorted.length){const tr=make('tr'),td=make('td','muted','Nenhum registro encontrado');td.colSpan=4;td.style.textAlign='center';tr.append(td);tb.append(tr);}else{for(const r of sorted){const tr=make('tr');const date=r.date.split('-').reverse().join('/');for(const text of [date,r.source,r.target,fmt(r.rate)])tr.append(make('td','',text));tb.append(tr);}}$('#resultsCount').textContent=sorted.length+' '+(sorted.length===1?'registro filtrado':'registros filtrados');$('#exportDemoCsv').disabled=!sorted.length;$('#dateHeading').setAttribute('aria-sort',sorting.key==='date'?(sorting.direction==='asc'?'ascending':'descending'):'none');$('#rateHeading').setAttribute('aria-sort',sorting.key==='rate'?(sorting.direction==='asc'?'ascending':'descending'):'none');}
+  function resetFilters(showFeedback=true){ $('#dateStart').value='2026-09-20';$('#dateEnd').value='2026-09-22';$('#minRate').value=fmt(1.0600);$('#maxRate').value=fmt(1.1050);sorting={key:'date',direction:'desc'};validateFilters();if(showFeedback)toast('Filtros de demonstração restaurados'); }
+  function exportFilteredCsv(){if(!filteredRows.length)return;const sorted=filteredRows.slice().sort((a,b)=>sorting.direction==='asc'?(a[sorting.key]>b[sorting.key]?1:-1):(a[sorting.key]<b[sorting.key]?1:-1));const rows=[['date','from','to','rate'],...sorted.map(r=>[r.date,r.source,r.target,r.rate.toFixed(4)])];const csv='\uFEFF'+rows.map(row=>row.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\r\n');download(csv,'hermes-demo-eur-usd.csv','text/csv;charset=utf-8');toast('CSV demonstrativo exportado');}
+  function renderNumberSamples(){const root=$('#numberSamples');root.replaceChildren();for(const [title,value,precision] of [['Valor',1234.56,2],['Cotação',1.08,4],['Variação',2.14,2]]){const c=make('div');c.append(make('small','',title));c.append(make('b','tabular',title==='Variação'?'+'+fmt(value,precision)+'%':fmt(value,precision)));root.append(c);}}
+  const prompt = `Implemente o HERMES Currency Exchange em React + JavaScript + Vite + CSS Modules. Use o arquivo HERMES_Design_System_Standalone.html como única referência de estilo: copie exatamente as 12 cores primitivas, 12 aliases semânticos, 16 dimensões e 7 estilos tipográficos fundamentais. Mantenha modo Dark; não invente tema Light. Preserve o visual premium escuro, sem substituir por Tailwind emerald padrão. Construa Button/Action, FilterField/Value, Navigation/Item, CurrencyAmount/Field, SwapCurrencies/Button, PeriodSelector/Item usando as props e estados documentados. No aplicativo, implemente a API Frankfurter, loading/error/empty, filtros, ordenação e CSV conforme Notion; não use os dados fictícios ou algoritmos ilustrativos desta página como fonte de câmbio. Inclua responsividade desktop/mobile/tablet, WCAG 2.2 AA e testes. Fonte do Design Guide: https://www.figma.com/design/lXz8qLzcQWvYolE2odWoYj/HERMES?node-id=26-1408.`;
+  function bind(){
+    $('#searchColor').addEventListener('input',e=>renderPalette(e.target.value));
+    for(const id of ['copyCss','copyCssBottom'])$('#'+id).addEventListener('click',()=>copy(tokenCss(),'Bloco :root com tokens copiado'));
+    for(const id of ['downloadTokens','downloadTokensBottom'])$('#'+id).addEventListener('click',()=>{download(JSON.stringify(tokenJson(),null,2),'hermes-design-tokens.json','application/json;charset=utf-8');toast('Tokens JSON exportados');});
+    $('#copyPrompt').addEventListener('click',()=>copy(prompt,'Instruções para Codex copiadas'));
+    $('#demoAction').addEventListener('click',exportFilteredCsv);$('#clearDemo').addEventListener('click',resetFilters);$('#stateDefault').addEventListener('click',()=>toast('Ação demonstrativa ativada'));
+    $('#navDemo').addEventListener('click',e=>{const b=e.target.closest('[role="tab"]');if(!b)return;$$('[role="tab"]',$('#navDemo')).forEach(t=>t.setAttribute('aria-selected',String(t===b)));$('#navDemoContent').textContent=`Selecionado: ${b.dataset.tab}. A navegação é apenas uma demonstração de estado visual.`;});
+    $('#fromCurrency').addEventListener('change',setConverter);$('#amountInput').addEventListener('input',setConverter);$('#swapCurrencies').addEventListener('click',swapCurrencies);
+    for(const id of ['dateStart','dateEnd','minRate','maxRate'])$('#'+id).addEventListener('input',validateFilters);
+    $('#resetFilters').addEventListener('click',resetFilters);$('#exportDemoCsv').addEventListener('click',exportFilteredCsv);
+    for(const [id,key] of [['sortDate','date'],['sortRate','rate']])$('#'+id).addEventListener('click',()=>{sorting={key,direction:sorting.key===key&&sorting.direction==='desc'?'asc':'desc'};renderTable();});
+    $('#localeSelect').addEventListener('change',e=>{const old=locale,value=parseLocalNumber($('#amountInput').value),lo=parseLocalNumber($('#minRate').value),hi=parseLocalNumber($('#maxRate').value);locale=e.target.value;$('#amountInput').value=Number.isFinite(value)?fmt(value,2):'';$('#minRate').value=Number.isFinite(lo)?fmt(lo):'';$('#maxRate').value=Number.isFinite(hi)?fmt(hi):'';renderMarket();renderChart();renderNumberSamples();setConverter();validateFilters();toast(`Formato numérico: ${locale}`);});
+    const navs=$$('a[href^="#"]');navs.forEach(link=>link.addEventListener('click',()=>{const href=link.getAttribute('href');navs.forEach(l=>l.classList.toggle('active',l.getAttribute('href')===href));}));
+    const sections=$$('main section[id]');if('IntersectionObserver' in window){const obs=new IntersectionObserver(entries=>{const top=entries.filter(x=>x.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];if(top){navs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+top.target.id));}},{rootMargin:'-12% 0px -76% 0px',threshold:0});sections.forEach(section=>obs.observe(section));}
+  }
+  function init(){renderPalette();renderSemantic();renderType();renderSpacing();renderRadius();renderInventory();renderMarket();renderPeriods();renderChart();renderNumberSamples();$('#cssPreview').textContent=tokenCss().slice(0,2700)+'\n/* ... clique em Copiar tokens CSS para obter o bloco completo ... */';resetFilters(false);setConverter();bind();}
+  init();
+})();
+</script>
+</body>
+</html>
