@@ -103,6 +103,13 @@
   --color-hermes-negative: var(--color-status-negative);
   --font-sans: var(--font-family);
   --font-mono: var(--mono);
+  --breakpoint-mobile: 375px;
+  --breakpoint-mobile-reference: 390px;
+  --breakpoint-mobile-wide: 430px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1280px;
+  --breakpoint-reference: 1440px;
   --radius-hermes-md: var(--radius-md);
   --radius-hermes-lg: var(--radius-lg);
   --radius-hermes-xl: var(--radius-xl);

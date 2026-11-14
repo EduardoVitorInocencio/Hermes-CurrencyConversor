@@ -38,11 +38,11 @@ O Playwright executa o smoke test contra o servidor Vite local em duas referênc
 
 ## Design foundation
 
-Os tokens verificados no Design Guide local estão em `src/app/styles/tokens.css`, com aliases semânticos dark-only, dimensões HERMES, tipografia Inter e mapeamento nominal para utilities Tailwind. `src/app/styles/globals.css` aplica reset, foco visível, seleção, tipografia base e contraste; `src/index.css` permanece como ponto de entrada compatível.
+Os tokens verificados no Design Guide local estão em `src/app/styles/tokens.css`, com aliases semânticos dark-only, dimensões HERMES, tipografia Inter, breakpoints de referência e mapeamento nominal para utilities Tailwind. `src/app/styles/globals.css` aplica reset, escala tipográfica, números tabulares, foco visível, seleção, contraste e overflow horizontal controlado; `src/index.css` permanece como ponto de entrada compatível.
 
 ## Estilos
 
-Tailwind CSS v4 está integrado pelo plugin oficial do Vite e pela entrada `src/index.css`. A paleta e os tokens efetivos HERMES permanecem deliberadamente fora desta tarefa e serão definidos em `TASK-007`; nenhuma cor genérica do Tailwind foi adotada como token do produto.
+Tailwind CSS v4 está integrado pelo plugin oficial do Vite e pela entrada `src/index.css`. A escala de tipografia usa Inter/fallback de sistema com os estilos H1–H4, Body Large/Medium e Caption Small do guia. Os breakpoints documentados são 375, 390, 430, 768, 1024, 1280 e 1440 px; são pontos de validação, não modos visuais adicionais.
 
 ## Imports
 
@@ -61,7 +61,7 @@ Novos componentes não precisam usar caminhos relativos longos; a migração dos
 - TypeScript `6.0.3`.
 - ESLint `10.15.0` instalado (`package.json`: `^10.14.0`).
 - Entradas atuais: `src/main.tsx`, `src/App.tsx`, `src/App.css` e `src/index.css`.
-- Ainda ausentes no baseline: cliente HTTP, arquitetura por feature, Axios, Recharts, Phosphor, `country-flag-icons` e ferramentas dedicadas de teste. Tailwind CSS v4 está configurado, mas seus tokens HERMES ainda não foram definidos.
+- Ainda ausentes no baseline: cliente HTTP, arquitetura por feature, Axios, Recharts, Phosphor e `country-flag-icons`. Tailwind CSS v4, tokens HERMES dark e breakpoints de referência já estão configurados.
 
 ## Escopo de referência
 

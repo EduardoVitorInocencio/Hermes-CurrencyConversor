@@ -11,6 +11,7 @@
   html {
     min-width: 320px;
     color-scheme: dark;
+    overflow-x: clip;
     scroll-behavior: smooth;
   }
 
@@ -26,6 +27,7 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
   }
 
   button,
@@ -72,5 +74,55 @@
 
   #root {
     min-height: 100svh;
+  }
+}
+
+@layer components {
+  .type-h1 {
+    font-size: var(--font-h1);
+    line-height: var(--leading-h1);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .type-h2 {
+    font-size: var(--font-h2);
+    line-height: var(--leading-h2);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .type-h3 {
+    font-size: var(--font-h3);
+    line-height: var(--leading-h3);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .type-h4 {
+    font-size: var(--font-h4);
+    line-height: var(--leading-h4);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .type-body-lg {
+    font-size: var(--font-body-lg);
+    line-height: var(--leading-body-lg);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .type-body-md {
+    font-size: var(--font-body-md);
+    line-height: var(--leading-body-md);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .type-caption-sm {
+    font-size: var(--font-caption-sm);
+    line-height: var(--leading-caption-sm);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .tabular,
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
   }
 }
