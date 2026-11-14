@@ -32,7 +32,7 @@ Este documento descreve **como** implementar os requisitos do PRD. Não altera o
 
 ### 1.3 Restrições atuais do repositório
 
-O baseline auditado em TASK-001 contém `src/App.tsx`, `src/App.css`, `src/index.css`, `src/main.tsx`, assets do template, `styleRef/HERMES_Design_System_Standalone.html` e configuração mínima de Vite/ESLint. O `package.json` declara React, React DOM, Vite, TypeScript e ESLint, além dos scripts `dev`, `build`, `lint`, `preview`, `test` e `typecheck`. O script `test` usa temporariamente o runner nativo do Node sem adicionar dependências; a suíte Vitest/React Testing Library/MSW permanece prevista para TASK-004. Ainda não há aliases, cliente HTTP, arquitetura por feature, Tailwind CSS v4, Axios, Recharts, Phosphor ou country-flag-icons.
+O baseline auditado em TASK-001/TASK-003 contém `src/App.tsx`, `src/App.css`, `src/index.css`, `src/main.tsx`, assets do template, `styleRef/HERMES_Design_System_Standalone.html` e configuração de Vite/ESLint com Tailwind CSS v4. O `package.json` declara React, React DOM, Vite, TypeScript, ESLint, Tailwind CSS e o plugin oficial do Vite, além dos scripts `dev`, `build`, `lint`, `preview`, `test` e `typecheck`. O script `test` usa temporariamente o runner nativo do Node sem adicionar uma suíte dedicada; Vitest/React Testing Library/MSW permanece prevista para TASK-004. O alias `@/*` já está configurado, mas ainda não há cliente HTTP, arquitetura por feature, Axios, Recharts, Phosphor ou country-flag-icons. Os tokens efetivos HERMES permanecem para TASK-007.
 
 O trabalho desta especificação não instala dependências nem modifica código de produto.
 

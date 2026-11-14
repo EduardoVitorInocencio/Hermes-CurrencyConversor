@@ -7,9 +7,9 @@
 - Phase: Phase 0 — Repository Setup
 - Type: Setup
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-001
-- Branch: `task/TASK-003-tailwind-pipeline` a partir de `chore/project-setup`
+- Branch: `dev`
 - PRD References: RNF-003, RNF-018
 - TECH References: TECH-001, TECH-002
 
@@ -27,11 +27,11 @@ Instalação/configuração mínima e integração com Vite. Tokens efetivos fic
 
 ### 4. Implementation Steps
 
-- [ ] Verificar compatibilidade de Node e dependências.
-- [ ] Adicionar Tailwind v4 e plugin/configuração necessária.
-- [ ] Integrar entrada CSS ao Vite.
-- [ ] Validar uma classe de teste sem alterar a UI final.
-- [ ] Rodar build e lint.
+- [x] Verificar compatibilidade de Node e dependências.
+- [x] Adicionar Tailwind v4 e plugin/configuração necessária.
+- [x] Integrar entrada CSS ao Vite.
+- [x] Validar uma classe de teste sem alterar a UI final.
+- [x] Rodar build e lint.
 
 ### 5. Expected Files
 
@@ -48,21 +48,23 @@ Build e lint; verificar que CSS de produção é gerado sem erro.
 
 ### 8. Definition of Done
 
-- [ ] Configuração concluída.
-- [ ] Critérios atendidos.
-- [ ] Gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Configuração concluída.
+- [x] Critérios atendidos.
+- [x] Gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
-- Pull Request: não aberto.
-- Branch de destino: `chore/project-setup`.
-- Status do merge: pendente.
+- Branch utilizada: `dev`.
+- Commits realizados: commit local atual — `chore(setup): add Tailwind v4 pipeline`.
+- Pull Request: não aberto, conforme solicitado.
+- Branch de destino: `dev`.
+- Status do merge: não aplicável; integração via PR não será realizada.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Tailwind CSS `4.3.5` e `@tailwindcss/vite` `4.3.5` foram adicionados como dependências de desenvolvimento. O plugin foi integrado ao `vite.config.ts` e `src/index.css` importa `tailwindcss`. Nenhum token HERMES ou classe de produto foi introduzido; a definição visual fica para TASK-007.
+
+Validação em 14/11/2026 com Node `24.22.1`: `npm run lint` passou; `npm run typecheck` passou; `npm run build` passou e gerou CSS de produção. Uma fixture temporária com `text-red-500` confirmou a geração da utility e foi removida antes do estado final. A instalação do npm reportou 7 vulnerabilidades moderadas no conjunto de dependências; nenhuma correção forçada foi aplicada nesta tarefa.
