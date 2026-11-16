@@ -7,11 +7,12 @@
 - Phase: Phase 2 — Base UI Components
 - Type: Component
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-007, TASK-008
-- Branch: `task/TASK-013-card-badge-typography` a partir de `feat/design-system`
+- Branch: `dev`
 - PRD References: RNF-005, RNF-018, RNF-019
 - TECH References: TECH-003
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Card, Badge e wrappers tipográficos alinhados aos tokens. Não compor páginas.
 
 ### 4. Implementation Steps
 
-- [ ] Definir variantes surface/raised/status.
-- [ ] Aplicar radius, borda e espaçamento do guia.
-- [ ] Garantir hierarquia semântica.
-- [ ] Evitar sombra/gradiente não aprovado.
-- [ ] Criar testes básicos.
+- [x] Definir variantes surface/raised/status.
+- [x] Aplicar radius, borda e espaçamento do guia.
+- [x] Garantir hierarquia semântica.
+- [x] Evitar sombra/gradiente não aprovado.
+- [x] Criar testes básicos.
 
 ### 5. Expected Files
 
@@ -48,21 +49,21 @@ Renderização, variantes, headings e contraste.
 
 ### 8. Definition of Done
 
-- [ ] Componentes concluídos.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Componentes concluídos.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(ui): add surface components`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/design-system`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Card, Badge e Typography implementados com variantes HERMES, heading semântico e status acompanhado de marcador e texto. Sem sombra ou gradiente. Validações finais: lint, typecheck, testes, build e E2E aprovados.

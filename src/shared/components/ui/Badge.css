@@ -1,0 +1,40 @@
+.hermes-badge {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  gap: var(--spacing-2);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-raised);
+  color: var(--color-text-secondary);
+  padding: 2px var(--spacing-3);
+  font-size: var(--font-caption-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-caption-sm);
+}
+
+.hermes-badge__marker {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-full);
+  background: currentColor;
+}
+
+.hermes-badge--positive {
+  border-color: var(--color-status-positive);
+  background: var(--reference-positive-soft);
+  color: var(--color-status-positive);
+}
+
+.hermes-badge--negative {
+  border-color: var(--color-status-negative);
+  background: color-mix(in srgb, var(--color-status-negative) 12%, var(--color-surface-default));
+  color: var(--color-status-negative);
+}
+
+.hermes-badge--info {
+  border-color: var(--color-border-control);
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+}
