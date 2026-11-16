@@ -7,11 +7,12 @@
 - Phase: Phase 1 — Design Foundation
 - Type: Test
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-007, TASK-008
-- Branch: `task/TASK-010-visual-baseline` a partir de `feat/design-system`
+- Branch: `dev`
 - PRD References: RNF-003, RNF-005, RNF-018, PD-007
 - TECH References: TECH-002
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Checklist visual, screenshots e registro de divergências. Não alterar Figma ne
 
 ### 4. Implementation Steps
 
-- [ ] Capturar referência local nos viewports principais.
-- [ ] Comparar cor, tipografia, radius, espaçamento e foco.
-- [ ] Registrar divergências e decisão necessária.
-- [ ] Corrigir apenas diferenças justificadas.
-- [ ] Atualizar relatório da tarefa.
+- [x] Capturar referência local nos viewports principais.
+- [x] Comparar cor, tipografia, radius, espaçamento e foco.
+- [x] Registrar divergências e decisão necessária.
+- [x] Corrigir apenas diferenças justificadas.
+- [x] Atualizar relatório da tarefa.
 
 ### 5. Expected Files
 
@@ -48,21 +49,23 @@ Validação visual e contraste; lint/build após eventuais correções.
 
 ### 8. Definition of Done
 
-- [ ] Baseline validado.
-- [ ] Critérios atendidos.
-- [ ] Gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Baseline validado.
+- [x] Critérios atendidos.
+- [x] Gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
-- Pull Request: não aberto.
-- Branch de destino: `feat/design-system`.
-- Status do merge: pendente.
+- Branch utilizada: `dev`.
+- Commits realizados: commit local atual — `test(design-system): record visual baseline`.
+- Pull Request: não aberto, conforme solicitado.
+- Branch de destino: `dev`.
+- Status do merge: não aplicável; integração via PR não será realizada.
 
 ### 10. Completion Notes
 
-Não iniciada; registrar pendências tablet e estados Figma.
+Baseline visual registrado em [docs/TASK-010-VISUAL-BASELINE.md](../docs/TASK-010-VISUAL-BASELINE.md), com screenshots desktop 1440×900 e mobile 390×844, comparação automatizada de 42 tokens e matriz de divergências. Tokens, contraste e overflow global foram confirmados; a divergência de conteúdo entre o starter atual e as telas HERMES do Figma permanece pendente para as tarefas de layout, sem antecipar implementação de produto.
+
+Validação em 16/11/2026: captura visual concluída; `npm run lint`, `npm run typecheck`, `npm run test`, `npm run test:e2e:ci` e `npm run build` passaram antes do registro do relatório.
