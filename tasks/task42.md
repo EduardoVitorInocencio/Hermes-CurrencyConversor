@@ -7,11 +7,12 @@
 - Phase: Phase 8 — Release Readiness
 - Type: Documentation
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-039, TASK-040, TASK-041
-- Branch: `task/TASK-042-release-checklist` a partir de `chore/release-readiness`
+- Branch: `dev`
 - PRD References: RNF-017, RNF-019, OBJ-01–OBJ-06, CA-01–CA-10
 - TECH References: TECH-016
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -58,12 +59,12 @@ Suite completa, build de produção e revisão visual/funcional final.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete exchange screens and workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `main` somente via release aprovada.
+- Branch de destino: `dev` (sem PR, conforme solicitação).
 - Status do merge: pendente.
 
 ### 10. Completion Notes
 
-Não iniciada. Não marcar como concluída por antecipação.
+Gates finais serão registrados após build, testes e revisão visual/funcional; sem PR ou merge nesta etapa.

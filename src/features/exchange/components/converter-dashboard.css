@@ -1,0 +1,4 @@
+.converter-dashboard { display: grid; gap: 26px; }
+.converter-dashboard .market-feature__header { margin-bottom: -4px; }
+.converter-dashboard .market-feature__header h2 { color: var(--color-text-primary); font-size: 16px; }
+.converter-dashboard .market-feature__header p { font-size: 11px; }

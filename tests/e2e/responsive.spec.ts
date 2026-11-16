@@ -12,6 +12,9 @@ test('keeps the document within the viewport at reference widths', async ({ page
     await page.setViewportSize({ width, height: 900 })
     await page.goto('/')
 
+    await expect(page.getByRole('main', { name: 'Moedas e câmbio' })).toBeVisible()
+    await expect(page.locator('#mobile-navigation')).toBeAttached()
+
     const hasNoHorizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
     )

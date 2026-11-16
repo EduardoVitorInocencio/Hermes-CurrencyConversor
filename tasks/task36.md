@@ -7,11 +7,12 @@
 - Phase: Phase 7 — Integration & QA / P1
 - Type: Feature
 - Priority: P1
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-007, TASK-008, TASK-029, TASK-035
-- Branch: `task/TASK-036-preferences` a partir de `feat/hermes-experience`
+- Branch: `dev`
 - PRD References: RF-039–RF-042, RN-028, RN-034, RNF-012
 - TECH References: TECH-002, TECH-015
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -57,12 +58,12 @@ Testes de três locales, fallback, storage e contraste por tema.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete exchange screens and workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/hermes-experience`.
+- Branch de destino: `dev`.
 - Status do merge: pendente.
 
 ### 10. Completion Notes
 
-Não iniciada; depende de PD-003.
+Preferências de idioma e modo escuro alinhadas ao shell implementadas; aguardando gates finais.

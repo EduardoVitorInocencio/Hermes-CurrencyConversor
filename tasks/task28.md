@@ -7,11 +7,12 @@
 - Phase: Phase 5 — Hooks & Business Logic
 - Type: Hook
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-020, TASK-021, TASK-022, TASK-023, TASK-024, TASK-026
-- Branch: `task/TASK-028-data-hooks` a partir de `feat/api-data-layer`
+- Branch: `dev`
 - PRD References: RF-001, RF-009, RF-017, RF-020, RF-025, RNF-008, RNF-009
 - TECH References: TECH-005, TECH-008, TECH-011
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Trocas rápidas de par/período não podem exibir resposta de outro contexto.
 
 ### 4. Implementation Steps
 
-- [ ] Criar estados request e retry.
-- [ ] Criar/cancelar AbortController em mudanças.
-- [ ] Comparar chave vigente antes de aplicar resposta.
-- [ ] Tratar vazio/stale/error separadamente.
-- [ ] Criar testes com MSW e delays.
+- [x] Criar estados request e retry.
+- [x] Criar/cancelar AbortController em mudanças.
+- [x] Comparar chave vigente antes de aplicar resposta.
+- [x] Tratar vazio/stale/error separadamente.
+- [x] Criar testes com MSW e delays.
 
 ### 5. Expected Files
 
@@ -49,21 +50,21 @@ Loading, sucesso, vazio, 4xx/5xx, timeout, cancelamento e corrida de requests.
 
 ### 8. Definition of Done
 
-- [ ] Hooks concluídos.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Hooks concluídos.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/api-data-layer`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Hooks de catálogo, cotação e histórico implementados com AbortController, retry, estados loading/error/empty/stale e proteção contra resposta obsoleta.

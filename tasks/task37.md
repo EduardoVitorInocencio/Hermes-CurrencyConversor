@@ -7,11 +7,12 @@
 - Phase: Phase 7 — Integration & QA / P1
 - Type: Feature
 - Priority: P1
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-014, TASK-028, TASK-030
-- Branch: `task/TASK-037-api-status` a partir de `feat/hermes-experience`
+- Branch: `dev`
 - PRD References: RF-015, RF-025, RF-043, RN-031, RNF-009, RNF-015
 - TECH References: TECH-005, TECH-011, TECH-015
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -57,12 +58,12 @@ Sucesso, erro, timeout, retry e stale-data.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete exchange screens and workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/hermes-experience`.
+- Branch de destino: `dev`.
 - Status do merge: pendente.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Status da API, stale data e estados de erro/empty integrados às telas; aguardando gates finais.

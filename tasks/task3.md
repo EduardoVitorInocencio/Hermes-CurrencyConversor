@@ -12,6 +12,7 @@
 - Branch: `dev`
 - PRD References: RNF-003, RNF-018
 - TECH References: TECH-001, TECH-002
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 

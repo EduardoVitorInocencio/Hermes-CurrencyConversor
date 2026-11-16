@@ -7,11 +7,12 @@
 - Phase: Phase 5 — Hooks & Business Logic
 - Type: Hook
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-022, TASK-024
-- Branch: `task/TASK-026-period-ranges` a partir de `feat/exchange-history`
+- Branch: `dev`
 - PRD References: RF-018, RF-017, RN-013–RN-016, RNF-019
 - TECH References: TECH-008, TECH-009
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Dias corridos e períodos de calendário têm semânticas diferentes e precisam 
 
 ### 4. Implementation Steps
 
-- [ ] Decidir dependência de datas (TD-001).
-- [ ] Implementar todos os períodos.
-- [ ] Tratar fim de mês, ano bissexto e timezone.
-- [ ] Garantir datas ISO.
-- [ ] Criar testes parametrizados.
+- [x] Decidir dependência de datas (TD-001).
+- [x] Implementar todos os períodos.
+- [x] Tratar fim de mês, ano bissexto e timezone.
+- [x] Garantir datas ISO.
+- [x] Criar testes parametrizados.
 
 ### 5. Expected Files
 
@@ -48,21 +49,21 @@ Oito períodos, final de mês, ano bissexto e datas de referência fixas.
 
 ### 8. Definition of Done
 
-- [ ] Intervalos concluídos.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Intervalos concluídos.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/exchange-history`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada; registrar TD-001.
+`getPeriodRange` implementado sem dependência externa, usando datas civis UTC, extremos inclusivos, oito períodos, fim de mês e ano bissexto cobertos por testes.

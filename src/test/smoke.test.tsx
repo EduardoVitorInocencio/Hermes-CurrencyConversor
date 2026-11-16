@@ -3,9 +3,9 @@ import { describe, expect, it } from 'vitest'
 import App from '@/App'
 
 describe('application smoke test', () => {
-  it('renders the starter application heading', () => {
+  it('renders the application shell heading', () => {
     render(<App />)
 
-    expect(screen.getByRole('heading', { name: 'Get started' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Moedas e câmbio' })).toBeInTheDocument()
   })
 })

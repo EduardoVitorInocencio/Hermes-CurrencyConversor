@@ -7,11 +7,12 @@
 - Phase: Phase 6 — Product Features
 - Type: Feature
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-027, TASK-033
-- Branch: `task/TASK-034-csv-export` a partir de `feat/export`
+- Branch: `dev`
 - PRD References: RF-035–RF-038, RN-025, RN-026, RNF-010
 - TECH References: TECH-010, TECH-014
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -58,12 +59,12 @@ Cabeçalho, BOM, aspas, quebras, valores especiais, zero registros e 32 linhas p
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete exchange screens and workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/export`.
+- Branch de destino: `dev`.
 - Status do merge: pendente.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Exportação CSV implementada com dados reais e estado desabilitado quando não há registros; aguardando gates finais.

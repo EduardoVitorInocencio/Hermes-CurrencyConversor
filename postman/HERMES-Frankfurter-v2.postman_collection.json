@@ -1,0 +1,19 @@
+{
+  "info": {
+    "name": "HERMES — Frankfurter API v2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Requests reproduzíveis para o catálogo, cotação e histórico. Não contém segredos."
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.frankfurter.dev/v2" },
+    { "key": "base", "value": "EUR" },
+    { "key": "quote", "value": "USD" },
+    { "key": "from", "value": "2024-01-01" },
+    { "key": "to", "value": "2024-01-31" }
+  ],
+  "item": [
+    { "name": "Currencies", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{baseUrl}}/currencies" } },
+    { "name": "Pair rate", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{baseUrl}}/rate/{{base}}/{{quote}}" } },
+    { "name": "Rate history", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": { "raw": "{{baseUrl}}/rates?from={{from}}&to={{to}}&base={{base}}&quotes={{quote}}", "host": ["{{baseUrl}}"], "path": ["rates"], "query": [{ "key": "from", "value": "{{from}}" }, { "key": "to", "value": "{{to}}" }, { "key": "base", "value": "{{base}}" }, { "key": "quotes", "value": "{{quote}}" }] } } }
+  ]
+}

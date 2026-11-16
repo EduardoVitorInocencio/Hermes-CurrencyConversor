@@ -1,0 +1,18 @@
+.converter-feature { display: grid; gap: 14px; }
+.converter-feature > .hermes-card { padding: 24px; }
+.converter-feature__card-heading, .converter-feature__result-row, .converter-feature__rate-line { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.converter-feature__card-heading h2 { margin: 0; font-size: 20px; }
+.converter-feature__overline, .converter-feature__label { margin: 0 0 6px; color: var(--color-status-positive); font-size: 10px; font-weight: 600; letter-spacing: .12em; }
+.converter-feature__intro { margin: 5px 0 0; color: var(--color-text-secondary); font-size: 12px; }
+.converter-feature__field-row { display: grid; grid-template-columns: minmax(0, 1fr) 46px minmax(0, 1fr); align-items: end; gap: 18px; margin-top: 26px; }
+.converter-feature__swap { width: 46px; height: 46px; min-width: 46px; border-radius: 50%; padding: 0; }
+.converter-feature__result-row { align-items: end; }
+.converter-feature__result { margin: 4px 0 0; color: var(--color-text-primary); font-size: 26px; font-weight: 600; }
+.converter-feature__date, .converter-feature__rate-line { color: var(--color-text-subtle); font-size: 11px; }
+.converter-feature__rate-line { align-items: center; border-top: 1px solid var(--color-border-default); margin-top: 18px; padding-top: 14px; }
+.converter-feature__rate-line strong { color: var(--color-text-primary); font-weight: 600; }
+.converter-feature .currency-amount-field__legend { margin-bottom: 9px; color: var(--color-text-subtle); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }
+.converter-feature .currency-amount-field__controls { grid-template-columns: 105px minmax(0, 1fr); }
+.converter-feature .hermes-input { background: #101a17; }
+.converter-feature > .hermes-card:last-child { background: #14241d; }
+@media (max-width: 650px) { .converter-feature__card-heading, .converter-feature__result-row { align-items: flex-start; flex-direction: column; } .converter-feature__field-row { grid-template-columns: 1fr; align-items: stretch; } .converter-feature__swap { justify-self: center; transform: rotate(90deg); } .converter-feature .currency-amount-field__controls { grid-template-columns: 95px minmax(0, 1fr); } }

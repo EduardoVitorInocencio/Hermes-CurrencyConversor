@@ -6,8 +6,8 @@ import { AppShell } from './AppShell'
 describe('AppShell', () => {
   it('renders landmarks, heading and active navigation', () => {
     render(<AppShell />)
-    expect(screen.getByRole('main', { name: 'Conversor' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Conversor', level: 1 })).toBeInTheDocument()
+    expect(screen.getByRole('main', { name: 'Moedas e câmbio' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Moedas e câmbio', level: 1 })).toBeInTheDocument()
     expect(screen.getByRole('navigation', { name: 'Seções principais' })).toBeInTheDocument()
   })
 
@@ -16,7 +16,7 @@ describe('AppShell', () => {
     render(<AppShell />)
     const desktopNavigation = screen.getByRole('navigation', { name: 'Seções principais' })
     await user.click(within(desktopNavigation).getByRole('button', { name: 'Histórico' }))
-    expect(screen.getByRole('heading', { name: 'Histórico', level: 1 })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Histórico de moedas', level: 1 })).toBeInTheDocument()
     expect(within(desktopNavigation).getByRole('button', { name: 'Histórico' })).toHaveAttribute('aria-current', 'page')
   })
 })

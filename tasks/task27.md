@@ -7,11 +7,12 @@
 - Phase: Phase 5 — Hooks & Business Logic
 - Type: Hook
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-022, TASK-024
-- Branch: `task/TASK-027-history-pipeline` a partir de `feat/exchange-history`
+- Branch: `dev`
 - PRD References: RF-026–RF-034, RN-017, RN-021–RN-024, RNF-007
 - TECH References: TECH-010, TECH-011
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Funções puras de filtro, sort, contador, paginação e reset. Não criar compo
 
 ### 4. Implementation Steps
 
-- [ ] Implementar limites inclusivos e AND.
-- [ ] Validar datas e mínimo/máximo.
-- [ ] Implementar sort de data/taxa com desempate.
-- [ ] Implementar paginação posterior ao sort.
-- [ ] Garantir não mutação do array original.
+- [x] Implementar limites inclusivos e AND.
+- [x] Validar datas e mínimo/máximo.
+- [x] Implementar sort de data/taxa com desempate.
+- [x] Implementar paginação posterior ao sort.
+- [x] Garantir não mutação do array original.
 
 ### 5. Expected Files
 
@@ -49,21 +50,21 @@ Datas, limites, AND, inválidos, empate, direções, lista vazia e paginação.
 
 ### 8. Definition of Done
 
-- [ ] Pipeline concluído.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Pipeline concluído.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/exchange-history`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Pipeline local implementado como dados → filtros inclusivos/AND → ordenação determinística → paginação, sem mutar a série canônica.

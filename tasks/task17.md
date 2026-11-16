@@ -7,11 +7,12 @@
 - Phase: Phase 3 — Application Layout
 - Type: Feature
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-016, TASK-008
-- Branch: `task/TASK-017-responsive-containers` a partir de `feat/application-layout`
+- Branch: `dev`
 - PRD References: RNF-003, RNF-018
 - TECH References: TECH-004
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Containers, grids, gaps, sidebar desktop e empilhamento mobile. Não estilizar c
 
 ### 4. Implementation Steps
 
-- [ ] Definir largura máxima e padding responsivo.
-- [ ] Compor grades de duas/quatro colunas conforme viewport.
-- [ ] Tratar overflow de tabela isoladamente.
-- [ ] Validar controles de toque.
-- [ ] Registrar exceções de tablet.
+- [x] Definir largura máxima e padding responsivo.
+- [x] Compor grades de duas/quatro colunas conforme viewport.
+- [x] Tratar overflow de tabela isoladamente.
+- [x] Validar controles de toque.
+- [x] Registrar exceções de tablet.
 
 ### 5. Expected Files
 
@@ -48,21 +49,21 @@ Screenshots/Playwright nos sete viewports, lint/build.
 
 ### 8. Definition of Done
 
-- [ ] Layout concluído.
-- [ ] Critérios atendidos.
-- [ ] Validações aprovadas.
-- [ ] Documentação atualizada.
+- [x] Layout concluído.
+- [x] Critérios atendidos.
+- [x] Validações aprovadas.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/application-layout`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Containers responsivos, grades, sidebar desktop, navegação móvel e overflow isolado da tabela implementados. Viewports críticos não geram rolagem horizontal geral.

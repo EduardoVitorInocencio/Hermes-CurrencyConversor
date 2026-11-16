@@ -4,9 +4,9 @@ Aplicação React + TypeScript para conversão de moedas, com especificação de
 
 ## Status atual
 
-`TASK-016` conclui a primeira camada de UI compartilhada e o AppShell responsivo. A aplicação agora possui controles de formulário, superfícies, feedback acessível e navegação entre Conversor, Histórico e Relatórios; as features ainda aguardam os contratos de API e domínio.
+As telas principais estão implementadas na branch `dev` e alinhadas ao Design Guide local e aos frames Figma informados: Conversor, Histórico e Relatórios. A entrega permanece em `IN_REVIEW` até a execução dos gates finais; não foi aberto PR.
 
-O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A implementação visual fica para as tarefas de UI previstas no plano.
+O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A interface usa o símbolo local HERMES, shell desktop/mobile, tokens dark, cards de mercado, conversor, análise histórica e builder de relatórios.
 
 ## Scripts
 
@@ -25,6 +25,12 @@ npm run preview
 ```
 
 `test` executa o Vitest em modo CI; `test:watch` inicia o modo interativo e `test:coverage` gera cobertura V8 em `coverage/`. O setup usa jsdom, Testing Library e MSW para manter testes de UI e rede independentes de serviços reais.
+
+## Fluxo funcional
+
+Após `npm install`, `npm run dev` abre o AppShell HERMES. O Conversor consulta o catálogo e a taxa do par pela Frankfurter v2, calcula localmente e identifica a natureza indicativa da taxa. Histórico usa a mesma série canônica para métricas, comparação, gráfico, tabela, filtros, paginação e CSV. Relatórios permite configurar nome, período, colunas e exportar CSV. Os testes E2E substituem a rede por fixtures determinísticas; a collection reproduzível está em [postman/HERMES-Frankfurter-v2.postman_collection.json](postman/HERMES-Frankfurter-v2.postman_collection.json).
+
+Se a API estiver indisponível, o app mantém estados de erro/indisponibilidade explícitos e não cria taxas de fallback. `VITE_FRANKFURTER_API_URL` é a única configuração pública da API; nenhum segredo deve ser colocado em variáveis `VITE_*`.
 
 ## E2E
 
@@ -52,7 +58,7 @@ Os tokens verificados no Design Guide local estão em `src/app/styles/tokens.css
 
 ## App shell
 
-`src/shared/components/layout/AppShell.tsx` organiza landmarks, sidebar desktop e navegação móvel fixa. Conversor, Histórico e Relatórios mudam sem recarga, identificam a seção ativa e exibem placeholders informativos sem taxas ou registros fictícios.
+`src/shared/components/layout/AppShell.tsx` organiza landmarks, sidebar desktop com pares salvos e fonte, topbar com status/idioma e navegação móvel fixa. Conversor, Histórico e Relatórios mudam sem recarga, identificam a seção ativa e exibem estados reais de loading, erro, stale e vazio sem taxas fictícias.
 
 ## Estilos
 
@@ -75,7 +81,7 @@ Novos componentes não precisam usar caminhos relativos longos; a migração dos
 - TypeScript `6.0.3`.
 - ESLint `10.15.0` instalado (`package.json`: `^10.14.0`).
 - Entradas atuais: `src/main.tsx`, `src/App.tsx`, `src/app/App.tsx` e `src/index.css`.
-- Ainda ausentes no baseline: cliente HTTP, contratos de domínio, Axios e Recharts. Tailwind CSS v4, tokens HERMES dark, breakpoints de referência, Phosphor, `country-flag-icons` e o AppShell já estão configurados.
+- Axios e Recharts estão integrados para consulta e visualização; Excel permanece explicitamente desabilitado, pois a exportação implementada nesta etapa é CSV. Nenhuma URL temporária do Figma é usada em runtime.
 
 ## Escopo de referência
 

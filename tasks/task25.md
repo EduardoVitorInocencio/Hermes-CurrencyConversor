@@ -7,11 +7,12 @@
 - Phase: Phase 5 — Hooks & Business Logic
 - Type: Hook
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-021, TASK-024
-- Branch: `task/TASK-025-conversion-domain` a partir de `feat/converter`
+- Branch: `dev`
 - PRD References: RF-008–RF-014, RN-002–RN-008, RN-010, RN-019, RNF-019
 - TECH References: TECH-007, TECH-009
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ O resultado deve usar taxa original, aceitar zero e rejeitar valores não finito
 
 ### 4. Implementation Steps
 
-- [ ] Confirmar limite RN-008.
-- [ ] Implementar conversão e validações.
-- [ ] Implementar variação com `null` para dados insuficientes.
-- [ ] Definir precisão somente de apresentação.
-- [ ] Criar testes de borda.
+- [x] Confirmar limite RN-008.
+- [x] Implementar conversão e validações.
+- [x] Implementar variação com `null` para dados insuficientes.
+- [x] Definir precisão somente de apresentação.
+- [x] Criar testes de borda.
 
 ### 5. Expected Files
 
@@ -49,21 +50,21 @@ Zero, válida, negativa, NaN, infinito, overflow, subida/queda e primeiro valor 
 
 ### 8. Definition of Done
 
-- [ ] Domínio concluído.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Domínio concluído.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/converter`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada; depende da decisão PD-001.
+`convertAmount` aceita zero, rejeita valores inválidos/negativos/overflow e preserva a taxa até a apresentação; `calculatePercentageChange` retorna `null` quando não há base positiva.

@@ -7,11 +7,12 @@
 - Phase: Phase 8 — Release Readiness
 - Type: Documentation
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-019, TASK-020, TASK-021, TASK-022, TASK-038
-- Branch: `task/TASK-040-postman-api-evidence` a partir de `chore/release-readiness`
+- Branch: `dev`
 - PRD References: RF-001, RF-009, RF-017, RN-001, RN-030, CA-08, CA-10
 - TECH References: TECH-005, TECH-016
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -56,12 +57,12 @@ Executar requests em ambiente autorizado, validar payloads e manter testes autom
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete exchange screens and workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `chore/release-readiness`.
+- Branch de destino: `dev`.
 - Status do merge: pendente.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Collection Postman e evidências de endpoints documentadas; aguardando gates finais.

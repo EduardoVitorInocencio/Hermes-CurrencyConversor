@@ -7,11 +7,12 @@
 - Phase: Phase 5 — Hooks & Business Logic
 - Type: Hook
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-020, TASK-021, TASK-022
-- Branch: `task/TASK-024-domain-view-state` a partir de `feat/api-data-layer`
+- Branch: `dev`
 - PRD References: RF-002, RF-004, RF-018, RF-020, RN-024
 - TECH References: TECH-008, TECH-011
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Tipos e reducer/hook de estado de view, incluindo reset de filtros/página por m
 
 ### 4. Implementation Steps
 
-- [ ] Definir `CurrencyPair`, `ExchangeViewState` e ações.
-- [ ] Definir defaults propostos como configuração explícita.
-- [ ] Implementar swap e mudança de período.
-- [ ] Resetar derivados incompatíveis.
-- [ ] Testar transições rápidas.
+- [x] Definir `CurrencyPair`, `ExchangeViewState` e ações.
+- [x] Definir defaults propostos como configuração explícita.
+- [x] Implementar swap e mudança de período.
+- [x] Resetar derivados incompatíveis.
+- [x] Testar transições rápidas.
 
 ### 5. Expected Files
 
@@ -48,21 +49,21 @@ Testes de reducer/hook, swap, período, defaults e reset.
 
 ### 8. Definition of Done
 
-- [ ] Estado concluído.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Estado concluído.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/api-data-layer`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada; confirmar PD-002 antes de fixar default.
+Estado único de par, valor, período, filtros e página implementado com default explícito EUR/USD e 30D; swap e mudanças de contexto resetam derivados incompatíveis.

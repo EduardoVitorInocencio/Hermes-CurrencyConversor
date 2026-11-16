@@ -17,6 +17,7 @@ export interface CurrencyAmountFieldProps {
   error?: ReactNode
   disabled?: boolean
   loading?: boolean
+  readOnly?: boolean
 }
 
 export function CurrencyAmountField({
@@ -33,6 +34,7 @@ export function CurrencyAmountField({
   loading = false,
   onAmountChange,
   onCurrencyChange,
+  readOnly = false,
 }: CurrencyAmountFieldProps) {
   return (
     <fieldset className="currency-amount-field" disabled={disabled || loading}>
@@ -52,6 +54,7 @@ export function CurrencyAmountField({
           label={amountLabel}
           loading={loading}
           onChange={(event) => onAmountChange?.(event.target.value)}
+          readOnly={readOnly}
           value={amount}
           error={error}
           hint={hint}

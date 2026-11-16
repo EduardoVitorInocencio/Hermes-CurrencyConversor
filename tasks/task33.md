@@ -7,11 +7,12 @@
 - Phase: Phase 6 — Product Features
 - Type: Feature
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-012, TASK-027, TASK-032
-- Branch: `task/TASK-033-history-controls` a partir de `feat/exchange-history`
+- Branch: `dev`
 - PRD References: RF-027–RF-034, RN-021–RN-024
 - TECH References: TECH-010, TECH-013
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -59,12 +60,12 @@ Combinações, extremos inclusivos, zero linhas, sort asc/desc, page size e rese
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete exchange screens and workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/exchange-history`.
+- Branch de destino: `dev`.
 - Status do merge: pendente.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Implementada no histórico e no dashboard do Conversor; aguardando os gates finais e o commit consolidado.

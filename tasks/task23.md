@@ -7,11 +7,12 @@
 - Phase: Phase 4 — Services & Data Layer
 - Type: Service
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-020, TASK-021, TASK-022
-- Branch: `task/TASK-023-validation-cache` a partir de `feat/api-data-layer`
+- Branch: `dev`
 - PRD References: RF-005, RF-015, RF-017, RN-017, RN-029, RN-030, RN-033, RNF-008–RNF-010
 - TECH References: TECH-005, TECH-006, TECH-007, TECH-008
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Schemas/adapters, ordenação canônica, deduplicação decidida, chaves de cach
 
 ### 4. Implementation Steps
 
-- [ ] Definir validações de data, códigos e taxa finita/positiva.
-- [ ] Definir política para registros repetidos e documentá-la.
-- [ ] Implementar cache curto somente se aprovado.
-- [ ] Garantir que mocks ficam restritos a teste/desenvolvimento.
-- [ ] Cobrir respostas blended sem chamar ECB indevidamente.
+- [x] Definir validações de data, códigos e taxa finita/positiva.
+- [x] Definir política para registros repetidos e documentá-la.
+- [x] Implementar cache curto somente se aprovado.
+- [x] Garantir que mocks ficam restritos a teste/desenvolvimento.
+- [x] Cobrir respostas blended sem chamar ECB indevidamente.
 
 ### 5. Expected Files
 
@@ -49,21 +50,21 @@ Fixtures válidas/inválidas, cache hit/miss/expiração, chaves distintas e res
 
 ### 8. Definition of Done
 
-- [ ] Validação/cache concluídos.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Validação/cache concluídos.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/api-data-layer`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada; registrar decisão TD-003 e política final de cache.
+Validação centralizada em `marketData`; duplicatas de histórico são preservadas para refletir o payload da fonte e o cache é apenas em memória, com TTL de 24h para catálogo. A atribuição permanece Frankfurter/fontes oficiais.

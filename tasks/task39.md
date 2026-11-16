@@ -7,11 +7,12 @@
 - Phase: Phase 7 — Integration & QA
 - Type: Test
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-018, TASK-030, TASK-031, TASK-033, TASK-038
-- Branch: `task/TASK-039-a11y-responsive-performance` a partir de `chore/quality-gates`
+- Branch: `dev`
 - PRD References: RNF-003–RNF-007, RNF-018, RNF-020, CA-09
 - TECH References: TECH-002, TECH-003, TECH-004, TECH-016
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -57,12 +58,12 @@ Playwright, auditoria de acessibilidade disponível, screenshots e medição doc
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete exchange screens and workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `chore/quality-gates`.
+- Branch de destino: `dev`.
 - Status do merge: pendente.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Checklist de qualidade, acessibilidade base e responsividade documentados; aguardando gates finais.

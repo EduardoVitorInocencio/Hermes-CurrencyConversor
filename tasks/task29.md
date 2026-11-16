@@ -7,11 +7,12 @@
 - Phase: Phase 5 — Hooks & Business Logic
 - Type: Hook
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-007, TASK-024
-- Branch: `task/TASK-029-locale-formatting` a partir de `feat/converter`
+- Branch: `dev`
 - PRD References: RF-008, RF-011, RF-040, RN-006, RN-028, RNF-012, RNF-019
 - TECH References: TECH-007, TECH-009, TECH-011
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Parser seguro, `Intl.NumberFormat`, datas, cotação e valor monetário; não tr
 
 ### 4. Implementation Steps
 
-- [ ] Definir tipos de locale.
-- [ ] Implementar parsing sem mutar valor canônico.
-- [ ] Implementar casas padrão e precisão adicional.
-- [ ] Implementar data conforme locale.
-- [ ] Criar testes parametrizados.
+- [x] Definir tipos de locale.
+- [x] Implementar parsing sem mutar valor canônico.
+- [x] Implementar casas padrão e precisão adicional.
+- [x] Implementar data conforme locale.
+- [x] Criar testes parametrizados.
 
 ### 5. Expected Files
 
@@ -49,21 +50,21 @@ Separadores, casas, zero, precisão, datas e mudança de locale.
 
 ### 8. Definition of Done
 
-- [ ] Formatting concluído.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Formatting concluído.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/converter`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Parser e formatadores PT-BR/EN-US/ES-ES implementados; precisão pequena permanece visível e códigos ISO não são traduzidos.

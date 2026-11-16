@@ -7,11 +7,12 @@
 - Phase: Phase 4 — Services & Data Layer
 - Type: Service
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-002, TASK-006
-- Branch: `task/TASK-019-axios-client` a partir de `feat/api-data-layer`
+- Branch: `dev`
 - PRD References: RF-009, RF-015, RNF-008, RNF-009, RNF-010, RNF-015
 - TECH References: TECH-005
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Axios client, timeout, headers, `AbortSignal` e normalização de 400/404/422/5x
 
 ### 4. Implementation Steps
 
-- [ ] Adicionar Axios e URL pública.
-- [ ] Configurar timeout e Accept.
-- [ ] Definir tipos de erro.
-- [ ] Propagar cancelamento.
-- [ ] Criar testes de erro.
+- [x] Adicionar Axios e URL pública.
+- [x] Configurar timeout e Accept.
+- [x] Definir tipos de erro.
+- [x] Propagar cancelamento.
+- [x] Criar testes de erro.
 
 ### 5. Expected Files
 
@@ -49,21 +50,21 @@ Mockar status e timeout com MSW/Axios; verificar retry somente onde permitido.
 
 ### 8. Definition of Done
 
-- [ ] Cliente concluído.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Cliente concluído.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/api-data-layer`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Axios configurado com base URL pública, timeout de 10s, Accept JSON, signal e normalização de HTTP, rede, timeout e cancelamento.

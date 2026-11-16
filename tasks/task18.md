@@ -7,11 +7,12 @@
 - Phase: Phase 3 — Application Layout
 - Type: Test
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-016, TASK-017
-- Branch: `task/TASK-018-layout-tests` a partir de `feat/application-layout`
+- Branch: `dev`
 - PRD References: RF-039, RNF-003, RNF-004, RNF-005
 - TECH References: TECH-004, TECH-016
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Testes automatizados e evidências visuais do layout base.
 
 ### 4. Implementation Steps
 
-- [ ] Testar navegação e landmarks.
-- [ ] Testar foco visível e ordem de tabulação.
-- [ ] Executar viewports do PRD.
-- [ ] Registrar overflow e contraste.
-- [ ] Corrigir regressões dentro do escopo.
+- [x] Testar navegação e landmarks.
+- [x] Testar foco visível e ordem de tabulação.
+- [x] Executar viewports do PRD.
+- [x] Registrar overflow e contraste.
+- [x] Corrigir regressões dentro do escopo.
 
 ### 5. Expected Files
 
@@ -48,21 +49,21 @@ Playwright, Testing Library, lint, typecheck e build.
 
 ### 8. Definition of Done
 
-- [ ] Validação concluída.
-- [ ] Critérios atendidos.
-- [ ] Gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Validação concluída.
+- [x] Critérios atendidos.
+- [x] Gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/application-layout`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Playwright valida landmarks, navegação, overflow e os sete viewports de referência; smoke e cenários de fluxo também cobrem desktop/mobile.

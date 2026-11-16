@@ -7,11 +7,12 @@
 - Phase: Phase 6 — Product Features
 - Type: Feature
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-027, TASK-031
-- Branch: `task/TASK-032-history-table` a partir de `feat/exchange-history`
+- Branch: `dev`
 - PRD References: RF-026, RF-032, RF-033, RN-020, RN-021
 - TECH References: TECH-010, TECH-013
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Colunas data/base/quote/rate, contador, empty state e scroll próprio. Ordenaç�
 
 ### 4. Implementation Steps
 
-- [ ] Definir tabela semântica e captions/labels.
-- [ ] Formatar datas e taxas sem perder valor.
-- [ ] Exibir contador do conjunto recebido.
-- [ ] Implementar loading/error/empty.
-- [ ] Preservar dados completos para exportação.
+- [x] Definir tabela semântica e captions/labels.
+- [x] Formatar datas e taxas sem perder valor.
+- [x] Exibir contador do conjunto recebido.
+- [x] Implementar loading/error/empty.
+- [x] Preservar dados completos para exportação.
 
 ### 5. Expected Files
 
@@ -49,21 +50,21 @@ Renderização, cabeçalhos, count, vazio, erro, teclado e viewport mobile.
 
 ### 8. Definition of Done
 
-- [ ] Tabela concluída.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Tabela concluída.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): complete remaining exchange workflow`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/exchange-history`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+HistoryTable, RecordCount e empty states implementados com tabela semântica, overflow próprio e contagem do conjunto filtrado.
