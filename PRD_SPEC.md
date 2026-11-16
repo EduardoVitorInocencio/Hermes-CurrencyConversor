@@ -5,9 +5,9 @@
 |---|---|
 | Produto | HERMES — Currency Exchange |
 | Tipo | Aplicação web de página única, frontend-only |
-| Versão | 2.0 — reorganização documental |
-| Data | 14/11/2026 |
-| Status | Especificação de produto pronta para planejamento; decisões marcadas como pendentes permanecem abertas |
+| Versão | 2.1 — consolidação da implementação observada |
+| Data | 16/11/2026 |
+| Status | MVP frontend implementado na branch `dev`, em revisão; P1 parcial e release ainda não concluídos |
 | Idioma deste documento | Português do Brasil |
 | Fonte funcional | [Projeto 02 — Currency Exchange App (Notion)](https://app.notion.com/p/Projeto-02-Currency-Exchange-App-3e4dfca74d8d819ebfeedbdbe661d76e) |
 | Fonte visual | [HERMES — Premium UX/UI (Figma)](https://www.figma.com/design/lXz8qLzcQWvYolE2odWoYj/HERMES-%E2%80%94-Currency-Exchange-%7C-Premium-UX---UI?node-id=26-2) |
@@ -15,6 +15,21 @@
 | Fonte cambial | [Frankfurter API v2](https://frankfurter.dev/pt/) |
 
 > Classificação de evidência: **[NOTION]** veio do briefing funcional; **[FIGMA]** foi identificado no protótipo ou no Design Guide; **[PROPOSTA]** é uma decisão de produto sujeita a validação. A presença visual no Figma não transforma automaticamente um recurso em requisito P0.
+
+## 0. Estado atual da entrega
+
+Este PRD continua sendo a fonte do **o quê** do produto. A tabela abaixo registra a implementação observada em 16/11/2026, sem transformar código parcial em requisito concluído.
+
+| Área | Situação observada | Evidência principal |
+|---|---|---|
+| Conversor P0 | Implementado | Catálogo, cotação do par, cálculo local, troca de moedas, estados de loading/erro e fonte em `src/features/exchange/` e `src/features/currencies/` |
+| Histórico P0 | Implementado | Oito períodos, gráfico Recharts, tabela, filtros, contador, paginação e CSV em `src/features/history/` e `src/features/export/` |
+| Análise histórica P1 | Implementada como composição funcional | Comparação USD/EUR/GBP contra BRL, métricas, variação, volatilidade e filtros em `HistoricalAnalysisPage.tsx` |
+| Navegação e responsividade | Implementadas | `AppShell`, navegação desktop/mobile e sweep E2E em 375–1440 px |
+| Favoritos, idioma e tema | Parciais | Existem hooks/controles de base, mas a integração com o shell ainda não está concluída; tema permanece dark-only |
+| Builder de relatórios | Parcial | Formulário, pré-visualização e CSV existem; colunas selecionadas e frequência ainda não alteram o payload exportado; Excel permanece desabilitado |
+| Qualidade | Gates locais verdes | Lint, typecheck, 22 arquivos/44 testes Vitest, build e 7 testes Playwright passaram; o build emite aviso de chunk >500 kB |
+| Release | Em revisão | Branch `dev`; não há PR ou merge de release confirmado |
 
 ## 1. Product Overview
 
@@ -384,7 +399,7 @@ Os casos abaixo são a referência comportamental para o aceite do MVP:
 | ID | Decisão pendente | Impacto |
 |---|---|---|
 | PD-001 | Confirmar limite máximo de entrada da RN-008. | Validação do conversor e mensagens de erro. |
-| PD-002 | Confirmar período inicial; 30D é proposta. | Estado inicial e primeira consulta. |
+| PD-002 | Confirmar período inicial; a implementação atual inicia em `1A`, enquanto `30D` permanece a proposta de produto. | Estado inicial e primeira consulta. |
 | PD-003 | Aprovar ou adiar tema claro; o Figma atual formaliza dark. | Escopo de RF-041. |
 | PD-004 | Confirmar comportamento final de favoritos e limite, se houver. | Persistência P1. |
 | PD-005 | Confirmar se overview e preferências entram na primeira release ou seguem como P1. | Planejamento de release. |
@@ -400,4 +415,7 @@ Os casos abaixo são a referência comportamental para o aceite do MVP:
 
 ## 12. Controle de mudanças
 
-Este arquivo contém somente requisitos, regras, jornadas, critérios e decisões de produto. Arquitetura, contratos, componentes, serviços, hooks, testes e plano de execução ficam em `TECH_SPEC.md`, `TASKs_SPEC.md` e nos arquivos de `tasks/`.
+- **14/11/2026 — v2.0:** reorganização dos requisitos, regras, jornadas, critérios e decisões de produto.
+- **16/11/2026 — v2.1:** inclusão do snapshot de implementação, gates observados, limitações P1 e status de revisão.
+
+Arquitetura, contratos, componentes, serviços, hooks, testes e plano de execução ficam em `TECH_SPEC.md`, `SPEC.md` e `TASKs_SPEC.md`. O plano de execução foi sintetizado em 10 fases e não mantém arquivos individuais de task.

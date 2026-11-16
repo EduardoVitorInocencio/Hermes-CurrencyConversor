@@ -4,12 +4,12 @@
 | Campo | Definição |
 |---|---|
 | Fonte de requisitos | [`PRD_SPEC.md`](PRD_SPEC.md) |
-| Versão | 1.0 — reorganização documental |
-| Data | 14/11/2026 |
-| Status | Implementação incremental; fundação, UI base e AppShell concluídos |
-| Repositório observado | Vite + React + TypeScript, branch `main`, um commit local alinhado a `origin/main` |
+| Versão | 1.1 — consolidação da arquitetura implementada |
+| Data | 16/11/2026 |
+| Status | Fundação, UI, shell, integração Frankfurter, conversor, histórico, análise e CSV implementados; P1 parcial; em revisão |
+| Repositório observado | Vite + React + TypeScript, branch `dev`, sem PR/merge de release confirmado |
 
-Este documento descreve **como** implementar os requisitos do PRD. Não altera o escopo de produto. Toda funcionalidade técnica deve apontar para IDs `RF`, `RN` e `RNF` do PRD.
+Este documento descreve **como** implementar os requisitos do PRD e registra o estado técnico observado. Não altera o escopo de produto. Toda funcionalidade técnica deve apontar para IDs `RF`, `RN` e `RNF` do PRD; divergências entre intenção e implementação ficam marcadas como parciais ou pendentes.
 
 ## 1. Technical Overview
 
@@ -32,9 +32,9 @@ Este documento descreve **como** implementar os requisitos do PRD. Não altera o
 
 ### 1.3 Restrições atuais do repositório
 
-O baseline auditado em TASK-001/TASK-003/TASK-004/TASK-005/TASK-006/TASK-007/TASK-008/TASK-009 contém `src/app/App.tsx`, `src/app/main.tsx`, `src/app/providers/AppProviders.tsx`, `src/app/config/env.ts`, `src/app/styles/tokens.css`, `src/app/styles/globals.css`, `src/features/currencies/constants/flagMap.ts`, `src/shared/components/CurrencyFlag.tsx`, o reexport de iconografia Phosphor, os re-exports/entradas compatíveis `src/App.tsx` e `src/main.tsx`, assets do template, `styleRef/HERMES_Design_System_Standalone.html` e configuração de Vite/ESLint com Tailwind CSS v4. O `package.json` declara React, React DOM, Vite, TypeScript, ESLint, Tailwind CSS, o plugin oficial do Vite, Vitest, Testing Library, jsdom, MSW, cobertura V8, Playwright, `@phosphor-icons/react` e `country-flag-icons`, além dos scripts `dev`, `build`, `lint`, `preview`, `test`, `test:watch`, `test:coverage`, `test:e2e`, `test:e2e:ci` e `typecheck`. O setup de testes usa jsdom, Testing Library e MSW com handlers locais; o E2E usa Chromium com viewports 1440×900 e 390×844; o alias `@/*` já está configurado; `.env.example` documenta apenas a URL pública do Frankfurter. Os tokens HERMES dark-only agora incluem escala tipográfica Inter, números tabulares e pontos de validação 375/390/430/768/1024/1280/1440 px, sem adoção de `emerald` ou paleta genérica. Ainda não há cliente HTTP, arquitetura por feature, Axios ou Recharts.
+O estado observado contém `src/app/`, `src/features/`, `src/shared/`, testes unitários/componentes em `src/**/*.test.*`, mocks MSW em `src/test/mocks/`, E2E Playwright em `tests/e2e/`, assets locais e o Design Guide em `styleRef/HERMES_Design_System_Standalone.html`. Axios, Recharts, Tailwind CSS v4, Phosphor, `country-flag-icons`, Vitest, Testing Library, MSW, cobertura V8 e Playwright estão instalados e configurados. O alias `@/*`, a variável pública `VITE_FRANKFURTER_API_URL` e os scripts de qualidade estão ativos.
 
-O trabalho desta especificação não instala dependências nem modifica código de produto.
+Limitações técnicas atuais: o cache TTL está aplicado ao catálogo, não às taxas/históricos; favoritos e preferências têm hooks, mas ainda não estão conectados ao `AppShell`; o status da API e os pares exibidos na sidebar ainda são composição estática; e o builder de relatórios ainda não projeta as colunas selecionadas no CSV.
 
 ## 2. Technology Stack
 
@@ -42,15 +42,15 @@ O trabalho desta especificação não instala dependências nem modifica código
 |---|---|---|---|
 | React + TypeScript | Componentes, estado e contratos | Já presente | Manter componentes funcionais e tipagem estrita |
 | Vite | Dev server e build estático | Já presente | Manter como pipeline principal |
-| Tailwind CSS v4 | Tokens e estilização responsiva | Ainda não presente | Adotar na Fase 1; não usar paleta genérica |
-| Axios | Cliente HTTP, timeout e cancelamento | Ainda não presente | Adotar para a camada de serviços |
-| Recharts | Gráfico histórico | Ainda não presente | Adotar somente no histórico P0 |
-| `@phosphor-icons/react` | Ícones | Ainda não presente | Usar o pacote React atual, não `phosphor-react` legado |
-| `country-flag-icons` | SVG de bandeiras | Ainda não presente | Usar mapa explícito ISO 4217 → ISO 3166 |
+| Tailwind CSS v4 | Tokens e estilização responsiva | Integrado pelo plugin oficial do Vite e `src/index.css` | Não substituir os tokens HERMES por paleta genérica |
+| Axios | Cliente HTTP, timeout e cancelamento | Integrado em `src/shared/lib/api/axiosClient.ts` | Manter URL pública configurável e `AbortSignal` |
+| Recharts | Gráfico histórico | Integrado em `ExchangeRateChart` e na análise comparativa | Renderizar somente dados normalizados |
+| `@phosphor-icons/react` | Ícones | Integrado com reexports em `src/shared/components/iconography.ts` | Não usar `phosphor-react` legado |
+| `country-flag-icons` | SVG de bandeiras | Integrado com mapa explícito em `flagMap.ts` | Não presumir país para moeda sem mapeamento |
 | Frankfurter API v2 | Fonte cambial | Dependência externa | Base pública em `https://api.frankfurter.dev/v2` |
-| date-fns | Cálculo de intervalos | Sugestão do PRD, ainda não presente | Adicionar apenas se a tarefa de datas justificar a dependência |
-| Vitest + Testing Library + MSW | Unitários, componentes e integração | Ainda não presente | Configurar com os scripts de qualidade |
-| Playwright | E2E e viewport | Ainda não presente | Configurar após o primeiro fluxo P0 |
+| date-fns | Cálculo de intervalos | Não adotado; o projeto usa cálculo UTC próprio | Adotar somente se a regra de calendário exigir uma dependência |
+| Vitest + Testing Library + MSW | Unitários, componentes e integração | Integrado; 22 arquivos e 44 testes passaram em 16/11/2026 | Manter rede determinística nos testes |
+| Playwright | E2E e viewport | Integrado; 7 testes passaram e 1 foi pulado por projeto | Manter Chromium desktop/mobile e sweep responsivo |
 
 Dependências adicionais precisam de justificativa em uma tarefa e no registro de decisão correspondente. A versão instalada deve ser compatível com Node/npm e confirmada pelo lockfile no momento da implementação.
 
@@ -80,7 +80,7 @@ Axios → Frankfurter v2
 
 ### 3.2 Fonte de verdade e dados derivados
 
-Estado compartilhado de página: `pair`, `period`, `amountInput`, filtros, ordenação e paginação. Dados remotos: catálogo, taxa e série histórica. Derivados: valor convertido, variação, linhas filtradas, linhas ordenadas, página atual e contagem. Não armazenar os derivados em `useState` separado quando puderem ser calculados do estado atual.
+Estado compartilhado de página: `pair`, `period`, `amount`, filtros e página. Dados remotos: catálogo, taxa e série histórica. Derivados: valor convertido, variação, linhas filtradas, linhas ordenadas, página atual e contagem. A implementação centraliza esse estado em `useExchangeViewState`; não armazenar derivados em `useState` separado quando puderem ser calculados do estado atual.
 
 ### 3.3 Fluxo de dados
 
@@ -99,7 +99,7 @@ period ────────────────────└──► 
 
 ### 3.4 Estado de requests
 
-Cada request deve carregar contexto de chave (`base`, `quote`, período e intervalo), status (`idle`, `loading`, `success`, `error`, `empty`) e erro categorizado. Um `AbortController` cancela a consulta anterior; além do cancelamento, o resultado recebido deve ser comparado com a chave vigente antes de alterar a tela. `stale-data` só pode ser mostrado quando o contexto ainda for o mesmo e o produto explicar que o dado não é novo.
+A implementação mantém `data`, `loading`, `error` e `stale` por hook. Um `AbortController` cancela a consulta anterior e uma flag de contexto impede que respostas obsoletas alterem a tela. O estado `empty` é derivado de uma resposta válida sem registros; `idle` não é exposto como estado visual separado. `stale-data` só pode ser mostrado quando o contexto ainda for o mesmo e o produto explicar que o dado não é novo.
 
 ### 3.5 Tratamento de erros
 
@@ -107,7 +107,7 @@ Normalizar erros de Axios, timeout, abort, HTTP e payload inválido para um tipo
 
 ## 4. Project Structure
 
-Estrutura-alvo, a ser construída incrementalmente a partir do template atual:
+Estrutura implementada e mantida incrementalmente:
 
 ```text
 src/
@@ -145,19 +145,16 @@ src/
 │   │   ├── utils/getPeriodRange.ts
 │   │   └── types/history.ts
 │   ├── market/
-│   │   ├── components/MarketOverview.tsx
-│   │   ├── components/MarketPairCard.tsx
-│   │   └── hooks/useMarketOverview.ts
+│   │   ├── MarketOverview.tsx
+│   │   └── market.css
 │   ├── favorites/
-│   │   ├── components/SavedPairsList.tsx
-│   │   └── hooks/useSavedPairs.ts
+│   │   └── hooks/useFavorites.ts
 │   ├── export/
 │   │   ├── components/ExportCsvButton.tsx
 │   │   └── utils/exportCsv.ts
 │   └── preferences/
-│       ├── components/LanguageSelector.tsx
-│       ├── components/ThemeToggle.tsx
-│       └── i18n/
+│       ├── components/PreferencesPanel.tsx
+│       └── hooks/usePreferences.ts
 ├── shared/
 │   ├── components/ui/
 │   ├── components/layout/
@@ -168,9 +165,11 @@ src/
 │   ├── hooks/
 │   └── types/
 └── test/
-    ├── fixtures/
     ├── mocks/
-    └── setup.ts
+    ├── setup.ts
+    └── smoke.test.tsx
+tests/
+└── e2e/
 ```
 
 O caminho físico dos arquivos deve ser ajustado somente se a implementação justificar; a responsabilidade da pasta não deve ser duplicada.
@@ -188,6 +187,8 @@ Fonte normativa local: `styleRef/HERMES_Design_System_Standalone.html`, derivada
 | Histórico e análise | `77:47` | 1440 × 2040 | Tela analítica com filtros, indicadores e comparação de moedas |
 
 O guia aprovado é **dark**. O arquivo registra 12 primitivas de cor, 12 aliases semânticos, escala de 4 px, 7 fundamentos tipográficos, 5 raios principais, 6 component sets e 24 variantes. O HTML contém estados e valores de demonstração que não devem ser tratados como tokens adicionais.
+
+Implementação atual: os tokens estão em `src/app/styles/tokens.css`, o reset e os contratos globais em `src/app/styles/globals.css`, e os componentes de UI consomem variáveis semânticas HERMES. A validação automatizada cobre overflow horizontal nos sete pontos de viewport; ainda falta uma revisão visual/manual formal contra todos os frames Figma e uma auditoria WCAG completa.
 
 Regra de implementação: o screenshot/contexto obtido pelo MCP do Figma é referência visual; a implementação deve permanecer em camadas editáveis e responsivas, usando os tokens abaixo. Não importar uma captura da tela como fundo nem usar URLs temporárias de assets do MCP em código. Quando a implementação for retomada, assets estáticos devem ser exportados pelo MCP, armazenados localmente e referenciados por seus arquivos versionados.
 
@@ -306,16 +307,18 @@ Usar Inter com os nomes de estilo do Figma: `Regular`, `Medium`, `Semi Bold` e `
 
 Cada componente deve ter teste de renderização, interação principal, estados aplicáveis e acessibilidade. Componentes P1 não devem bloquear o núcleo P0.
 
+Estado observado: os componentes base, feedback, layout, conversor, mercado, histórico, análise e exportação já existem. `SortButton` e `useFavorites` estão disponíveis no código, mas a ordenação por coluna e a lista dinâmica de favoritos ainda não estão conectadas ao fluxo principal. O `AppShell` exibe pares e status de API estáticos enquanto essa integração não é finalizada.
+
 ## 7. Custom Hooks
 
 | Hook | Assinatura conceitual | Responsabilidade e efeitos | Testes |
 |---|---|---|---|
-| `useCurrencies` | `() => { data, status, error, retry }` | Carregar catálogo, validar e cachear por curto período | sucesso, payload inválido, erro, retry |
-| `useExchangeRate` | `(pair) => { rate, status, error, retry }` | Consultar par, cancelar troca rápida, rejeitar resposta obsoleta | loading, swap, cancelamento, 4xx/5xx |
-| `useRateHistory` | `(pair, period) => { records, status, error, retry }` | Calcular intervalo, consultar e normalizar série | oito períodos, vazio, mudança de contexto |
-| `useSavedPairs` | `() => { pairs, save, remove, storageStatus }` | Persistir pares únicos e sobreviver a storage bloqueado | duplicata, reload, parse inválido, fallback |
-| `usePreferences` | `() => { locale, theme, setLocale, setTheme }` | Preferências P1 com fallback padrão | idioma/tema e storage bloqueado |
-| `useHistoryPipeline` | `(records, filters, sort, page) => derived` | Compor filtros, ordenação, contagem e paginação sem mutar fonte | AND, desempate, página após filtro |
+| `useCurrencies` | `(enabled?) => { data, loading, error, stale, retry }` | Carregar, validar e cachear o catálogo por 24h | sucesso, payload inválido, erro, retry |
+| `useExchangeRate` | `(base, quote, enabled?) => { data, loading, error, stale, retry }` | Consultar par, cancelar troca rápida e rejeitar resposta obsoleta | loading, swap, cancelamento, 4xx/5xx |
+| `useRateHistory` | `(base, quote, from, to, enabled?) => { data, loading, error, stale, retry }` | Consultar e normalizar série para o intervalo | oito períodos, vazio, mudança de contexto |
+| `useFavorites` | `() => { pairs, toggle, storageStatus }` | Persistir pares únicos e sobreviver a storage bloqueado | duplicata, parse inválido, fallback |
+| `usePreferences` | `() => { locale, theme, setLocale }` | Persistir locale; manter tema dark-only | idioma e storage bloqueado |
+| Pipeline de histórico | `filterHistory → sortHistory → paginateHistory` | Compor filtros, ordenação e paginação sem mutar a fonte | AND, desempate, página após filtro |
 
 Não criar hook para cálculo trivial que possa ser função pura.
 
@@ -384,7 +387,7 @@ export type AppLocale = 'pt-BR' | 'en-US' | 'es-ES';
 
 ### 8.3 Cliente HTTP
 
-Configuração planejada: Axios com base URL via `VITE_FRANKFURTER_API_URL`, timeout de 10.000 ms, `Accept: application/json` e propagação de `AbortSignal`. A URL pública não é segredo. Endpoints devem codificar parâmetros e usar `params` para query string.
+Configuração implementada: Axios com base URL via `VITE_FRANKFURTER_API_URL`, fallback para `https://api.frankfurter.dev/v2`, timeout de 10.000 ms, `Accept: application/json` e propagação de `AbortSignal`. A URL pública não é segredo. Endpoints codificam o par e usam `params` para query string.
 
 ### 8.4 Validação e normalização
 
@@ -407,7 +410,7 @@ Configuração planejada: Axios com base URL via `VITE_FRANKFURTER_API_URL`, tim
 | JSON inválido | Estado de erro de dados; não renderizar resposta parcial como correta |
 | Array vazio | Estado sem cotações para o intervalo |
 
-Cache P1 proposto: catálogo até 24h, cotação até 5 min, histórico por `base|quote|from|to` até 15 min. São políticas locais, não garantias de atualização da fonte.
+Cache observado: o catálogo usa TTL local de 24h em `TtlCache`. Cotação e histórico ainda não têm cache TTL ou deduplicação. Cache de cotação até 5 min e histórico por `base|quote|from|to` até 15 min continuam decisões P1, não garantias de atualização da fonte.
 
 ## 9. Data Models & Domain Logic
 
@@ -415,14 +418,16 @@ Cache P1 proposto: catálogo até 24h, cotação até 5 min, histórico por `bas
 export interface CurrencyPair { base: string; quote: string }
 export interface ExchangeViewState {
   pair: CurrencyPair;
-  amountInput: string;
+  amount: string;
   period: HistoryPeriod;
+  filters: HistoryFilters;
+  page: number;
 }
 export interface HistoryFilters {
-  from?: string;
-  to?: string;
-  minRate?: number;
-  maxRate?: number;
+  from: string;
+  to: string;
+  minRate: string;
+  maxRate: string;
 }
 export interface HistorySort {
   field: 'date' | 'rate';
@@ -447,78 +452,88 @@ Para séries longas, preservar todos os registros no modelo e no CSV. Se o gráf
 
 ### TECH-001 — Fundação do repositório
 
-Requisitos relacionados: RNF-001, RNF-002, RNF-016, RNF-017. Responsabilidade: ajustar scripts, aliases, Tailwind, ambiente e gates sem alterar comportamento de produto. Tarefas: TASK-001 a TASK-006.
+Requisitos relacionados: RNF-001, RNF-002, RNF-016, RNF-017. Responsabilidade: ajustar scripts, aliases, Tailwind, ambiente e gates sem alterar comportamento de produto. Fase: 1 — Foundation & Tooling.
 
 ### TECH-002 — Design System HERMES
 
-Requisitos relacionados: RF-039, RF-041, RN-034, RNF-003 a RNF-005, RNF-018. Responsabilidade: tokens dark verificados, tipografia, estados e breakpoints. Tarefas: TASK-007 a TASK-010.
+Requisitos relacionados: RF-039, RF-041, RN-034, RNF-003 a RNF-005, RNF-018. Responsabilidade: tokens dark verificados, tipografia, estados e breakpoints. Fase: 2 — Design Foundation.
 
 ### TECH-003 — UI compartilhada
 
-Requisitos relacionados: RNF-004, RNF-005, RNF-018. Responsabilidade: Button, controles, superfícies, feedback, foco e testes de acessibilidade. Tarefas: TASK-011 a TASK-015.
+Requisitos relacionados: RNF-004, RNF-005, RNF-018. Responsabilidade: Button, controles, superfícies, feedback, foco e testes de acessibilidade. Fase: 3 — Shared UI & Accessibility.
 
-Implementação atual: `src/shared/components/ui/` cobre Button, Input, Select, CurrencyAmountField, Card, Badge e Typography; `src/shared/components/feedback/` cobre loading, skeleton, erro com retry opcional e vazio. Todos usam os tokens HERMES e contratos semânticos; as ações de produto permanecem fora dos componentes e serão conectadas nas features correspondentes.
+Implementação atual: `src/shared/components/ui/` cobre Button, Input, Select, CurrencyAmountField, Card, Badge e Typography; `src/shared/components/feedback/` cobre loading, skeleton, erro com retry opcional e vazio. Todos usam os tokens HERMES e contratos semânticos. O conversor, histórico, análise, relatórios e exportação já compõem esses componentes.
 
 ### TECH-004 — Shell da aplicação
 
-Requisitos relacionados: RF-039, RNF-003, RNF-004, RNF-018. Responsabilidade: ordem Mercado → Conversor → Evolução → Histórico, navegação P1 e containers responsivos. Tarefas: TASK-016 a TASK-018.
+Requisitos relacionados: RF-039, RNF-003, RNF-004, RNF-018. Responsabilidade: ordem Mercado → Conversor → Evolução → Histórico, navegação P1 e containers responsivos. Fase: 4 — App Shell & Responsive Layout.
 
-Implementação atual: `src/shared/components/layout/AppShell.tsx` fornece landmarks, sidebar desktop, navegação móvel e troca local entre Conversor, Histórico e Relatórios sem recarga. Os estados iniciais são placeholders informativos e não apresentam taxas ou registros fictícios.
+Implementação atual: `src/shared/components/layout/AppShell.tsx` fornece landmarks, sidebar desktop, navegação móvel e troca local entre Conversor, Histórico e Relatórios sem recarga. A sidebar ainda exibe pares salvos e status da API como composição estática; as telas de produto consultam a API e usam estados reais de loading, erro, stale e vazio.
 
 ### TECH-005 — Cliente e contratos de API
 
-Requisitos relacionados: RF-001, RF-009, RF-017, RF-015, RN-001, RN-011, RN-030, RN-033, RNF-008 a RNF-010. Responsabilidade: Axios, DTOs, validação, erros, cancelamento e cache local. Tarefas: TASK-019 a TASK-023.
+Requisitos relacionados: RF-001, RF-009, RF-017, RF-015, RN-001, RN-011, RN-030, RN-033, RNF-008 a RNF-010. Responsabilidade: Axios, DTOs, validação, erros, cancelamento e cache local. Fase: 5 — API & Data Contracts.
 
 ### TECH-006 — Catálogo de moedas
 
-Requisitos relacionados: RF-001 a RF-007, RN-027. Responsabilidade: adaptador de `/currencies`, busca, seleção e mapa de bandeiras. Tarefas: TASK-020, TASK-023 e TASK-025.
+Requisitos relacionados: RF-001 a RF-007, RN-027. Responsabilidade: adaptador de `/currencies`, busca, seleção e mapa de bandeiras. Fase: 5 — API & Data Contracts.
 
 ### TECH-007 — Cotação e conversão
 
-Requisitos relacionados: RF-008 a RF-015, RN-002 a RN-011, RNF-009, RNF-019. Responsabilidade: consulta de par, cálculo local, validação, formatação e estados. Tarefas: TASK-021, TASK-025, TASK-026, TASK-029.
+Requisitos relacionados: RF-008 a RF-015, RN-002 a RN-011, RNF-009, RNF-019. Responsabilidade: consulta de par, cálculo local, validação, formatação e estados. Fase: 6 — Domain State, Hooks & Formatting.
 
 ### TECH-008 — Histórico temporal
 
-Requisitos relacionados: RF-017 a RF-022, RN-012 a RN-020, RNF-020. Responsabilidade: intervalos, série canônica, cancelamento e visualização. Tarefas: TASK-022, TASK-027, TASK-028, TASK-031.
+Requisitos relacionados: RF-017 a RF-022, RN-012 a RN-020, RNF-020. Responsabilidade: intervalos, série canônica, cancelamento e visualização. Fases: 6 e 8 — Domain State, Hooks & Formatting; History, Analysis & Export.
 
 ### TECH-009 — Domínio de cálculo
 
-Requisitos relacionados: RF-010, RF-013, RF-022, RN-003, RN-005 a RN-008, RN-018. Responsabilidade: funções puras de conversão, variação e precisão de apresentação. Tarefas: TASK-025, TASK-026, TASK-034.
+Requisitos relacionados: RF-010, RF-013, RF-022, RN-003, RN-005 a RN-008, RN-018. Responsabilidade: funções puras de conversão, variação e precisão de apresentação. Fases: 6 e 8 — Domain State, Hooks & Formatting; History, Analysis & Export.
 
 ### TECH-010 — Pipeline do histórico
 
-Requisitos relacionados: RF-026 a RF-034, RN-017, RN-021 a RN-024. Responsabilidade: filtros, ordenação, contador e paginação derivados. Tarefas: TASK-027, TASK-032, TASK-033, TASK-034.
+Requisitos relacionados: RF-026 a RF-034, RN-017, RN-021 a RN-024. Responsabilidade: filtros, ordenação, contador e paginação derivados. Fases: 6 e 8 — Domain State, Hooks & Formatting; History, Analysis & Export.
 
 ### TECH-011 — Estado de features
 
-Requisitos relacionados: RF-014, RF-020, RN-024, RNF-008, RNF-009. Responsabilidade: hooks de catálogo, taxa, histórico, preferências e resposta obsoleta. Tarefas: TASK-024, TASK-028, TASK-035, TASK-036.
+Requisitos relacionados: RF-014, RF-020, RN-024, RNF-008, RNF-009. Responsabilidade: hooks de catálogo, taxa, histórico, preferências e resposta obsoleta. Fases: 5, 6, 7 e 9.
 
 ### TECH-012 — Feature Converter
 
-Requisitos relacionados: RF-002, RF-004, RF-008 a RF-015, RF-043. Responsabilidade: composição do conversor P0, informação de fonte e estados. Tarefas: TASK-029 e TASK-038.
+Requisitos relacionados: RF-002, RF-004, RF-008 a RF-015, RF-043. Responsabilidade: composição do conversor P0, informação de fonte e estados. Fases: 6, 7 e 10.
 
 ### TECH-013 — Feature History
 
-Requisitos relacionados: RF-017 a RF-034, RNF-003, RNF-018 e RNF-020. Responsabilidade: seletor de períodos, gráfico, tabela, filtros, sort, paginação e composição visual das telas `26:441`, `26:616` e `77:47`. Tarefas: TASK-031 a TASK-033.
+Requisitos relacionados: RF-017 a RF-034, RNF-003, RNF-018 e RNF-020. Responsabilidade: seletor de períodos, gráfico, tabela, filtros, sort, paginação e composição visual das telas `26:441`, `26:616` e `77:47`. Fase: 8 — History, Analysis & Export.
 
 O histórico possui duas camadas de produto:
 
 1. **Histórico P0:** série do par selecionado, gráfico, tabela, filtros, ordenação, contador, paginação e CSV.
-2. **Histórico e análise da referência `77:47`:** filtros de moeda de referência/data/moedas comparadas, indicadores de média/mínima/máxima/volatilidade e comparação percentual. Esses indicadores são uma composição visual P1 até que os contratos de cálculo e a prioridade de produto sejam confirmados; não utilizar os números do Figma como dados reais.
+2. **Histórico e análise da referência `77:47`:** filtros de moeda de referência/data/moedas comparadas, indicadores de média/mínima/máxima/volatilidade e comparação percentual. Essa composição já está implementada com dados da API para USD/EUR/GBP contra BRL, mas continua P1 para fins de aceite visual e de produto; não utilizar os números do Figma como dados reais.
 
 O componente de comparação deve receber séries normalizadas, usar uma mesma data-base para todas as moedas e tratar ausência de histórico de 12 meses como estado informativo. A seção deve preservar a hierarquia, os espaçamentos e os tokens do Design Guide sem transformar coordenadas absolutas do Figma em uma implementação rígida.
 
 ### TECH-014 — Exportação
 
-Requisitos relacionados: RF-035 a RF-038, RN-025/RN-026, RNF-010. Responsabilidade: gerar CSV local a partir do conjunto filtrado e ordenado. Tarefas: TASK-034 e TASK-038.
+Requisitos relacionados: RF-035 a RF-038, RN-025/RN-026, RNF-010. Responsabilidade: gerar CSV local a partir do conjunto filtrado e ordenado. Fases: 8 e 10.
 
 ### TECH-015 — Experiência P1
 
-Requisitos relacionados: RF-016, RF-023 a RF-025, RF-039 a RF-042, RN-028, RN-031/RN-032. Responsabilidade: overview, favoritos, preferências, idioma, tema e status da API desacoplados do MVP. Tarefas: TASK-035 a TASK-037.
+Requisitos relacionados: RF-016, RF-023 a RF-025, RF-039 a RF-042, RN-028, RN-031/RN-032. Responsabilidade: overview, favoritos, preferências, idioma, tema e status da API desacoplados do MVP. Fases: 7 e 9.
 
 ### TECH-016 — Qualidade e release
 
-Requisitos relacionados: RNF-003 a RNF-017, CA-01 a CA-10. Responsabilidade: testes unitários, integração, E2E, acessibilidade, desempenho, segurança, documentação e build. Tarefas: TASK-004, TASK-005, TASK-015, TASK-018, TASK-038 a TASK-042.
+Requisitos relacionados: RNF-003 a RNF-017, CA-01 a CA-10. Responsabilidade: testes unitários, integração, E2E, acessibilidade, desempenho, segurança, documentação e build. Fase: 10 — E2E, Documentation & Release.
+
+### 10.1 Snapshot de implementação
+
+| Bloco | Estado em 16/11/2026 | Observação |
+|---|---|---|
+| TECH-001 a TECH-004 | Implementados | Setup, tokens, UI base, feedback, shell e viewports de referência estão no código e cobertos por testes |
+| TECH-005 a TECH-009 | Implementados | Axios, adapters, validação, catálogo, cotação, histórico, intervalos e cálculo local estão ativos |
+| TECH-010 a TECH-014 | Implementados com limites | Pipeline de filtros/paginação, conversor, histórico, análise e CSV estão ativos; sort por coluna e projeção de colunas do relatório ainda precisam de conexão de UI |
+| TECH-015 | Parcial | Hooks de favoritos/preferências existem, mas o shell usa composição estática; idioma não traduz o conteúdo e tema permanece dark-only |
+| TECH-016 | Em revisão | Gates verdes localmente; não há PR ou merge confirmado; build mantém aviso de chunk grande |
 
 ## 11. Testing Strategy
 
@@ -532,7 +547,7 @@ React Testing Library para interações e estados. MSW para simular respostas de
 
 ### 11.3 E2E
 
-Playwright deve cobrir: conversão completa; troca de par/período; gráfico e tabela sincronizados; filtros, ordenação, paginação e download CSV; viewport 390 px; foco, labels e mensagens de erro.
+O smoke E2E atual cobre conversão com taxa mockada, navegação para histórico, tabela/CSV e ausência de overflow nas larguras 375, 390, 430, 768, 1024, 1280 e 1440 px, em Chromium desktop/mobile. Ainda faltam cenários automatizados específicos para swap, os oito períodos, ordenação por coluna, retry e preferências.
 
 ### 11.4 Acessibilidade e responsividade
 
@@ -540,7 +555,7 @@ Testar teclado, foco visível, nomes/descrições, `aria-invalid`, anúncio de e
 
 ### 11.5 Gates mínimos
 
-Antes de merge de tarefa: `npm run lint`, `npm run typecheck`, `npm run test` e, quando aplicável, `npm run build` e testes E2E. Falha de gate mantém a tarefa fora de `DONE`.
+Validação observada em 16/11/2026: `npm run lint` passou; `npm run typecheck` passou; `npm run test` passou com 22 arquivos e 44 testes; `npm run build` passou com aviso de chunk maior que 500 kB; `npm run test:e2e` passou com 7 testes e 1 cenário pulado por projeto. Esses gates não substituem revisão visual/manual, PR ou merge.
 
 ## 12. Performance, Accessibility & Security
 
@@ -552,12 +567,13 @@ Antes de merge de tarefa: `npm run lint`, `npm run typecheck`, `npm run test` e,
 - Todo controle deve ter label/nome acessível e estado de erro associado.
 - CSV deve escapar aspas, quebras de linha e valores que possam ser interpretados como fórmula; não incluir conteúdo arbitrário sem sanitização.
 - URL da API deve ser HTTPS e configurável somente por variável pública.
+- O build atual gera um bundle JavaScript minificado acima do limite de aviso do Vite (~737 kB antes de gzip); code splitting é uma pendência de desempenho, não uma falha do gate.
 
 ## 13. Definition of Done técnica
 
 Uma tarefa só pode ser `DONE` quando:
 
-- escopo, requisitos e critérios do arquivo individual foram atendidos;
+- escopo, requisitos e critérios da fase foram atendidos;
 - testes aplicáveis foram criados/atualizados e aprovados;
 - lint, typecheck e build/testes exigidos passaram;
 - estados de loading, erro, vazio e acessibilidade foram considerados;
@@ -569,12 +585,14 @@ Uma tarefa só pode ser `DONE` quando:
 
 | ID | Decisão | Dono/condição |
 |---|---|---|
-| TD-001 | Confirmar data library ou implementar cálculo de calendário sem dependência. | Antes de TASK-026 |
-| TD-002 | Confirmar limite de entrada RN-008. | Produto antes de TASK-025 |
-| TD-003 | Definir política de deduplicação de datas repetidas. | Antes de TASK-023 |
-| TD-004 | Aprovar tema claro e seus tokens. | Produto/design antes de TASK-036 |
-| TD-005 | Confirmar cache P1 e indicador de API. | Antes de TASK-035/037 |
-| TD-006 | Confirmar cobertura de E2E e browsers no CI. | Antes de TASK-005/038 |
+| TD-001 | A implementação atual usa cálculo UTC próprio em `getPeriodRange.ts`; confirmar se essa decisão permanece suficiente ou se uma biblioteca deve ser adotada. | Produto/engenharia antes da release |
+| TD-002 | Confirmar limite de entrada RN-008. | Produto antes da Fase 6 |
+| TD-003 | Definir política de deduplicação de datas repetidas. | Antes de concluir a Fase 5 |
+| TD-004 | Aprovar tema claro e seus tokens; a implementação permanece dark-only. | Produto/design antes da Fase 9 |
+| TD-005 | Confirmar cache P1 de cotação/histórico e tornar o indicador de API derivado de request real no shell. | Antes de concluir a Fase 9 |
+| TD-006 | Confirmar cobertura adicional de E2E e browsers no CI; o baseline atual cobre Chromium desktop/mobile. | Antes da release |
+| TD-007 | Conectar favoritos e preferências ao shell e substituir pares/status estáticos. | Antes de considerar TECH-015 concluído |
+| TD-008 | Fazer colunas selecionadas e frequência do builder alterarem o CSV, ou reduzir o formulário ao escopo suportado. | Antes de considerar relatórios concluídos |
 
 ## 15. Referências externas verificadas
 

@@ -1,12 +1,12 @@
 # HERMES — Currency Exchange
 
-Aplicação React + TypeScript para conversão de moedas, com especificação de produto em `PRD_SPEC.md`, arquitetura técnica em `TECH_SPEC.md` e plano de execução em `TASKs_SPEC.md`.
+Aplicação React + TypeScript para conversão de moedas, com especificação de produto em `PRD_SPEC.md`, arquitetura técnica em `TECH_SPEC.md`, índice operacional em `SPEC.md` e plano de execução em `TASKs_SPEC.md`.
 
 ## Status atual
 
-As telas principais estão implementadas na branch `dev` e alinhadas ao Design Guide local e aos frames Figma informados: Conversor, Histórico e Relatórios. A entrega permanece em `IN_REVIEW` até a execução dos gates finais; não foi aberto PR.
+As telas principais estão implementadas na branch `dev` e alinhadas ao Design Guide local e aos frames Figma informados: Conversor, Histórico, Análise e Relatórios. A entrega permanece em `IN_REVIEW`: os gates locais passaram, mas ainda existem integrações P1, revisão visual/manual e PR/merge pendentes.
 
-O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A interface usa o símbolo local HERMES, shell desktop/mobile, tokens dark, cards de mercado, conversor, análise histórica e builder de relatórios.
+O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A interface usa o símbolo local HERMES, shell desktop/mobile, tokens dark, cards de mercado, conversor, análise histórica e builder de relatórios. O status detalhado e as limitações conhecidas estão em [`SPEC.md`](SPEC.md).
 
 ## Scripts
 
@@ -32,15 +32,23 @@ Após `npm install`, `npm run dev` abre o AppShell HERMES. O Conversor consulta 
 
 Se a API estiver indisponível, o app mantém estados de erro/indisponibilidade explícitos e não cria taxas de fallback. `VITE_FRANKFURTER_API_URL` é a única configuração pública da API; nenhum segredo deve ser colocado em variáveis `VITE_*`.
 
+## Limitações conhecidas
+
+- A sidebar ainda usa composição estática para pares salvos e status da API; o hook de favoritos existe, mas não está conectado ao shell.
+- Os controles de idioma alteram a seleção visual, mas a tradução completa ainda não está conectada; o tema aprovado permanece dark-only.
+- O histórico detalhado usa ordenação por data no fluxo atual; o utilitário e o componente de sort ainda precisam ser ligados à UI.
+- O builder permite escolher colunas e frequência visualmente, mas o CSV atual ainda exporta o contrato canônico completo; Excel permanece desabilitado.
+- O build passa, mas o Vite alerta sobre um chunk JavaScript minificado acima de 500 kB.
+
 ## E2E
 
 O Playwright executa o smoke test contra o servidor Vite local em duas referências: Chromium desktop `1440×900` e Chromium mobile `390×844`. `test:e2e` usa o reporter padrão; `test:e2e:ci` ativa o reporter de linha, proíbe `test.only`, usa um worker e permite até dois retries. Na primeira execução de uma máquina, instale o browser com `npx playwright install chromium`.
 
 ## App shell e ambiente
 
-`src/main.tsx` permanece como entrada pública e delega a montagem para `src/app/main.tsx`, que aplica `StrictMode` e `AppProviders`. O provider é intencionalmente neutro nesta fase; providers de features entram junto com suas respectivas tarefas. `src/App.tsx` mantém um re-export compatível para imports existentes, enquanto o componente está organizado em `src/app/App.tsx`.
+`src/main.tsx` permanece como entrada pública e delega a montagem para `src/app/main.tsx`, que aplica `StrictMode` e `AppProviders`. O provider é neutro; os hooks de feature são conectados pelas próprias telas. `src/App.tsx` mantém um re-export compatível para imports existentes, enquanto o componente está organizado em `src/app/App.tsx`.
 
-`VITE_FRANKFURTER_API_URL` é uma configuração pública de browser documentada em [.env.example](.env.example). Variáveis `VITE_*` não podem conter segredos; o fallback local aponta para `https://api.frankfurter.dev/v2` até a camada HTTP ser implementada.
+`VITE_FRANKFURTER_API_URL` é uma configuração pública de browser documentada em [.env.example](.env.example). Variáveis `VITE_*` não podem conter segredos; o fallback local aponta para `https://api.frankfurter.dev/v2`.
 
 ## Design foundation
 
@@ -58,7 +66,7 @@ Os tokens verificados no Design Guide local estão em `src/app/styles/tokens.css
 
 ## App shell
 
-`src/shared/components/layout/AppShell.tsx` organiza landmarks, sidebar desktop com pares salvos e fonte, topbar com status/idioma e navegação móvel fixa. Conversor, Histórico e Relatórios mudam sem recarga, identificam a seção ativa e exibem estados reais de loading, erro, stale e vazio sem taxas fictícias.
+`src/shared/components/layout/AppShell.tsx` organiza landmarks, sidebar desktop com fonte, topbar com status/idioma e navegação móvel fixa. Conversor, Histórico, Análise e Relatórios mudam sem recarga, identificam a seção ativa e exibem estados reais de loading, erro, stale e vazio sem taxas fictícias. Os pares exibidos na sidebar e o status visual da API ainda são estáticos e estão documentados como pendência.
 
 ## Estilos
 
@@ -82,10 +90,11 @@ Novos componentes não precisam usar caminhos relativos longos; a migração dos
 - ESLint `10.15.0` instalado (`package.json`: `^10.14.0`).
 - Entradas atuais: `src/main.tsx`, `src/App.tsx`, `src/app/App.tsx` e `src/index.css`.
 - Axios e Recharts estão integrados para consulta e visualização; Excel permanece explicitamente desabilitado, pois a exportação implementada nesta etapa é CSV. Nenhuma URL temporária do Figma é usada em runtime.
+- Validação em 16/11/2026: lint, typecheck, 22 arquivos/44 testes Vitest, build e 7 testes E2E passaram; 1 cenário E2E foi pulado por ser exclusivo do projeto desktop.
 
 ## Escopo de referência
 
 - Produto: [PRD_SPEC.md](PRD_SPEC.md)
 - Arquitetura: [TECH_SPEC.md](TECH_SPEC.md)
-- Plano geral: [TASKs_SPEC.md](TASKs_SPEC.md)
-- Tarefas: [tasks/task1.md](tasks/task1.md) até `tasks/task42.md`
+- Snapshot operacional: [SPEC.md](SPEC.md)
+- Plano de execução: [TASKs_SPEC.md](TASKs_SPEC.md), sintetizado em 10 fases

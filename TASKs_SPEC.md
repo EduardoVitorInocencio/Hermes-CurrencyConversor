@@ -4,128 +4,104 @@
 |---|---|
 | Fonte de produto | [`PRD_SPEC.md`](PRD_SPEC.md) |
 | Fonte técnica | [`TECH_SPEC.md`](TECH_SPEC.md) |
-| Status global | Planejado; nenhuma tarefa concluída nesta reorganização |
-| Total de tarefas | 42 |
-| Branches principais | `main` (produção) e `develop` (integração) |
+| Snapshot operacional | [`SPEC.md`](SPEC.md) |
+| Data da revisão | 16/11/2026 |
+| Status global | Implementação principal realizada; fases em `IN_REVIEW` até DoD, revisão e PR/merge |
+| Itens de execução | 10 fases consolidadas |
+| Branches principais | `main` (produção) e `dev` (integração atual) |
 | Regra de conclusão | Código + validação + revisão/PR real + sincronização documental |
 
-Este arquivo é o checklist central. Cada item possui um arquivo em `tasks/` e deve permanecer sincronizado com ele. Todas as tarefas começam como `TODO`; não há evidência de implementação, PR aprovado ou merge nesta entrega documental.
+Este arquivo é o checklist central da execução. O plano anterior de 42 tasks foi sintetizado em 10 fases; não há mais arquivos individuais em `tasks/`. Cada fase só pode ser marcada como `DONE` quando código, critérios, gates, documentação e integração estiverem confirmados.
 
-## 1. Status e ordem de execução
+## 1. Plano consolidado em 10 fases
 
-### Phase 0 — Repository Setup
+### Phase 1 — Foundation & Tooling · IN_REVIEW
 
-- [ ] TASK-001 — Auditar baseline e normalizar scripts → [`tasks/task1.md`](tasks/task1.md)
-- [ ] TASK-002 — Configurar TypeScript estrito e aliases → [`tasks/task2.md`](tasks/task2.md)
-- [ ] TASK-003 — Configurar Tailwind CSS v4 e pipeline de estilos → [`tasks/task3.md`](tasks/task3.md)
-- [ ] TASK-004 — Configurar Vitest, Testing Library e MSW → [`tasks/task4.md`](tasks/task4.md)
-- [ ] TASK-005 — Configurar Playwright e quality gates → [`tasks/task5.md`](tasks/task5.md)
-- [ ] TASK-006 — Preparar ambiente, providers e shell inicial → [`tasks/task6.md`](tasks/task6.md)
+- Setup do repositório, aliases, scripts, providers e ferramentas de teste.
+- Evidência atual: Vite, TypeScript estrito, ESLint, Vitest, MSW, Playwright e Tailwind v4 configurados.
 
-### Phase 1 — Design Foundation
+### Phase 2 — Design Foundation · IN_REVIEW
 
-- [ ] TASK-007 — Extrair tokens HERMES dark e estilos globais → [`tasks/task7.md`](tasks/task7.md)
-- [ ] TASK-008 — Configurar tipografia e breakpoints → [`tasks/task8.md`](tasks/task8.md)
-- [ ] TASK-009 — Configurar ícones e mapa de bandeiras → [`tasks/task9.md`](tasks/task9.md)
-- [ ] TASK-010 — Validar fundação visual contra Figma e styleRef → [`tasks/task10.md`](tasks/task10.md)
+- Tokens dark HERMES, tipografia Inter, breakpoints, iconografia, bandeiras e validação visual.
+- Pendência: revisão visual/manual completa contra Figma e Design Guide.
 
-### Phase 2 — Base UI Components
+### Phase 3 — Shared UI & Accessibility · IN_REVIEW
 
-- [ ] TASK-011 — Implementar Button e variantes → [`tasks/task11.md`](tasks/task11.md)
-- [ ] TASK-012 — Implementar Input, Select e CurrencyAmountField → [`tasks/task12.md`](tasks/task12.md)
-- [ ] TASK-013 — Implementar Card, Badge e hierarquia tipográfica → [`tasks/task13.md`](tasks/task13.md)
-- [ ] TASK-014 — Implementar estados de feedback → [`tasks/task14.md`](tasks/task14.md)
-- [ ] TASK-015 — Testar componentes base e acessibilidade → [`tasks/task15.md`](tasks/task15.md)
+- Componentes base, superfícies, formulários, feedback, foco e contratos de acessibilidade.
+- Evidência atual: componentes compartilhados e testes unitários/componentes implementados.
 
-### Phase 3 — Application Layout
+### Phase 4 — App Shell & Responsive Layout · IN_REVIEW
 
-- [ ] TASK-016 — Implementar AppShell e navegação de seções → [`tasks/task16.md`](tasks/task16.md)
-- [ ] TASK-017 — Implementar containers e layout responsivo → [`tasks/task17.md`](tasks/task17.md)
-- [ ] TASK-018 — Validar layout, landmarks e viewports → [`tasks/task18.md`](tasks/task18.md)
+- AppShell, landmarks, navegação desktop/mobile, containers e validação de viewport.
+- Evidência atual: navegação entre Conversor, Histórico, Análise e Relatórios sem recarga.
 
-### Phase 4 — Services & Data Layer
+### Phase 5 — API & Data Contracts · IN_REVIEW
 
-- [ ] TASK-019 — Implementar cliente Axios e erros normalizados → [`tasks/task19.md`](tasks/task19.md)
-- [ ] TASK-020 — Implementar serviço e adaptador de moedas → [`tasks/task20.md`](tasks/task20.md)
-- [ ] TASK-021 — Implementar serviço de cotação do par → [`tasks/task21.md`](tasks/task21.md)
-- [ ] TASK-022 — Implementar serviço de histórico → [`tasks/task22.md`](tasks/task22.md)
-- [ ] TASK-023 — Validar DTOs, normalizar dados e definir cache → [`tasks/task23.md`](tasks/task23.md)
+- Cliente Axios, endpoints Frankfurter v2, adapters, validação, erros, cancelamento e cache do catálogo.
+- Pendência: cache TTL/deduplicação para cotação e histórico.
 
-### Phase 5 — Hooks & Business Logic
+### Phase 6 — Domain State, Hooks & Formatting · IN_REVIEW
 
-- [ ] TASK-024 — Implementar estado compartilhado de par e período → [`tasks/task24.md`](tasks/task24.md)
-- [ ] TASK-025 — Implementar validação e cálculo de conversão → [`tasks/task25.md`](tasks/task25.md)
-- [ ] TASK-026 — Implementar cálculo dos oito intervalos → [`tasks/task26.md`](tasks/task26.md)
-- [ ] TASK-027 — Implementar pipeline de filtros, sort e paginação → [`tasks/task27.md`](tasks/task27.md)
-- [ ] TASK-028 — Implementar hooks de dados e cancelamento → [`tasks/task28.md`](tasks/task28.md)
-- [ ] TASK-029 — Implementar parsing e formatação por localidade → [`tasks/task29.md`](tasks/task29.md)
+- Estado compartilhado, conversão, intervalos, filtros, ordenação, paginação, cancelamento e formatação local.
+- Evidência atual: funções puras e hooks principais implementados; ordenação por coluna ainda precisa ser conectada à UI.
 
-### Phase 6 — Product Features
+### Phase 7 — Converter & Market Experience · PARTIAL
 
-- [ ] TASK-030 — Compor Currency Converter P0 → [`tasks/task30.md`](tasks/task30.md)
-- [ ] TASK-031 — Compor histórico, períodos e gráfico → [`tasks/task31.md`](tasks/task31.md)
-- [ ] TASK-032 — Implementar tabela histórica e estados vazios → [`tasks/task32.md`](tasks/task32.md)
-- [ ] TASK-033 — Implementar filtros, ordenação e paginação → [`tasks/task33.md`](tasks/task33.md)
-- [ ] TASK-034 — Implementar exportação CSV filtrada → [`tasks/task34.md`](tasks/task34.md)
+- Conversor P0, overview de pares, abertura de par e favoritos locais.
+- Evidência atual: conversor e overview funcionais; favoritos e valores da sidebar ainda têm integração parcial/estática.
 
-### Phase 7 — Integration & QA / P1
+### Phase 8 — History, Analysis & Export · PARTIAL
 
-- [ ] TASK-035 — Implementar overview de mercado e favoritos → [`tasks/task35.md`](tasks/task35.md)
-- [ ] TASK-036 — Implementar preferências de idioma e tema → [`tasks/task36.md`](tasks/task36.md)
-- [ ] TASK-037 — Implementar status da API e stale-data → [`tasks/task37.md`](tasks/task37.md)
-- [ ] TASK-038 — Executar integração E2E do MVP → [`tasks/task38.md`](tasks/task38.md)
-- [ ] TASK-039 — Validar acessibilidade, responsividade e desempenho → [`tasks/task39.md`](tasks/task39.md)
+- Histórico detalhado, análise comparativa, gráfico, tabela, filtros, paginação e CSV.
+- Evidência atual: dados reais da API e exportação canônica implementados; builder de relatórios ainda não aplica colunas/frequência ao CSV.
 
-### Phase 8 — Release Readiness
+### Phase 9 — Preferences & Product Integration · PARTIAL
 
-- [ ] TASK-040 — Criar coleção Postman e evidências da API → [`tasks/task40.md`](tasks/task40.md)
-- [ ] TASK-041 — Atualizar README e documentação operacional → [`tasks/task41.md`](tasks/task41.md)
-- [ ] TASK-042 — Executar checklist de release e fechamento → [`tasks/task42.md`](tasks/task42.md)
+- Idioma, tema, favoritos, status da API, stale-data e integração final entre telas.
+- Pendências: tradução completa, tema dark-only explícito, status derivado de request real e preferências conectadas ao shell.
+
+### Phase 10 — E2E, Documentation & Release · IN_REVIEW
+
+- E2E, acessibilidade, responsividade, desempenho, Postman, documentação e checklist de release.
+- Evidência atual: gates locais verdes; PR/merge, revisão visual/manual, WCAG formal e code splitting permanecem pendentes.
 
 ## 2. Dependências críticas
 
 ```text
-TASK-001 → TASK-002 → TASK-003 → TASK-006
-                     ├──────────► TASK-007 → TASK-008 → TASK-010
-                     └──────────► TASK-004 → TASK-005
-TASK-007 → TASK-009 → TASK-012/013/014 → TASK-015
-TASK-006 + TASK-015 → TASK-016 → TASK-017 → TASK-018
-TASK-019 → TASK-020/021/022 → TASK-023
-TASK-020/021/022 + TASK-023 → TASK-024/025/026/027/028/029
-TASK-012 + TASK-020/021 + TASK-025/028/029 → TASK-030
-TASK-022 + TASK-026/028 → TASK-031 → TASK-032 → TASK-033 → TASK-034
-TASK-030/031/032/033/034 → TASK-038/039
-TASK-023 → TASK-035/037; TASK-029 → TASK-036
-TASK-038/039 → TASK-040/041 → TASK-042
+PHASE 1 → PHASE 2 → PHASE 3 → PHASE 4 → PHASE 5 → PHASE 6
+                                                   ├──► PHASE 7 — Converter & Market
+                                                   └──► PHASE 8 — History & Export
+PHASE 7 + PHASE 8 → PHASE 9 — Preferences & Integration
+PHASE 9 → PHASE 10 — E2E, Documentation & Release
 ```
 
-Dependências são bloqueios de implementação, não autorização para pular gates. Uma tarefa pode ser iniciada somente quando suas dependências obrigatórias estiverem `DONE` ou quando a exceção estiver registrada no próprio arquivo.
+Dependências são bloqueios de implementação, não autorização para pular gates. Uma fase pode avançar somente quando suas dependências obrigatórias estiverem concluídas ou quando a exceção estiver registrada neste arquivo.
 
-## 3. Matriz de rastreabilidade
+## 3. Matriz de rastreabilidade por fase
 
-| PRD | TECH | TASKs | Feature | Status |
+| Fase | PRD principal | TECH principal | Escopo | Estado |
 |---|---|---|---|---|
-| RNF-001/002/016/017 | TECH-001 | TASK-001–006 | Setup | TODO |
-| RNF-003–005/018; RN-034 | TECH-002/003 | TASK-007–015 | Design/UI | TODO |
-| RF-039; RNF-003/004/018 | TECH-004 | TASK-016–018 | Layout | TODO |
-| RF-001/005/009/015/017; RN-001/011/030/033; RNF-008–010 | TECH-005/006 | TASK-019–023 | Data/API | TODO |
-| RF-008/010/013/014; RN-003/005–008 | TECH-007/009/011 | TASK-024–029 | Domínio/hooks | TODO |
-| RF-002/004/008–015/043 | TECH-012 | TASK-025/028–030/037 | Converter | TODO |
-| RF-017–034; RN-012–025; RNF-020 | TECH-008/010/013 | TASK-022/026–028/031–033 | Histórico | TODO |
-| RF-035–038; RN-025/026; RNF-010 | TECH-014 | TASK-034/038 | CSV | TODO |
-| RF-006/007/016/023–025/040–042 | TECH-006/015 | TASK-009/020/035–037 | P1 HERMES | TODO |
-| RNF-003–015; CA-01–10 | TECH-016 | TASK-004/005/015/018/038–042 | QA/release | TODO |
+| 1 — Foundation & Tooling | RNF-001/002/016/017 | TECH-001 | Setup, aliases, scripts e providers | IN_REVIEW |
+| 2 — Design Foundation | RNF-003–005/018; RN-034 | TECH-002 | Tokens, tipografia, ícones e validação visual | IN_REVIEW |
+| 3 — Shared UI & Accessibility | RNF-004/005/018 | TECH-003 | Componentes base, feedback e acessibilidade | IN_REVIEW |
+| 4 — App Shell & Responsive Layout | RF-039; RNF-003/004/018 | TECH-004 | Shell, navegação, landmarks e viewports | IN_REVIEW |
+| 5 — API & Data Contracts | RF-001/005/009/015/017; RN-001/011/030/033; RNF-008–010 | TECH-005/006 | Axios, adapters, validação, cache e erros | IN_REVIEW |
+| 6 — Domain State, Hooks & Formatting | RF-008/010/013/014; RN-003/005–008; RNF-009/019 | TECH-007/008/009/010/011 | Estado, períodos, conversão, pipeline e formatação | IN_REVIEW |
+| 7 — Converter & Market Experience | RF-002/004/008–016/023–025/043 | TECH-012/015 | Conversor, overview e favoritos | PARTIAL |
+| 8 — History, Analysis & Export | RF-017–038; RN-012–026; RNF-010/020 | TECH-008/010/013/014 | Histórico, análise, tabela, filtros e CSV | PARTIAL |
+| 9 — Preferences & Product Integration | RF-039–043; RN-028/031/034 | TECH-015 | Idioma, tema, status e stale-data | PARTIAL |
+| 10 — E2E, Documentation & Release | RNF-003–017; CA-01–10 | TECH-016 | E2E, QA, Postman, docs e release | IN_REVIEW |
 
 ## 4. Branching strategy
 
 ### 4.1 Branches principais
 
 - `main`: produção, protegida, sem commit direto, integração via PR de release.
-- `develop`: integração, protegida, recebe features aprovadas via PR.
+- `dev`: integração atual do projeto, recebe features aprovadas via PR.
 
 ### 4.2 Feature branches
 
-Criar a partir de `develop`, usando somente escopo previsto no PRD:
+Criar a partir de `dev`, usando somente escopo previsto no PRD:
 
 | Feature | Branch |
 |---|---|
@@ -140,39 +116,37 @@ Criar a partir de `develop`, usando somente escopo previsto no PRD:
 | Qualidade | `chore/quality-gates` |
 | Release | `chore/release-readiness` |
 
-### 4.3 Task branches
+### 4.3 Phase branches
 
-Cada tarefa parte da feature correspondente, nunca diretamente de `main`:
+Cada fase parte da feature correspondente, nunca diretamente de `main`:
 
 ```text
-develop
+dev
   └── feat/converter
-        ├── task/TASK-025-conversion-domain
-        ├── task/TASK-028-data-hooks
-        └── task/TASK-030-converter-feature
+        └── phase/07-converter-market
 ```
 
-O nome previsto de cada branch está no arquivo individual da tarefa.
+O nome da branch deve refletir a fase ou feature trabalhada e permanecer rastreável ao PRD/TECH.
 
 ## 5. Pull Request workflow
 
-### Task → Feature
+### Fase → Feature
 
-1. Criar a task branch a partir da feature branch atualizada.
-2. Atualizar o status individual para `IN_PROGRESS`.
+1. Criar a branch da fase a partir da feature branch atualizada.
+2. Atualizar o status da fase para `IN_PROGRESS`.
 3. Implementar somente o escopo.
 4. Executar testes, lint, typecheck e build aplicável.
 5. Criar commits semânticos e publicar a branch.
 6. Abrir PR para a feature branch.
 7. Revisar critérios de aceitação e evidências.
 8. Integrar somente após aprovação real.
-9. Atualizar task, checklist central e matriz.
+9. Atualizar o checklist central, `SPEC.md` e a matriz.
 
-### Feature → develop
+### Feature → dev
 
-Quando tarefas obrigatórias da feature estiverem `DONE`, abrir PR com testes completos, dependências, critérios do PRD e documentação atualizados. Não afirmar merge sem confirmação real.
+Quando tarefas obrigatórias da feature estiverem `DONE`, abrir PR para `dev` com testes completos, dependências, critérios do PRD e documentação atualizados. Não afirmar merge sem confirmação real.
 
-### develop → main
+### dev → main
 
 Somente por release aprovada. Sem force push, merge direto ou commit direto em branches protegidas.
 
@@ -190,14 +164,14 @@ feat(ui): add Button variants
 feat(api): integrate Frankfurter v2 rate service
 test(history): cover combined filters and sorting
 fix(converter): reject non-finite amount
-docs(tasks): update TASK-030 completion status
+docs(plan): consolidate execution into ten phases
 ```
 
-Commits devem ser pequenos, objetivos, sem arquivos temporários ou segredos, e podem incluir `TASK-XXX` no corpo/rodapé para rastreabilidade.
+Commits devem ser pequenos, objetivos, sem arquivos temporários ou segredos, e devem indicar a fase ou feature afetada quando isso ajudar na rastreabilidade.
 
 ## 7. Quality gates e sincronização
 
-Cada task individual deve registrar resultado de `lint`, `typecheck`, testes e build aplicáveis. A checklist central só muda para `[x]` quando:
+Cada fase deve registrar resultado de `lint`, `typecheck`, testes e build aplicáveis. A checklist central só muda para `[x]` quando:
 
 1. código está implementado;
 2. critérios de aceitação foram verificados;
@@ -205,16 +179,18 @@ Cada task individual deve registrar resultado de `lint`, `typecheck`, testes e b
 4. documentação foi atualizada;
 5. PR foi aprovado e integrado de forma confirmada.
 
-Enquanto qualquer uma dessas condições faltar, o status permanece `TODO`, `IN_PROGRESS`, `BLOCKED` ou `IN_REVIEW`.
+Enquanto qualquer uma dessas condições faltar, o status da fase permanece `IN_PROGRESS`, `BLOCKED`, `PARTIAL` ou `IN_REVIEW`.
 
 ## 8. Próxima tarefa recomendada
 
-**TASK-001 — Auditar baseline e normalizar scripts.** É a primeira tarefa elegível porque o repositório ainda está no template mínimo, os scripts de teste/typecheck não existem e todas as demais fases dependem de uma base verificável.
+**Próxima frente recomendada:** fechar as pendências parciais das Fases 7–9: conectar favoritos/status da API, tornar preferências funcionais, ligar ordenação por coluna e alinhar as opções do builder ao CSV. Depois, repetir a validação de release da Fase 10.
 
 ## 9. Pendências de planejamento
 
 - Confirmar limite de entrada, período inicial e tema claro com produto/design.
 - Confirmar política de datas repetidas e necessidade de `date-fns`.
-- Confirmar browsers e execução E2E no CI.
+- Confirmar browsers adicionais e execução E2E no CI.
 - Verificar acesso real ao remoto antes de publicar branches ou abrir PRs.
-- Atualizar status somente com evidências reais de implementação e integração.
+- Fazer revisão visual/manual contra Figma e auditoria WCAG formal.
+- Reduzir o chunk de produção ou registrar a decisão de code splitting.
+- Atualizar status somente com evidências reais de implementação, revisão e integração.
