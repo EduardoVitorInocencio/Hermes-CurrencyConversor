@@ -7,11 +7,12 @@
 - Phase: Phase 2 — Base UI Components
 - Type: Component
 - Priority: P0
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-011, TASK-013
-- Branch: `task/TASK-014-feedback-states` a partir de `feat/design-system`
+- Branch: `dev`
 - PRD References: RF-015, RF-021, RF-033, RNF-009
 - TECH References: TECH-003, TECH-005
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Componentes de feedback e contratos de mensagem/ação. Não ligar aos services 
 
 ### 4. Implementation Steps
 
-- [ ] Definir estados e tipos.
-- [ ] Implementar feedback visual e anúncio acessível.
-- [ ] Adicionar retry opcional.
-- [ ] Garantir que vazio não pareça erro.
-- [ ] Testar todos os estados.
+- [x] Definir estados e tipos.
+- [x] Implementar feedback visual e anúncio acessível.
+- [x] Adicionar retry opcional.
+- [x] Garantir que vazio não pareça erro.
+- [x] Testar todos os estados.
 
 ### 5. Expected Files
 
@@ -48,21 +49,21 @@ Renderização, anúncio, retry, disabled e empty state.
 
 ### 8. Definition of Done
 
-- [ ] Feedback concluído.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Feedback concluído.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(ui): add feedback states`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/design-system`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+Loading, skeleton, erro e vazio implementados com mensagens claras, anúncios ARIA e retry apenas quando uma ação real é fornecida. Nenhum estado inventa taxa ou registro. Validações finais: lint, typecheck, testes, build e E2E aprovados.
