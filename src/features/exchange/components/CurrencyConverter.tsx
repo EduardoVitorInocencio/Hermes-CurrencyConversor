@@ -1,7 +1,6 @@
 import type { Dispatch } from 'react'
 import { Card } from '@/shared/components/ui/Card'
 import { Button } from '@/shared/components/ui/Button'
-import { LoadingState, ErrorState } from '@/shared/components/feedback'
 import { ArrowsLeftRight } from '@/shared/components/iconography'
 import { useCurrencies } from '@/features/currencies/hooks/useCurrencies'
 import { useExchangeRate } from '../hooks/useExchangeRate'
@@ -45,12 +44,10 @@ function CurrencyAmountControl({ amount, currency, currencies, id, onAmountChang
 
 export function CurrencyConverter({ dispatch, viewState }: CurrencyConverterProps) {
   const currencies = useCurrencies()
-  const rate = useExchangeRate(viewState.pair.base, viewState.pair.quote, Boolean(currencies.data))
+  const rate = useExchangeRate(viewState.pair.base, viewState.pair.quote)
   const parsedAmount = parseLocalizedNumber(viewState.amount, locale)
   const convertedAmount = parsedAmount !== null && rate.data ? convertAmount(parsedAmount, rate.data.rate) : null
 
-  if (currencies.loading && !currencies.data) return <LoadingState message="Carregando catálogo de moedas" />
-  if (currencies.error && !currencies.data) return <ErrorState message="Não foi possível carregar o catálogo de moedas." onRetry={currencies.retry} />
   const options = currencies.data ?? []
 
   return (
