@@ -25,8 +25,8 @@ export type ExchangeViewAction =
 
 export const initialExchangeViewState: ExchangeViewState = {
   pair: { base: 'EUR', quote: 'USD' },
-  amount: '',
-  period: '30D',
+  amount: '10.000,00',
+  period: '1A',
   filters: { from: '', to: '', minRate: '', maxRate: '' },
   page: 1,
 }

@@ -12,14 +12,17 @@ const periodOptions: Array<{ value: HistoryPeriod; label: string }> = [
   { value: '10A', label: '10 anos' },
 ]
 
+const compactLabels: Record<HistoryPeriod, string> = { '7D': '7D', '15D': '15D', '30D': '30D', '3M': '3M', '6M': '6M', '1A': '1A', '5A': '5A', '10A': '10A' }
+
 export interface PeriodSelectorProps {
+  compact?: boolean
   value: HistoryPeriod
   onChange: (value: HistoryPeriod) => void
 }
 
-export function PeriodSelector({ onChange, value }: PeriodSelectorProps) {
+export function PeriodSelector({ compact = false, onChange, value }: PeriodSelectorProps) {
   return (
-    <div aria-label="Período histórico" className="history-period-selector" role="group">
+    <div aria-label="Período histórico" className={['history-period-selector', compact ? 'history-period-selector--compact' : undefined].filter(Boolean).join(' ')} role="group">
       {periodOptions.map((period) => (
         <button
           aria-pressed={value === period.value}
@@ -28,7 +31,7 @@ export function PeriodSelector({ onChange, value }: PeriodSelectorProps) {
           onClick={() => onChange(period.value)}
           type="button"
         >
-          {period.label}
+          {compact ? compactLabels[period.value] : period.label}
         </button>
       ))}
     </div>

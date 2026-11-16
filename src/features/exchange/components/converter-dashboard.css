@@ -1,4 +1,4 @@
-.converter-dashboard { display: grid; gap: 26px; }
-.converter-dashboard .market-feature__header { margin-bottom: -4px; }
-.converter-dashboard .market-feature__header h2 { color: var(--color-text-primary); font-size: 16px; }
-.converter-dashboard .market-feature__header p { font-size: 11px; }
+.converter-dashboard { display: grid; width: 100%; min-width: 0; gap: 28px; }
+.converter-dashboard > * { min-width: 0; }
+.converter-dashboard__source { margin: -14px 2px 0; color: var(--color-text-subtle); font-size: 10px; }
+@media (max-width: 768px) { .converter-dashboard { gap: 20px; } .converter-dashboard__source { margin-top: -4px; line-height: 15px; } }

@@ -1,6 +1,6 @@
 import type { HistoryRecord } from '../types/history'
 import { formatDate } from '@/shared/lib/format/date'
-import { formatRate, type AppLocale } from '@/shared/lib/format/number'
+import { formatRateFixed, type AppLocale } from '@/shared/lib/format/number'
 import './history.css'
 
 export function HistoryTable({ records }: { records: HistoryRecord[] }) {
@@ -13,7 +13,7 @@ export function HistoryTable({ records }: { records: HistoryRecord[] }) {
         <tbody>
           {records.map((record) => (
             <tr key={`${record.date}-${record.base}-${record.quote}`}>
-              <td>{formatDate(record.date, locale)}</td><td>{record.base}</td><td>{record.quote}</td><td className="tabular-nums">{formatRate(record.rate, locale)}</td>
+              <td>{formatDate(record.date, locale)}</td><td>{record.base}</td><td>{record.quote}</td><td className="tabular-nums">{formatRateFixed(record.rate, locale)}</td>
             </tr>
           ))}
         </tbody>

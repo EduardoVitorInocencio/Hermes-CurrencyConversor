@@ -28,3 +28,7 @@ export function formatRate(value: number, locale: AppLocale) {
   const digits = Math.abs(value) > 0 && Math.abs(value) < 0.01 ? 6 : 4
   return formatNumber(value, locale, digits)
 }
+
+export function formatRateFixed(value: number, locale: AppLocale) {
+  return new Intl.NumberFormat(locale, { maximumFractionDigits: 4, minimumFractionDigits: 4 }).format(value)
+}
