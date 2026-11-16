@@ -1,0 +1,50 @@
+.hermes-select {
+  position: relative;
+}
+
+.hermes-select__input {
+  padding-right: var(--spacing-8);
+}
+
+.hermes-select__menu {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% - var(--spacing-2));
+  right: 0;
+  left: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-raised);
+  padding: var(--spacing-1);
+}
+
+.hermes-select__option {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  padding: var(--spacing-2) var(--spacing-3);
+  cursor: pointer;
+}
+
+.hermes-select__option:hover,
+.hermes-select__option.is-highlighted {
+  background: var(--reference-selected);
+}
+
+.hermes-select__selected {
+  color: var(--color-status-positive);
+  font-weight: var(--font-weight-bold);
+}
+
+.hermes-select__empty {
+  margin: 0;
+  color: var(--color-text-subtle);
+  padding: var(--spacing-3);
+  font-size: var(--font-caption-sm);
+}

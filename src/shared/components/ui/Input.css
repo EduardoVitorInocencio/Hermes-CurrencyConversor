@@ -1,0 +1,95 @@
+.hermes-field {
+  display: grid;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.hermes-field__label {
+  color: var(--color-text-primary);
+  font-size: var(--font-body-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-body-md);
+}
+
+.hermes-field__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hermes-input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+  padding: 10px var(--spacing-3);
+  line-height: var(--leading-body-md);
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.hermes-input::placeholder {
+  color: var(--color-text-subtle);
+}
+
+.hermes-input:hover:not(:disabled) {
+  border-color: var(--color-text-subtle);
+}
+
+.hermes-input:focus-visible {
+  border-color: var(--color-status-positive);
+  outline: 2px solid var(--color-status-positive);
+  outline-offset: 2px;
+}
+
+.hermes-input[aria-invalid='true'] {
+  border-color: var(--color-status-negative);
+}
+
+.hermes-input:disabled {
+  cursor: not-allowed;
+  background: var(--color-background-sidebar);
+}
+
+.hermes-field__control:has(.hermes-input:disabled) {
+  opacity: 0.7;
+}
+
+.hermes-field__spinner {
+  position: absolute;
+  right: var(--spacing-3);
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-text-subtle);
+  border-top-color: transparent;
+  border-radius: var(--radius-full);
+  animation: hermes-field-spin 700ms linear infinite;
+}
+
+.hermes-field__hint,
+.hermes-field__error {
+  margin: 0;
+  font-size: var(--font-caption-sm);
+  line-height: var(--leading-caption-sm);
+}
+
+.hermes-field__hint {
+  color: var(--color-text-subtle);
+}
+
+.hermes-field__error {
+  color: var(--color-status-negative);
+}
+
+@keyframes hermes-field-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hermes-field__spinner {
+    animation-duration: 1.5s;
+  }
+}

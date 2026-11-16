@@ -1,0 +1,26 @@
+.currency-amount-field {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.currency-amount-field__legend {
+  margin-bottom: var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--font-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--leading-h4);
+}
+
+.currency-amount-field__controls {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.75fr) minmax(180px, 1.25fr);
+  gap: var(--spacing-3);
+}
+
+@media (max-width: 430px) {
+  .currency-amount-field__controls {
+    grid-template-columns: 1fr;
+  }
+}
