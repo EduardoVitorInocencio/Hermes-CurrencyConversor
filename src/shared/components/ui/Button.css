@@ -1,0 +1,109 @@
+.hermes-button {
+  --button-background: transparent;
+  --button-border: var(--color-border-control);
+  --button-color: var(--color-text-primary);
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  border: 1px solid var(--button-border);
+  border-radius: var(--radius-lg);
+  background: var(--button-background);
+  color: var(--button-color);
+  padding: 10px var(--spacing-4);
+  font-size: var(--font-body-md);
+  line-height: var(--leading-body-md);
+  font-weight: var(--font-weight-semibold);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.hermes-button:hover:not(:disabled) {
+  background: var(--color-surface-raised);
+}
+
+.hermes-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.hermes-button:focus-visible {
+  outline: 2px solid var(--color-status-positive);
+  outline-offset: 3px;
+}
+
+.hermes-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.hermes-button--primary {
+  --button-background: var(--color-action-primary);
+  --button-border: var(--color-action-primary);
+}
+
+.hermes-button--primary:hover:not(:disabled) {
+  background: var(--reference-brand-hover);
+  border-color: var(--reference-brand-hover);
+}
+
+.hermes-button--secondary {
+  --button-background: var(--color-surface-raised);
+  --button-color: var(--color-text-secondary);
+}
+
+.hermes-button--secondary:hover:not(:disabled) {
+  background: var(--reference-selected);
+  color: var(--color-text-primary);
+}
+
+.hermes-button--quiet {
+  --button-background: var(--color-surface-default);
+  --button-border: var(--color-border-default);
+  min-height: 34px;
+  padding: 6px var(--spacing-3);
+  font-size: var(--font-caption-sm);
+  line-height: var(--leading-caption-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.hermes-button--quiet:hover:not(:disabled) {
+  background: var(--color-surface-raised);
+}
+
+.hermes-button__icon,
+.hermes-button__spinner {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.hermes-button__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: var(--radius-full);
+  animation: hermes-button-spin 700ms linear infinite;
+}
+
+@keyframes hermes-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hermes-button {
+    transition: none;
+  }
+
+  .hermes-button__spinner {
+    animation-duration: 1.5s;
+  }
+}

@@ -6,7 +6,7 @@
 | Fonte de requisitos | [`PRD_SPEC.md`](PRD_SPEC.md) |
 | Versão | 1.0 — reorganização documental |
 | Data | 14/11/2026 |
-| Status | Planejamento técnico; implementação ainda não iniciada |
+| Status | Implementação incremental; fundação e Button compartilhado concluídos |
 | Repositório observado | Vite + React + TypeScript, branch `main`, um commit local alinhado a `origin/main` |
 
 Este documento descreve **como** implementar os requisitos do PRD. Não altera o escopo de produto. Toda funcionalidade técnica deve apontar para IDs `RF`, `RN` e `RNF` do PRD.
@@ -456,6 +456,8 @@ Requisitos relacionados: RF-039, RF-041, RN-034, RNF-003 a RNF-005, RNF-018. Res
 ### TECH-003 — UI compartilhada
 
 Requisitos relacionados: RNF-004, RNF-005, RNF-018. Responsabilidade: Button, controles, superfícies, feedback, foco e testes de acessibilidade. Tarefas: TASK-011 a TASK-015.
+
+Implementação atual: `src/shared/components/ui/Button.tsx` e `Button.css` cobrem as variantes `primary`, `secondary` e `quiet`, tamanhos `md` e `sm`, ícone, loading, disabled, foco visível e nome acessível preservado durante loading. As ações de produto permanecem fora do componente e serão conectadas nas features correspondentes.
 
 ### TECH-004 — Shell da aplicação
 

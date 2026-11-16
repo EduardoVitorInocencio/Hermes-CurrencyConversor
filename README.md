@@ -4,7 +4,7 @@ Aplicação React + TypeScript para conversão de moedas, com especificação de
 
 ## Status atual
 
-`TASK-009` configura iconografia Phosphor e o mapa explícito de bandeiras por moeda. A interface atual ainda é o starter do Vite; nenhuma feature de produto foi implementada nesta tarefa.
+`TASK-011` adiciona o componente compartilhado `Button`, com variantes HERMES, ícone, loading, disabled e foco visível. A interface de produto ainda não foi composta; os componentes de feature entram nas tarefas seguintes.
 
 O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A implementação visual fica para as tarefas de UI previstas no plano.
 
@@ -43,6 +43,10 @@ Os tokens verificados no Design Guide local estão em `src/app/styles/tokens.css
 ## Moedas, bandeiras e ícones
 
 `@phosphor-icons/react` é a fonte única para ícones de ação, com reexports em `src/shared/components/iconography.ts`. `country-flag-icons` é consumido por `CurrencyFlag`; o mapa explícito cobre `EUR → EU`, `USD → US`, `GBP → GB`, `BRL → BR` e `JPY → JP`. Códigos sem mapeamento exibem o código original e um marcador neutro, nunca uma bandeira presumida.
+
+## UI compartilhada
+
+`src/shared/components/ui/Button.tsx` fornece as variantes `primary`, `secondary` e `quiet`, tamanhos `md` e `sm`, suporte a ícone, loading, disabled e foco por teclado. O loading mantém o label acessível no DOM e desabilita a ação para impedir duplicidade.
 
 ## Estilos
 
