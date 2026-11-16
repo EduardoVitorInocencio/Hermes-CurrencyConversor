@@ -4,7 +4,7 @@ Aplicação React + TypeScript para conversão de moedas, com especificação de
 
 ## Status atual
 
-`TASK-011` adiciona o componente compartilhado `Button`, com variantes HERMES, ícone, loading, disabled e foco visível. A interface de produto ainda não foi composta; os componentes de feature entram nas tarefas seguintes.
+`TASK-016` conclui a primeira camada de UI compartilhada e o AppShell responsivo. A aplicação agora possui controles de formulário, superfícies, feedback acessível e navegação entre Conversor, Histórico e Relatórios; as features ainda aguardam os contratos de API e domínio.
 
 O Design Guide local em `styleRef/HERMES_Design_System_Standalone.html` e as referências de tela no Figma estão documentados em `TECH_SPEC.md`. A implementação visual fica para as tarefas de UI previstas no plano.
 
@@ -48,6 +48,12 @@ Os tokens verificados no Design Guide local estão em `src/app/styles/tokens.css
 
 `src/shared/components/ui/Button.tsx` fornece as variantes `primary`, `secondary` e `quiet`, tamanhos `md` e `sm`, suporte a ícone, loading, disabled e foco por teclado. O loading mantém o label acessível no DOM e desabilita a ação para impedir duplicidade.
 
+`Input`, `Select` e `CurrencyAmountField` compartilham labels, ajuda, erro e estados de loading/disabled. O `Select` permite busca case-insensitive e seleção por teclado; valores monetários permanecem como strings para preservar vazio e zero sem coerção enganosa. `Card`, `Badge`, `Typography`, `LoadingState`, `ErrorState` e `EmptyState` completam a linguagem de superfícies e feedback.
+
+## App shell
+
+`src/shared/components/layout/AppShell.tsx` organiza landmarks, sidebar desktop e navegação móvel fixa. Conversor, Histórico e Relatórios mudam sem recarga, identificam a seção ativa e exibem placeholders informativos sem taxas ou registros fictícios.
+
 ## Estilos
 
 Tailwind CSS v4 está integrado pelo plugin oficial do Vite e pela entrada `src/index.css`. A escala de tipografia usa Inter/fallback de sistema com os estilos H1–H4, Body Large/Medium e Caption Small do guia. Os breakpoints documentados são 375, 390, 430, 768, 1024, 1280 e 1440 px; são pontos de validação, não modos visuais adicionais.
@@ -68,8 +74,8 @@ Novos componentes não precisam usar caminhos relativos longos; a migração dos
 - Vite `8.3.8` instalado (`package.json`: `^8.3.6`).
 - TypeScript `6.0.3`.
 - ESLint `10.15.0` instalado (`package.json`: `^10.14.0`).
-- Entradas atuais: `src/main.tsx`, `src/App.tsx`, `src/App.css` e `src/index.css`.
-- Ainda ausentes no baseline: cliente HTTP, arquitetura por feature, Axios e Recharts. Tailwind CSS v4, tokens HERMES dark, breakpoints de referência, Phosphor e `country-flag-icons` já estão configurados.
+- Entradas atuais: `src/main.tsx`, `src/App.tsx`, `src/app/App.tsx` e `src/index.css`.
+- Ainda ausentes no baseline: cliente HTTP, contratos de domínio, Axios e Recharts. Tailwind CSS v4, tokens HERMES dark, breakpoints de referência, Phosphor, `country-flag-icons` e o AppShell já estão configurados.
 
 ## Escopo de referência
 

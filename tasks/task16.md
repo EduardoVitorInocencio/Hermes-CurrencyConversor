@@ -7,11 +7,12 @@
 - Phase: Phase 3 — Application Layout
 - Type: Feature
 - Priority: P1
-- Status: TODO
+- Status: IN_REVIEW
 - Dependencies: TASK-006, TASK-015
-- Branch: `task/TASK-016-app-shell-navigation` a partir de `feat/application-layout`
+- Branch: `dev`
 - PRD References: RF-039, RNF-003, RNF-004, RNF-018
 - TECH References: TECH-004
+- Reference Documents: [`PRD_SPEC.md`](../PRD_SPEC.md) · [`TECH_SPEC.md`](../TECH_SPEC.md) · [`TASKs_SPEC.md`](../TASKs_SPEC.md)
 
 ### 1. Objective
 
@@ -27,11 +28,11 @@ Landmarks, seção ativa, sidebar/topbar/mobile navigation e placeholders sem da
 
 ### 4. Implementation Steps
 
-- [ ] Definir landmarks e heading principal.
-- [ ] Compor navegação com estados ativo/foco.
-- [ ] Adaptar sidebar para mobile.
-- [ ] Conectar navegação a seções sem recarga.
-- [ ] Testar teclado.
+- [x] Definir landmarks e heading principal.
+- [x] Compor navegação com estados ativo/foco.
+- [x] Adaptar sidebar para mobile.
+- [x] Conectar navegação a seções sem recarga.
+- [x] Testar teclado.
 
 ### 5. Expected Files
 
@@ -48,21 +49,21 @@ Testing Library para navegação, landmarks, foco e viewport mobile.
 
 ### 8. Definition of Done
 
-- [ ] Shell concluído.
-- [ ] Critérios atendidos.
-- [ ] Testes/gates aprovados.
-- [ ] Documentação atualizada.
+- [x] Shell concluído.
+- [x] Critérios atendidos.
+- [x] Testes/gates aprovados.
+- [x] Documentação atualizada.
 - [ ] PR revisado e integrado.
 - [ ] Checklist sincronizado.
 
 ### 9. Git Information
 
-- Branch utilizada: não iniciada.
-- Commits realizados: nenhum.
+- Branch utilizada: `dev`.
+- Commits realizados: `feat(app): add responsive app shell`.
 - Pull Request: não aberto.
-- Branch de destino: `feat/application-layout`.
-- Status do merge: pendente.
+- Branch de destino: não aplicável; fluxo solicitado sem PR.
+- Status do merge: não aplicável.
 
 ### 10. Completion Notes
 
-Não iniciada.
+AppShell responsivo implementado com sidebar desktop, navegação móvel, landmarks, heading principal, foco e estado ativo. Conversor, Histórico e Relatórios alternam sem recarga e exibem apenas placeholders informativos. Validações finais: lint, typecheck, 29 testes, build e E2E aprovados.
